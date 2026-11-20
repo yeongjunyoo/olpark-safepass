@@ -1,0 +1,956 @@
+{
+  "generated_at_kst": "2026-11-20T18:38:16+09:00",
+  "park_center": {
+    "lat": 37.518,
+    "lng": 127.1225,
+    "area_sqm": 1447122
+  },
+  "parking_policy": {
+    "total_official_capacity_citydata": 2716,
+    "total_official_capacity_faq": "약 2,800대 (5개 매표소: 북2·동2·남2·남3·남4문)",
+    "disabled_parking_total_locations": 12,
+    "disabled_parking_total_spaces": 85,
+    "entry_hours": "06:00~22:00 (야간 공연 종료 시 출차 가능)",
+    "small_car_fee": "10분당 600원 (일 최대 20,000원)",
+    "large_car_fee": "10분당 1,200원 (일 최대 24,000원, 24인승·2.5톤 이상)",
+    "free_dropoff_minutes": 10,
+    "discounts_50_pct": [
+      "경차",
+      "장애인",
+      "저공해·친환경차",
+      "국가유공자·보훈대상자",
+      "다자녀 우대카드(2자녀 이상, 2024.08.01~)"
+    ],
+    "concert_ticket_discount": "없음 (공연 관람객도 일반 후불제 요금 동일 적용)",
+    "source": "ksponco.or.kr mid=a20111000000 & 15089962 FAQ"
+  },
+  "facilities_summary": {
+    "outdoor_restrooms": 13,
+    "drinking_fountains": 18,
+    "emergency_tel": "02-410-1119",
+    "info_center_peace_tel": "02-2180-3564",
+    "info_center_meeting_tel": "02-2180-3566",
+    "running_etiquette": "단체 러닝 크루 보행권 보호: 2열 이하 우측 통행, 몽촌토성 흙길/좁은 구간 추월 금지, 자전거·인라인 토성 산책로 진입 금지"
+  },
+  "venues": [
+    {
+      "id": "kspo_dome",
+      "plc_cd": "02",
+      "name_ko": "KSPO DOME (올림픽체조경기장)",
+      "name_en": "KSPO DOME",
+      "category": "concert_arena",
+      "capacity": 15000,
+      "lat": 37.51912,
+      "lng": 127.12718,
+      "nearest_parking": [
+        "P5",
+        "P4",
+        "P6"
+      ],
+      "nearest_gate": "북2문 / 동2문 / 남2문",
+      "subway_walk_min": {
+        "olympic_5_9": 8,
+        "hanseong_9": 15,
+        "mongchon_8": 20
+      },
+      "wheelchair_accessible": true,
+      "wheelchair_note": "2층 진입 경사로·엘리베이터 완비; P5(도보 1분) 장애인 구역 8면 최단 접근. 2층 1열 앞줄 기립 시 시야 간섭 주의(3D 시야 검증 탭 확인).",
+      "source": "ksponco.or.kr mid=a20111000000 & mid=a10405050100"
+    },
+    {
+      "id": "olympic_hall",
+      "plc_cd": "01",
+      "name_ko": "올림픽홀",
+      "name_en": "Olympic Hall",
+      "category": "concert_hall",
+      "capacity": 3000,
+      "lat": 37.51598,
+      "lng": 127.12798,
+      "nearest_parking": [
+        "P2",
+        "P11",
+        "P1B"
+      ],
+      "nearest_gate": "동2문 / 남2문",
+      "subway_walk_min": {
+        "olympic_5_9": 6,
+        "hanseong_9": 16,
+        "mongchon_8": 22
+      },
+      "wheelchair_accessible": true,
+      "wheelchair_note": "동2문·올림픽공원역 3번출구에서 평탄 무장애 보행로 6분. 올림픽홀 지하주차장(P2 포함 320면) 엘리베이터 직결.",
+      "source": "ksponco.or.kr mid=a20111000000"
+    },
+    {
+      "id": "handball_arena",
+      "plc_cd": "03",
+      "name_ko": "티켓링크 라이브 아레나 (SK핸드볼경기장)",
+      "name_en": "Ticketlink Live Arena (SK Handball)",
+      "category": "concert_arena",
+      "capacity": 5003,
+      "lat": 37.51772,
+      "lng": 127.12572,
+      "nearest_parking": [
+        "P6",
+        "P7",
+        "P5"
+      ],
+      "nearest_gate": "동2문 / 남2문 / 북2문",
+      "subway_walk_min": {
+        "olympic_5_9": 9,
+        "hanseong_9": 14,
+        "mongchon_8": 19
+      },
+      "wheelchair_accessible": true,
+      "wheelchair_note": "P6(도보 1~2분) 장애인 주차구역 최단거리. 휠체어석 전면 난간 높이 사전 확인 권장(3D 탭 지원).",
+      "source": "ksponco.or.kr mid=a20111000000 & mid=a10405050200"
+    },
+    {
+      "id": "woori_arthall",
+      "plc_cd": "04",
+      "name_ko": "우리금융아트홀 (올림픽역도경기장)",
+      "name_en": "Woori Art Hall",
+      "category": "theater",
+      "capacity": 1184,
+      "lat": 37.51695,
+      "lng": 127.12425,
+      "nearest_parking": [
+        "P7",
+        "P6",
+        "P1A"
+      ],
+      "nearest_gate": "남2문 / 동2문",
+      "subway_walk_min": {
+        "olympic_5_9": 11,
+        "hanseong_9": 11,
+        "mongchon_8": 16
+      },
+      "wheelchair_accessible": true,
+      "wheelchair_note": "남2문 P7(도보 1~2분) 인접. 공연 종료 후 한성백제역 9호선 도보 11분 우회 경로가 9호선 올림픽공원역보다 쾌적.",
+      "source": "ksponco.or.kr mid=a20111000000 & mid=a10405050500"
+    },
+    {
+      "id": "lawn_88",
+      "plc_cd": "06",
+      "name_ko": "88잔디마당",
+      "name_en": "88 Lawn Plaza",
+      "category": "outdoor_stage",
+      "capacity": 8000,
+      "lat": 37.52055,
+      "lng": 127.12355,
+      "nearest_parking": [
+        "P4",
+        "P5",
+        "P2"
+      ],
+      "nearest_gate": "동2문 / 북2문",
+      "subway_walk_min": {
+        "olympic_5_9": 11,
+        "hanseong_9": 13,
+        "mongchon_8": 14
+      },
+      "wheelchair_accessible": true,
+      "wheelchair_note": "외곽 포장 순환로 휠체어 이동 가능(잔디 내부는 우천 시 침수·바퀴 빠짐 주의). 11/1~5/31 잔디 출입 통제(15143220). 돌발 폭우·낙뢰 시 올림픽수영장·KSPO DOME 로비로 대피.",
+      "source": "15143220 잔디시설정보 & 15127487 실감형 콘텐츠"
+    },
+    {
+      "id": "national_sports_museum",
+      "plc_cd": "06",
+      "name_ko": "국립스포츠박물관 (2026.10.15 신개관)",
+      "name_en": "National Sports Museum of Korea",
+      "category": "museum",
+      "capacity": 1500,
+      "lat": 37.51622,
+      "lng": 127.11572,
+      "nearest_parking": [
+        "P10",
+        "P9"
+      ],
+      "nearest_gate": "남4문 / 서1문",
+      "subway_walk_min": {
+        "olympic_5_9": 20,
+        "hanseong_9": 4,
+        "mongchon_8": 6
+      },
+      "wheelchair_accessible": true,
+      "wheelchair_note": "2026년 10월 15일 개관 최신 무장애 전시관. 한성백제역 2번출구(도보 4분)·몽촌토성역 1번출구(도보 6분) 평탄 진입, 평화의광장 연계 무장애 산책 코스 핵심 거점.",
+      "source": "ksponco.or.kr 공지 85882 (2026-11-19)"
+    },
+    {
+      "id": "soma_museum",
+      "plc_cd": "06",
+      "name_ko": "소마미술관",
+      "name_en": "SOMA Museum of Art",
+      "category": "museum",
+      "capacity": 800,
+      "lat": 37.51692,
+      "lng": 127.11817,
+      "nearest_parking": [
+        "P9"
+      ],
+      "nearest_gate": "남3문",
+      "subway_walk_min": {
+        "olympic_5_9": 17,
+        "hanseong_9": 4,
+        "mongchon_8": 9
+      },
+      "wheelchair_accessible": true,
+      "wheelchair_note": "남3문 소마미술관 지하주차장(254면) 엘리베이터 직결. 5천원 이상 유료 관람객 주차 1시간 할인.",
+      "source": "seoul citydata EVENT_STTS & ksponco.or.kr mid=a20111000000"
+    }
+  ],
+  "parking_zones": [
+    {
+      "zone": "P1A",
+      "name": "P1A 주차장 (벨로드롬·남2문)",
+      "gate": "남2문",
+      "capacity": 281,
+      "disabled_spaces": 8,
+      "lat": 37.51548,
+      "lng": 127.12515,
+      "near": [
+        "K-아트홀",
+        "우리금융아트홀",
+        "벨로드롬"
+      ],
+      "ev_charger": false,
+      "monthly_pass_zone": true
+    },
+    {
+      "zone": "P1B",
+      "name": "P1B 주차장 (만남의광장·동2문)",
+      "gate": "동2문",
+      "capacity": 281,
+      "disabled_spaces": 8,
+      "lat": 37.5159,
+      "lng": 127.12685,
+      "near": [
+        "올림픽홀",
+        "만남의광장",
+        "K-아트홀"
+      ],
+      "ev_charger": false,
+      "monthly_pass_zone": false
+    },
+    {
+      "zone": "P2",
+      "name": "P2 주차장 (올림픽홀 지상·지하)",
+      "gate": "동2문",
+      "capacity": 320,
+      "disabled_spaces": 10,
+      "lat": 37.51625,
+      "lng": 127.12855,
+      "near": [
+        "올림픽홀",
+        "KSPO DOME",
+        "장미광장"
+      ],
+      "ev_charger": true,
+      "monthly_pass_zone": true
+    },
+    {
+      "zone": "P4",
+      "name": "P4 주차장 (올림픽수영장·북2문)",
+      "gate": "북2문",
+      "capacity": 117,
+      "disabled_spaces": 6,
+      "lat": 37.52105,
+      "lng": 127.1271,
+      "near": [
+        "올림픽수영장",
+        "KSPO DOME",
+        "88호수수변무대"
+      ],
+      "ev_charger": false,
+      "monthly_pass_zone": false
+    },
+    {
+      "zone": "P5",
+      "name": "P5 주차장 (KSPO DOME 바로앞)",
+      "gate": "북2문",
+      "capacity": 176,
+      "disabled_spaces": 8,
+      "lat": 37.51945,
+      "lng": 127.12795,
+      "near": [
+        "KSPO DOME",
+        "올림픽수영장"
+      ],
+      "ev_charger": false,
+      "monthly_pass_zone": false
+    },
+    {
+      "zone": "P6",
+      "name": "P6 주차장 (핸드볼경기장 인접)",
+      "gate": "남2문",
+      "capacity": 167,
+      "disabled_spaces": 7,
+      "lat": 37.5177,
+      "lng": 127.12665,
+      "near": [
+        "티켓링크 라이브 아레나",
+        "KSPO DOME"
+      ],
+      "ev_charger": false,
+      "monthly_pass_zone": false
+    },
+    {
+      "zone": "P7",
+      "name": "P7 주차장 (우리금융아트홀 앞)",
+      "gate": "남2문",
+      "capacity": 137,
+      "disabled_spaces": 6,
+      "lat": 37.51672,
+      "lng": 127.12465,
+      "near": [
+        "우리금융아트홀",
+        "뮤즈라이브",
+        "핸드볼경기장"
+      ],
+      "ev_charger": false,
+      "monthly_pass_zone": false
+    },
+    {
+      "zone": "P8",
+      "name": "P8 주차장 (한성백제박물관 동측)",
+      "gate": "남2문/남3문",
+      "capacity": 142,
+      "disabled_spaces": 6,
+      "lat": 37.51535,
+      "lng": 127.1208,
+      "near": [
+        "한성백제박물관",
+        "야생화단지"
+      ],
+      "ev_charger": false,
+      "monthly_pass_zone": false
+    },
+    {
+      "zone": "P9",
+      "name": "P9 남3문 소마미술관 지상·지하주차장",
+      "gate": "남3문",
+      "capacity": 254,
+      "disabled_spaces": 8,
+      "lat": 37.51612,
+      "lng": 127.1185,
+      "near": [
+        "소마미술관",
+        "한성백제박물관",
+        "몽촌토성"
+      ],
+      "ev_charger": true,
+      "monthly_pass_zone": true
+    },
+    {
+      "zone": "P10",
+      "name": "P10 남4문 그린존(평화의광장·전기차)",
+      "gate": "남4문",
+      "capacity": 200,
+      "disabled_spaces": 7,
+      "lat": 37.51658,
+      "lng": 127.11562,
+      "near": [
+        "평화의광장",
+        "국립스포츠박물관",
+        "세계평화의문"
+      ],
+      "ev_charger": true,
+      "monthly_pass_zone": true
+    },
+    {
+      "zone": "P11",
+      "name": "P11 올림픽테니스경기장 주차장",
+      "gate": "동2문",
+      "capacity": 190,
+      "disabled_spaces": 6,
+      "lat": 37.5151,
+      "lng": 127.12895,
+      "near": [
+        "올림픽테니스경기장",
+        "올림픽홀"
+      ],
+      "ev_charger": false,
+      "monthly_pass_zone": false
+    },
+    {
+      "zone": "WEST",
+      "name": "서1·서2문 올림픽회관·파크텔 주차장",
+      "gate": "서1문/서2문",
+      "capacity": 200,
+      "disabled_spaces": 5,
+      "lat": 37.51844,
+      "lng": 127.11617,
+      "near": [
+        "올림픽회관",
+        "올림픽파크텔",
+        "나홀로나무"
+      ],
+      "ev_charger": false,
+      "monthly_pass_zone": false
+    }
+  ],
+  "subway_stations": [
+    {
+      "id": "olympic_5",
+      "name": "올림픽공원(한국체대)",
+      "line": "5호선",
+      "recommended_exit": "3번 출구 (에스컬레이터·엘리베이터)",
+      "lat": 37.516201,
+      "lng": 127.130923,
+      "elevator_available": true,
+      "post_concert_crowding": "매우 혼잡 (종료 직후 30~40분 대기 빈발)",
+      "dispersion_tip": "KSPO DOME·올림픽홀 최단거리(6~8분)이나 20~21시 병목 집중. 5호선 마천/방화 방면은 9호선 급행 대비 대기열이 35% 짧음.",
+      "walk_to_venues_min": {
+        "kspo_dome": 8,
+        "olympic_hall": 6,
+        "handball_arena": 9,
+        "woori_arthall": 11,
+        "lawn_88": 11
+      }
+    },
+    {
+      "id": "olympic_9",
+      "name": "올림픽공원(한국체대)",
+      "line": "9호선 (급행·일반)",
+      "recommended_exit": "3번·4번 출구 (2024.08 내부 계단 신설)",
+      "lat": 37.516269,
+      "lng": 127.130288,
+      "elevator_available": true,
+      "post_concert_crowding": "최고 위험 (강남·여의도 방면 급행 집중)",
+      "dispersion_tip": "단독 월 68.4만 통행(2026-10 실측). 2개 이상 동시공연 종료 시 한성백제역(9호선 1정거장 서쪽, 도보 11~15분)으로 걸어가면 승차 대기시간 20분 이상 단축!",
+      "walk_to_venues_min": {
+        "kspo_dome": 8,
+        "olympic_hall": 6,
+        "handball_arena": 9,
+        "woori_arthall": 11,
+        "lawn_88": 11
+      }
+    },
+    {
+      "id": "hanseong_9",
+      "name": "한성백제",
+      "line": "9호선 (일반)",
+      "recommended_exit": "2번 출구 (남4문·평화의광장 직결)",
+      "lat": 37.516404,
+      "lng": 127.116503,
+      "elevator_available": true,
+      "post_concert_crowding": "여유 (핵심 분산 귀가 추천역!)",
+      "dispersion_tip": "올림픽공원역 다음 정거장(김포공항 방면). 우리금융아트홀(11분)·핸드볼(14분)·KSPO DOME(15분)에서 평탄 조명 보행로로 이동 가능 — 공연 종료 인파 회피 1순위!",
+      "walk_to_venues_min": {
+        "kspo_dome": 15,
+        "olympic_hall": 16,
+        "handball_arena": 14,
+        "woori_arthall": 11,
+        "national_sports_museum": 4
+      }
+    },
+    {
+      "id": "mongchon_8",
+      "name": "몽촌토성(평화의문)",
+      "line": "8호선",
+      "recommended_exit": "1번 출구 (평화의광장·국립스포츠박물관)",
+      "lat": 37.517409,
+      "lng": 127.112359,
+      "elevator_available": true,
+      "post_concert_crowding": "여유~보통 (잠실 2호선 환승 1정거장)",
+      "dispersion_tip": "잠실·천호·분당(수인분당선 환승) 방면 최적. 평화의광장 24:00까지 개방 구역을 통해 22:00 이후에도 안전하게 이동 가능.",
+      "walk_to_venues_min": {
+        "kspo_dome": 20,
+        "olympic_hall": 22,
+        "handball_arena": 19,
+        "woori_arthall": 16,
+        "national_sports_museum": 6
+      }
+    }
+  ],
+  "songpa_overflow_parking": [
+    {
+      "pklt_cd": "1277145",
+      "name": "잠실역 공영주차장(시)",
+      "address": "서울 송파구 신천동 27-0",
+      "capacity": 357,
+      "realtime_api_supported": true,
+      "fee_per_10m_won": 880,
+      "lat": 37.514277,
+      "lng": 127.103414,
+      "transit_to_park": "8호선 몽촌토성역 1정거장(3분) 또는 버스 3412/3413 (8분)",
+      "source": "서울열린데이터광장 GetParkingInfo (실시간 연동)"
+    },
+    {
+      "pklt_cd": "173646",
+      "name": "신천유수지 공영주차장(시)",
+      "address": "서울 송파구 신천동 14-0",
+      "capacity": 192,
+      "realtime_api_supported": true,
+      "fee_per_10m_won": 880,
+      "lat": 37.51792,
+      "lng": 127.10295,
+      "transit_to_park": "잠실나루·몽촌토성 방면 버스 10분 / 따릉이 7분",
+      "source": "서울열린데이터광장 GetParkingInfo (실시간 연동)"
+    },
+    {
+      "pklt_cd": "1475224",
+      "name": "성내역(잠실나루역) 공영주차장(시)",
+      "address": "서울 송파구 신천동 11-1",
+      "capacity": 27,
+      "realtime_api_supported": true,
+      "fee_per_10m_won": 540,
+      "lat": 37.518063,
+      "lng": 127.105006,
+      "transit_to_park": "몽촌토성역 도보 12분 / 북2문 방향 차량 진입 회피 최적",
+      "source": "서울열린데이터광장 GetParkingInfo (실시간 연동)"
+    },
+    {
+      "pklt_cd": "1441378",
+      "name": "방이고분 공영주차장(구)",
+      "address": "서울 송파구 방이동 125-0",
+      "capacity": 60,
+      "realtime_api_supported": false,
+      "fee_per_10m_won": 300,
+      "lat": 37.50895,
+      "lng": 127.12045,
+      "transit_to_park": "남2문·올림픽공원역 도보 12분 (저렴한 구영 대체주차장)",
+      "source": "서울열린데이터광장 GetParkInfo"
+    },
+    {
+      "pklt_cd": "1441397",
+      "name": "송파근린공원 공영주차장(구)",
+      "address": "서울 송파구 송파동 113-2",
+      "capacity": 324,
+      "realtime_api_supported": false,
+      "fee_per_10m_won": 300,
+      "lat": 37.50385,
+      "lng": 127.11655,
+      "transit_to_park": "9호선 석촌고분/송파나루→한성백제역 1~2정거장(5분)",
+      "source": "서울열린데이터광장 GetParkInfo"
+    },
+    {
+      "pklt_cd": "173752",
+      "name": "복정역 공영주차장(시) [환승주차]",
+      "address": "서울 송파구 장지동 600-2",
+      "capacity": 362,
+      "realtime_api_supported": true,
+      "fee_per_10m_won": 560,
+      "lat": 37.47065,
+      "lng": 127.12675,
+      "transit_to_park": "성남·분당·중부고속도로 진입 시 8호선 복정→몽촌토성 15분 환승(Park & Ride)",
+      "source": "서울열린데이터광장 GetParkingInfo (실시간 연동)"
+    }
+  ],
+  "safety_pois": [
+    {
+      "id": "INFO-PEACE",
+      "type": "info_center",
+      "name": "평화의 광장 안내센터 (분실물·휠체어·유모차 대여)",
+      "tel": "02-2180-3564",
+      "lat": 37.51742,
+      "lng": 127.11465,
+      "hours": "09:00~18:00 (24시 개방구역 내)",
+      "source": "15089962 FAQ #18987"
+    },
+    {
+      "id": "INFO-MEETING",
+      "type": "info_center",
+      "name": "만남의 광장 안내센터 (동2문·공연장권 안내)",
+      "tel": "02-2180-3566",
+      "lat": 37.51628,
+      "lng": 127.12925,
+      "hours": "09:00~18:00 (24시 개방구역 내)",
+      "source": "15089962 FAQ #18987"
+    },
+    {
+      "id": "SAFETY-HQ",
+      "type": "emergency",
+      "name": "올림픽공원 안전서비스신고센터 (24시간 긴급)",
+      "tel": "02-410-1119",
+      "lat": 37.51805,
+      "lng": 127.1219,
+      "hours": "24시간 운영",
+      "source": "15089962 FAQ #19010"
+    },
+    {
+      "id": "AED-KSPO",
+      "type": "aed",
+      "name": "AED · KSPO DOME 1층 로비 안내데스크",
+      "tel": "02-410-1119",
+      "lat": 37.51895,
+      "lng": 127.1273,
+      "hours": "시설 운영시간 상시",
+      "source": "중앙응급의료센터·KSPO&CO 안전관리"
+    },
+    {
+      "id": "AED-HANDBALL",
+      "type": "aed",
+      "name": "AED · 티켓링크 라이브 아레나(핸드볼) 1층",
+      "tel": "02-410-1119",
+      "lat": 37.51765,
+      "lng": 127.12585,
+      "hours": "시설 운영시간 상시",
+      "source": "중앙응급의료센터·KSPO&CO 안전관리"
+    },
+    {
+      "id": "AED-OHALL",
+      "type": "aed",
+      "name": "AED · 올림픽홀 로비 & 올림픽수영장 안내데스크",
+      "tel": "02-410-1119",
+      "lat": 37.51605,
+      "lng": 127.1281,
+      "hours": "시설 운영시간 상시",
+      "source": "중앙응급의료센터·KSPO&CO 안전관리"
+    },
+    {
+      "id": "AED-PEACE",
+      "type": "aed",
+      "name": "AED · 평화의광장 안내센터 / 국립스포츠박물관",
+      "tel": "02-410-1119",
+      "lat": 37.51725,
+      "lng": 127.11495,
+      "hours": "상시 접근",
+      "source": "중앙응급의료센터·KSPO&CO 안전관리"
+    },
+    {
+      "id": "SHELTER-RAIN",
+      "type": "weather_shelter",
+      "name": "우천·낙뢰 실내 대피 거점 (올림픽수영장·KSPO DOME 로비)",
+      "tel": "02-410-1119",
+      "lat": 37.52042,
+      "lng": 127.12645,
+      "hours": "88잔디마당 야외행사 돌발 악천후 시 최단 실내대피(도보 3분)",
+      "source": "2026-11-19 ON고객소통 기후안전수칙"
+    }
+  ],
+  "night_control_zones": [
+    {
+      "id": "NIGHT-RESTRICT-INNER",
+      "name": "22:00 이후 내부 출입 통제 구역 (몽촌토성·88잔디마당·야생화단지)",
+      "restricted_after": "22:00",
+      "open_hours": "05:00~22:00 (차량 06:00~22:00, 야간공연 종료 시 출차 예외)",
+      "center": [
+        37.5212,
+        127.1215
+      ],
+      "radius_m": 420,
+      "polygon": [
+        [
+          37.5248,
+          127.1165
+        ],
+        [
+          37.5248,
+          127.1258
+        ],
+        [
+          37.5184,
+          127.1252
+        ],
+        [
+          37.518,
+          127.1172
+        ]
+      ],
+      "safe_bypass": "22:00 이후 야간 귀가 시 내부 토성길 지름길 진입 금지 — 외곽 조명 보행로(평화의광장·만남의광장 24:00까지 개방)를 따라 한성백제역·몽촌토성역·올림픽공원역으로 이동",
+      "source": "15089962 FAQ #18985"
+    },
+    {
+      "id": "OPEN-24H-PEACE",
+      "name": "24:00까지 개방 안전 보행 구역 (평화의광장 ↔ 한성백제역/몽촌토성역)",
+      "restricted_after": "24:00",
+      "open_hours": "05:00~24:00",
+      "center": [
+        37.5172,
+        127.1152
+      ],
+      "radius_m": 220,
+      "source": "15089962 FAQ #18985"
+    },
+    {
+      "id": "OPEN-24H-MEETING",
+      "name": "24:00까지 개방 안전 보행 구역 (만남의광장 ↔ 올림픽공원역 3번출구)",
+      "restricted_after": "24:00",
+      "open_hours": "05:00~24:00",
+      "center": [
+        37.5162,
+        127.129
+      ],
+      "radius_m": 200,
+      "source": "15089962 FAQ #18985"
+    }
+  ],
+  "barrier_free_routes": [
+    {
+      "id": "BF-ROUTE-1",
+      "name": "무장애 공연장 메인 동선 (올림픽공원역 3번출구 → 올림픽홀 → KSPO DOME)",
+      "for_users": [
+        "휠체어",
+        "유모차",
+        "고령자"
+      ],
+      "distance_m": 680,
+      "est_min": 10,
+      "max_slope_deg": 2.8,
+      "step_free": true,
+      "warning": "대형 공연 종료 직후(20~21시) 유모차·휠체어 혼잡 위험 — 종료 10분 전 선행 이동 또는 남2문→한성백제역 우회 권장(2026-06-06 VOC 대응)",
+      "waypoints": [
+        [
+          37.5162,
+          127.13092
+        ],
+        [
+          37.51625,
+          127.1291
+        ],
+        [
+          37.5161,
+          127.128
+        ],
+        [
+          37.5177,
+          127.1274
+        ],
+        [
+          37.5191,
+          127.12718
+        ]
+      ]
+    },
+    {
+      "id": "BF-ROUTE-2",
+      "name": "스마트 분산 무장애 귀가 동선 (핸드볼·우리금융 → 남2문 → 한성백제역 2번출구)",
+      "for_users": [
+        "휠체어",
+        "유모차",
+        "일반 관객 분산귀가"
+      ],
+      "distance_m": 920,
+      "est_min": 12,
+      "max_slope_deg": 2.2,
+      "step_free": true,
+      "warning": "22:00 이후에도 전 구간 외곽 조명 확보! 9호선 올림픽공원역 대기열 회피 시 15~25분 절약.",
+      "waypoints": [
+        [
+          37.51772,
+          127.12572
+        ],
+        [
+          37.51695,
+          127.12425
+        ],
+        [
+          37.51575,
+          127.1231
+        ],
+        [
+          37.51595,
+          127.1195
+        ],
+        [
+          37.5164,
+          127.1165
+        ]
+      ]
+    },
+    {
+      "id": "BF-ROUTE-3",
+      "name": "국립스포츠박물관·평화의광장·소마미술관 무장애 문화 산책 코스",
+      "for_users": [
+        "휠체어",
+        "유모차",
+        "시니어",
+        "가족"
+      ],
+      "distance_m": 1150,
+      "est_min": 18,
+      "max_slope_deg": 2.5,
+      "step_free": true,
+      "warning": "토성 내 산책로는 자전거·인라인 통행 금지(안전 러닝 에티켓: 우측 보행·2열 이하 준수).",
+      "waypoints": [
+        [
+          37.51741,
+          127.11236
+        ],
+        [
+          37.5172,
+          127.1149
+        ],
+        [
+          37.51622,
+          127.11572
+        ],
+        [
+          37.51692,
+          127.11817
+        ],
+        [
+          37.51544,
+          127.12089
+        ]
+      ]
+    }
+  ],
+  "lawn_policies": [
+    {
+      "place": "나홀로나무",
+      "type": "개방시간",
+      "period": "연중 상시개방",
+      "url": "https://www.ksponco.or.kr/olympicpark/menu.es?mid=a20402000000"
+    },
+    {
+      "place": "피크닉장",
+      "type": "개방시간",
+      "period": "연중 상시개방",
+      "url": "https://www.ksponco.or.kr/olympicpark/menu.es?mid=a20402000000"
+    },
+    {
+      "place": "가족놀이동산",
+      "type": "개방시간",
+      "period": "연중 상시개방",
+      "url": "https://www.ksponco.or.kr/olympicpark/menu.es?mid=a20402000000"
+    },
+    {
+      "place": "88마당",
+      "type": "개방시간",
+      "period": "06-01 ~ 10-31",
+      "url": "https://www.ksponco.or.kr/olympicpark/menu.es?mid=a20402000000"
+    },
+    {
+      "place": "지구촌공원",
+      "type": "개방시간",
+      "period": "06-01 ~ 10-31",
+      "url": "https://www.ksponco.or.kr/olympicpark/menu.es?mid=a20402000000"
+    },
+    {
+      "place": "전시마당",
+      "type": "개방시간",
+      "period": "06-01 ~ 10-31",
+      "url": "https://www.ksponco.or.kr/olympicpark/menu.es?mid=a20402000000"
+    },
+    {
+      "place": "잔디통제시기",
+      "type": "출입금지기간",
+      "period": "11-01 ~ 익년05-31",
+      "url": "https://www.ksponco.or.kr/olympicpark/menu.es?mid=a20402000000"
+    }
+  ],
+  "official_faqs_15": [
+    {
+      "serial": 18985,
+      "category": "올림픽공원",
+      "question": "올림픽공원 이용시간이 어떻게 되나요",
+      "answer": "올림픽공원의 이용시간은 도보나 자전거 출입시 오전 5시~밤 10시 평화의광장 만남의광장 지역은 밤 12시까지이고차량을 이용하여출입하실 경우오전 6시~밤 10시까지 개방하고 있습니다(야간행사 개최시 제외)시설물 안전과 방문객의 신변보호를 위해 밤 10시 이후에는 평화의 광장 만남의 광장을 제외한 공원 안쪽으로의 출입을 금하고 있습니다",
+      "registered_date": "2024-07-09",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 19018,
+      "category": "한국체육산업개발",
+      "question": "올림픽공원 내 주차시설은 어떻게 되나요",
+      "answer": "올림픽공원은 2800여대의 차량이 주차할 수 있는 넓은 주차장을 보유하고 있으며 공원 내 주차매표소는 5개소로 북2문 동2문 남2문 남3문 남4문이 있습니다좀 더 자세한 내용은 올림픽공원 홈페이지 내 공원가이드 → 교통 및 주차안내 을 참고해주시기 바랍니다",
+      "registered_date": "2024-07-09",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 19019,
+      "category": "한국체육산업개발",
+      "question": "주차장 이용 및 요금은 어떻게 되나요",
+      "answer": "올림픽공원의 주차장은 주차시간에 비례해 요금을 정산·지불하는 후불제이며 일반승용차의 경우 10분당 600원씩 요금이 부과됩니다경차 장애인 국가유공자 저공해 다자녀(3자녀 이상) 차량은 이용요금이 50% 할인되며 다자녀(2자녀)는 25% 할인됩니다대형차량(25인승 이상 25톤 이상)은 10분당 1200원씩 요금이 부과됩니다각각의 요금제는 1회 요금제이며 출차하셨다가 다시 입차하실 경우 주차요금을 다시 내셔야 하오니 이점 유의하시기 바랍니다",
+      "registered_date": "2024-08-08",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 19020,
+      "category": "올림픽공원",
+      "question": "주차 예상 소요 시간은 어느 정도인가요",
+      "answer": "공연시간 임박해서는 공원주변이 많이 혼잡하여 1시간가량 여유를 가지셔야 하며 가급적이면 대중교통을 이용하여 주시기 바랍니다",
+      "registered_date": "2024-07-09",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 19023,
+      "category": "한국체육산업개발",
+      "question": "공연 관람 시와 비관람 시의 주차요금이 차이가 있나요",
+      "answer": "올림픽공원 주차시설은 이용객의 공연관람 여부와 관계없이 상시 후불제 요금 체계로 운영되고 있습니다",
+      "registered_date": "2022-09-14",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 19022,
+      "category": "올림픽공원",
+      "question": "휠체어 이용자 주차구역은 어디에 있나요",
+      "answer": "각 주차장내에 장애인 이용구역 안내문이 부착되어 있습니다",
+      "registered_date": "2016-05-03",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 19021,
+      "category": "한국체육산업개발",
+      "question": "주차 후 공연장까지 오는 방법은 어떻게 되나요",
+      "answer": "주차장 바로 가까운 곳에 공연장이 있습니다어렵지 않게 찾아오실 수 있으시며 도보로 5분 정도 소요 됩니다 공연장과 가까운 주차장을 찾아보시려면 올림픽공원 홈페이지 내 공원가이드 → 교통 및 주차안내 [바로가기] 참고해주시기 바랍니다",
+      "registered_date": "2024-07-09",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 18989,
+      "category": "한국체육산업개발",
+      "question": "올림픽공원 이용시 대중교통을 알고 싶습니다",
+      "answer": "올림픽공원 주변의 대중교통은 다음과 같습니다○ 지하철 : 5호선 9호선 올림픽공원역 3번출구 8호선 몽촌토성역1번출구○ 버 스· 동2문(지하철 5호선 올림픽공원역)   - 지선(초록색) : 3214 3220 3319 3412 3413    - 공항버스 : 6300    - 경기버스 : 30 30-5· 남2문(벨로드롬 입구)    - 지선(초록색) : 3412 3413 3416 3414   - 경기버스 :  30 30-5 35· 남4문(지하철 9호선 한성백제역 2번출구)    - 지선(초록색) : 3412 3413     - 경기버스 : 30 30-5 35· 평화의 광장(지하철 8호선 몽촌토성역 1번출구)    -  지선(초록색) : 3412 3413    - 간선(파란색) : 340    - 경기버스 : 30 30-5· 올림픽회관    - 지선(초록색) : 3318 3319 3411 4318    - 간선(파란색) : 340 341 351    - 경기버스 : 16 30 30-3 N-34   - 공항버스 6006 6006-1",
+      "registered_date": "2024-07-09",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 18987,
+      "category": "한국체육산업개발",
+      "question": "공연을 관람 후 소지품을 분실하였을 경우",
+      "answer": "분실물 발생 시에는 올림픽공원 홈페이지 내 고객센터&gt;유실물센터를 이용하시거나 올림픽공원 안내센터(평화의 광장 내 안내센터 02-2180-3564~5 만남의 광장 내 안내센터 02-2180-3566)를 찾아주시기 바랍니다",
+      "registered_date": "2024-07-09",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 19010,
+      "category": "올림픽공원",
+      "question": "올림픽공원 시설물이 파손되었어요",
+      "answer": "올림픽공원 내 시설물 파손을 확인하셨다면 주변에 순찰 중인 청경이나 출입구 매표소에 말씀해 주시면빠른 시일내에 보수 조치토록 하겠습니다만약 긴급을 요하는 경우 024101119번(안전서비스신고센터)으로 전화주시면 즉시 조치토록 하겠습니다",
+      "registered_date": "2024-07-09",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 18998,
+      "category": "한국체육산업개발",
+      "question": "공원 내 화장실은 어디 있습니까",
+      "answer": "야외에서 이용하실 수 있는 화장실은 평화의광장 만남의광장 몽촌토성 체육관 주변지역에 등 13개소에 설치되어 있습니다 처음 방문하시는 분들을 위해 출입구 청경초소에 안내도를 비치해두고 있습니다 올림픽공원 홈페이지를 통해 공원 전체지도를 클릭해 보시면 가정에서도 언제든 공원에 대한 자세한 정보를 얻으실 수 있습니다",
+      "registered_date": "2022-09-15",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 18999,
+      "category": "한국체육산업개발",
+      "question": "올림픽공원 내 음수대는 어디에 있나요",
+      "answer": "올림픽공원 안에는 총 18개소의 음수전을 설치하여 운영중입니다매년 해당 음수전에 대한 수질관리를 통해 깨끗한 식수를 제공하고 있으며 그 결과를 공지하고 있습니다음수전의 위치는피크닉장 주변 3개소 장미광장 2개소  테니스경기장 입구 올림픽유스호스텔 뒤 역도경기장 뒤 수영장 뒤 동1문 만남의광장 분수대 옆 북2문 까치다리 옆 올림픽회관 앞 프라자A2동 옆 몽촌토성 삼거리 P1 주차장 야생화단지 입구 곰말다리 옆 지구촌공원 인근에 각 1개소씩 설치되어 있습니다처음 방문하시는 분들을 위해 인터넷 홈페이지 및 공원 출입구 청경초소에 음수대 위치 및 공원 구석구석을 쉽게 알아 볼 수 있는안내도를 비치해 두고 있습니다 방문시 활용하시면 더욱 편안하게 올림픽공원을 이용하실 수 있습니다",
+      "registered_date": "2026-08-19",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 19004,
+      "category": "한국체육산업개발",
+      "question": "올림픽공원 잔디지역 이용시기",
+      "answer": "올림픽공원 내 잔디지역은 일부구역을 제외하고 기간 제한없이 이용할 수 있습니다 88잔디마당 지구촌공원 소마미술관은 잔디 휴면기 및 신초발아기를 제외하고 61 ~ 1031 기간 중 전면 개방하고 있사오니 이용에 참고 부탁드립니다",
+      "registered_date": "2024-07-09",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 18984,
+      "category": "올림픽공원",
+      "question": "올림픽공원내 자전거 이용에 대하여",
+      "answer": "자전거 및 인라인 과속에 대해서는 질서유지를 위해 공원 내 배치되어있는 경비근무자를 통하여 계도하고 공원 안내방송을 통하여 지속적으로 홍보를 하여 안전사고 예방에 만전을 기하도록 하겠습니다 또한 토성 내 산책로는 자전거와 인라인의 통행을 제한하고 있음을 알려드립니다",
+      "registered_date": "2024-07-09",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    },
+    {
+      "serial": 19040,
+      "category": "한국체육산업개발",
+      "question": "드론 비행 가능한가요",
+      "answer": "1 개인 드론 비행: 운행 불가    올림픽공원은 다중이용시설로 안전사고 우려로 개인 드론 비행은 불가합니다(항공안전법 시행규칙 제310조 의거) 2 대관행사: 정부 인허가 승인 후 운행가능    콘서트 등 대관행사로 인한 운행을 협의하여 진행 합니다 (관련부서: 문화사업팀)    * 보험가입 및 정부 인허가 승인은 대관사용자가 합니다 (드론 원스탑 민원서비스",
+      "registered_date": "2024-07-09",
+      "source": "data.go.kr 15089962 (한국체육산업개발주식회사_자주 묻는 질문정보)"
+    }
+  ]
+}

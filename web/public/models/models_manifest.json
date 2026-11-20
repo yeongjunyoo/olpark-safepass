@@ -1,0 +1,218 @@
+{
+  "generated_at_kst": "2026-11-20T18:38:16+09:00",
+  "source_dataset_id": "15127487",
+  "source_dataset_name": "한국체육산업개발주식회사_올림픽공원 공연장 실감형 콘텐츠",
+  "local_glb_models": [
+    {
+      "file": "88JandiMadang.glb",
+      "url": "/models/88JandiMadang.glb",
+      "bytes": 10867108,
+      "mb": 10.36,
+      "gltf_version": 2,
+      "generator": "SimLab GLTF",
+      "meshes": 1019,
+      "nodes": 2033,
+      "materials": 17,
+      "textures": 7,
+      "extensions_used": [
+        "KHR_materials_pbrSpecularGlossiness"
+      ],
+      "extensions_required": [],
+      "threejs_pbr_compatible": true,
+      "bounds": {
+        "min": [
+          -9854.56,
+          -5791.99,
+          -8742.89
+        ],
+        "max": [
+          39201.23,
+          16368.2,
+          141.97
+        ]
+      },
+      "venue_ko": "88잔디마당",
+      "venue_en": "88 Lawn Plaza (Outdoor Festival Stage)",
+      "source_dataset": "15127487",
+      "source_zip": "15127487_88_glb.zip"
+    },
+    {
+      "file": "OlympicPark_LakeSideStage.glb",
+      "url": "/models/OlympicPark_LakeSideStage.glb",
+      "bytes": 24718144,
+      "mb": 23.57,
+      "gltf_version": 2,
+      "generator": "SimLab GLTF",
+      "meshes": 650,
+      "nodes": 1469,
+      "materials": 21,
+      "textures": 9,
+      "extensions_used": [
+        "KHR_materials_pbrSpecularGlossiness"
+      ],
+      "extensions_required": [],
+      "threejs_pbr_compatible": true,
+      "bounds": {
+        "min": [
+          -530.18,
+          -985.89,
+          -209.84
+        ],
+        "max": [
+          2805.36,
+          2191.3,
+          232.88
+        ]
+      },
+      "venue_ko": "수변무대",
+      "venue_en": "88 Lake Waterside Stage",
+      "source_dataset": "15127487",
+      "source_zip": "15127487_lake_glb.zip"
+    }
+  ],
+  "all_venues_3d_catalog": [
+    {
+      "id": "88_lawn",
+      "venue_ko": "88잔디마당",
+      "venue_en": "88 Lawn Plaza",
+      "indoor_outdoor": "실외",
+      "capacity": 8000,
+      "local_glb": "/models/88JandiMadang.glb",
+      "glb_mb": 10.36,
+      "kspo_formats": {
+        "SKP": "11.36 MB",
+        "GLB": "4.92 MB zip (10.87 MB raw)",
+        "E57": "340.38 MB"
+      },
+      "kspo_url": "https://www.ksponco.or.kr/menu.es?mid=a10405050600",
+      "wheelchair_zone": {
+        "eye_height_cm": 115,
+        "standing_eye_cm": 165,
+        "platform_elevation_cm": 45,
+        "stage_height_cm": 150,
+        "distance_m": 28.0,
+        "voc_note": "야외 페스티벌 배리어프리 데크 높이 45cm 미만 시 앞줄 기립 관객(165cm)에 의해 무대 하단 62% 가림 — 45~60cm 리프트 데크 배치 권장"
+      }
+    },
+    {
+      "id": "lake_stage",
+      "venue_ko": "수변무대 (88호수수변무대)",
+      "venue_en": "88 Lake Waterside Stage",
+      "indoor_outdoor": "실외",
+      "capacity": 1200,
+      "local_glb": "/models/OlympicPark_LakeSideStage.glb",
+      "glb_mb": 23.57,
+      "kspo_formats": {
+        "SKP": "13.47 MB",
+        "GLB": "9.18 MB zip (24.72 MB raw)",
+        "E57": "347.20 MB"
+      },
+      "kspo_url": "https://www.ksponco.or.kr/menu.es?mid=a10405050600",
+      "wheelchair_zone": {
+        "eye_height_cm": 115,
+        "standing_eye_cm": 165,
+        "platform_elevation_cm": 30,
+        "stage_height_cm": 120,
+        "distance_m": 18.0,
+        "voc_note": "계단식 반원형 관람석 상단 무장애 진입로에서 호수 무대 전경 확보 가능"
+      }
+    },
+    {
+      "id": "kspo_dome",
+      "venue_ko": "KSPO DOME (올림픽체조경기장)",
+      "venue_en": "KSPO DOME (Olympic Gymnastics Arena)",
+      "indoor_outdoor": "실내",
+      "capacity": 15000,
+      "local_glb": null,
+      "parametric_3d_available": true,
+      "kspo_formats": {
+        "SKP": "7.34 MB",
+        "DAE": "56.05 MB",
+        "GLB": "미개방(결함 #5)",
+        "E57": "미개방"
+      },
+      "kspo_url": "https://www.ksponco.or.kr/menu.es?mid=a10405050100",
+      "wheelchair_zone": {
+        "eye_height_cm": 115,
+        "standing_eye_cm": 165,
+        "railing_height_cm": 110,
+        "front_row_step_cm": 35,
+        "stage_height_cm": 180,
+        "distance_m": 32.0,
+        "voc_note": "VOC 조회 1,262회·828회 핵심 민원: 2층 1열 앞쪽 관객 기립 + 110cm 안전난간 겹침 시 휠체어 눈높이(115cm) 직선 시야가 58~74% 차단됨 → 시야각 시뮬레이터로 대관사 사전 검증"
+      }
+    },
+    {
+      "id": "handball",
+      "venue_ko": "티켓링크 라이브 아레나 (SK핸드볼경기장)",
+      "venue_en": "Ticketlink Live Arena (SK Handball Arena)",
+      "indoor_outdoor": "실내",
+      "capacity": 5003,
+      "local_glb": null,
+      "parametric_3d_available": true,
+      "kspo_formats": {
+        "SKP": "4.17 MB",
+        "GLB": "34.51 MB zip (대용량 외부 링크)",
+        "E57": "353.57 MB"
+      },
+      "kspo_url": "https://www.ksponco.or.kr/menu.es?mid=a10405050200",
+      "wheelchair_zone": {
+        "eye_height_cm": 115,
+        "standing_eye_cm": 165,
+        "railing_height_cm": 112,
+        "front_row_step_cm": 32,
+        "stage_height_cm": 160,
+        "distance_m": 24.0,
+        "voc_note": "VOC 조회 470회(2025-09-28): 휠체어석 전면 유리/금속 난간 상단 프레임이 무대 중앙 눈높이와 정확히 교차 — 좌석 플랫폼 +25cm 보강 시 차단율 68%→12% 급감"
+      }
+    },
+    {
+      "id": "woori_arthall",
+      "venue_ko": "우리금융아트홀 (올림픽역도경기장)",
+      "venue_en": "Woori Art Hall",
+      "indoor_outdoor": "실내",
+      "capacity": 1184,
+      "local_glb": null,
+      "parametric_3d_available": true,
+      "kspo_formats": {
+        "SKP": "10.76 MB",
+        "GLB": "61.01 MB zip (대용량 외부 링크)",
+        "E57": "338.62 MB"
+      },
+      "kspo_url": "https://www.ksponco.or.kr/menu.es?mid=a10405050500",
+      "wheelchair_zone": {
+        "eye_height_cm": 115,
+        "standing_eye_cm": 165,
+        "railing_height_cm": 95,
+        "front_row_step_cm": 40,
+        "stage_height_cm": 110,
+        "distance_m": 19.0,
+        "voc_note": "뮤지컬·가족공연 착석 관람 위주로 기립 간섭은 낮으나 1층 후방 휠체어석 경사로 동선 사전 확인 필요"
+      }
+    },
+    {
+      "id": "olympic_hall",
+      "venue_ko": "올림픽홀",
+      "venue_en": "Olympic Hall",
+      "indoor_outdoor": "실내",
+      "capacity": 3000,
+      "local_glb": null,
+      "parametric_3d_available": true,
+      "kspo_formats": {
+        "SKP": "미개방",
+        "GLB": "미개방(결함 #5)",
+        "E57": "미개방"
+      },
+      "kspo_url": "https://www.ksponco.or.kr/menu.es?mid=a10405050300",
+      "wheelchair_zone": {
+        "eye_height_cm": 115,
+        "standing_eye_cm": 165,
+        "railing_height_cm": 105,
+        "front_row_step_cm": 38,
+        "stage_height_cm": 140,
+        "distance_m": 22.0,
+        "voc_note": "15099006 기준 최다 공연장(71건)이나 15127487 실감형 3D 미개방 — SafePass 신규 개방 제안 3순위 반영"
+      }
+    }
+  ]
+}

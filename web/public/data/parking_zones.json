@@ -1,0 +1,369 @@
+[
+  {
+    "zone": "P6",
+    "canonical_id": 7,
+    "raw_ids_observed": [
+      7
+    ],
+    "gate": "남2문",
+    "capacity": 167,
+    "near_venues": [
+      "티켓링크 라이브 아레나(핸드볼경기장)",
+      "KSPO DOME"
+    ],
+    "total_records": 82,
+    "full_count": 35,
+    "congested_count": 29,
+    "smooth_count": 18,
+    "full_rate_pct": 42.7,
+    "congested_or_full_pct": 78.0,
+    "concert_day_records": 72,
+    "concert_day_full_rate_pct": 48.6,
+    "non_concert_day_full_rate_pct": 0.0,
+    "risk_weight": 0.639,
+    "full_by_hour": {
+      "0": 1,
+      "10": 2,
+      "11": 4,
+      "12": 3,
+      "13": 10,
+      "14": 7,
+      "15": 3,
+      "16": 3,
+      "17": 2
+    }
+  },
+  {
+    "zone": "P5",
+    "canonical_id": 6,
+    "raw_ids_observed": [
+      5,
+      6
+    ],
+    "gate": "북2문",
+    "capacity": 176,
+    "near_venues": [
+      "KSPO DOME",
+      "올림픽수영장"
+    ],
+    "total_records": 75,
+    "full_count": 32,
+    "congested_count": 30,
+    "smooth_count": 13,
+    "full_rate_pct": 42.7,
+    "congested_or_full_pct": 82.7,
+    "concert_day_records": 66,
+    "concert_day_full_rate_pct": 47.0,
+    "non_concert_day_full_rate_pct": 11.1,
+    "risk_weight": 0.667,
+    "full_by_hour": {
+      "0": 1,
+      "9": 1,
+      "10": 5,
+      "11": 4,
+      "12": 1,
+      "13": 6,
+      "14": 7,
+      "15": 5,
+      "16": 1,
+      "20": 1
+    }
+  },
+  {
+    "zone": "P4",
+    "canonical_id": 5,
+    "raw_ids_observed": [
+      5
+    ],
+    "gate": "북2문",
+    "capacity": 117,
+    "near_venues": [
+      "올림픽수영장",
+      "KSPO DOME",
+      "88호수수변무대"
+    ],
+    "total_records": 76,
+    "full_count": 31,
+    "congested_count": 29,
+    "smooth_count": 16,
+    "full_rate_pct": 40.8,
+    "congested_or_full_pct": 78.9,
+    "concert_day_records": 65,
+    "concert_day_full_rate_pct": 46.2,
+    "non_concert_day_full_rate_pct": 9.1,
+    "risk_weight": 0.637,
+    "full_by_hour": {
+      "0": 1,
+      "9": 1,
+      "10": 7,
+      "11": 5,
+      "13": 5,
+      "14": 5,
+      "15": 5,
+      "16": 1,
+      "20": 1
+    }
+  },
+  {
+    "zone": "P11",
+    "canonical_id": 12,
+    "raw_ids_observed": [
+      12
+    ],
+    "gate": "동2문",
+    "capacity": 190,
+    "near_venues": [
+      "올림픽테니스경기장",
+      "올림픽홀"
+    ],
+    "total_records": 60,
+    "full_count": 27,
+    "congested_count": 24,
+    "smooth_count": 9,
+    "full_rate_pct": 45.0,
+    "congested_or_full_pct": 85.0,
+    "concert_day_records": 53,
+    "concert_day_full_rate_pct": 50.9,
+    "non_concert_day_full_rate_pct": 0.0,
+    "risk_weight": 0.69,
+    "full_by_hour": {
+      "9": 1,
+      "10": 2,
+      "11": 2,
+      "12": 2,
+      "13": 6,
+      "14": 6,
+      "15": 3,
+      "16": 4,
+      "17": 1
+    }
+  },
+  {
+    "zone": "P2",
+    "canonical_id": 3,
+    "raw_ids_observed": [
+      3
+    ],
+    "gate": "동2문",
+    "capacity": 320,
+    "near_venues": [
+      "올림픽홀",
+      "KSPO DOME",
+      "88잔디마당"
+    ],
+    "total_records": 81,
+    "full_count": 26,
+    "congested_count": 22,
+    "smooth_count": 33,
+    "full_rate_pct": 32.1,
+    "congested_or_full_pct": 59.3,
+    "concert_day_records": 72,
+    "concert_day_full_rate_pct": 36.1,
+    "non_concert_day_full_rate_pct": 0.0,
+    "risk_weight": 0.484,
+    "full_by_hour": {
+      "0": 1,
+      "11": 1,
+      "12": 1,
+      "13": 5,
+      "14": 5,
+      "15": 9,
+      "16": 3,
+      "17": 1
+    }
+  },
+  {
+    "zone": "P8",
+    "canonical_id": 9,
+    "raw_ids_observed": [
+      9
+    ],
+    "gate": "남2문/남3문",
+    "capacity": 160,
+    "near_venues": [
+      "벨로드롬",
+      "야생화단지"
+    ],
+    "total_records": 61,
+    "full_count": 25,
+    "congested_count": 24,
+    "smooth_count": 12,
+    "full_rate_pct": 41.0,
+    "congested_or_full_pct": 80.3,
+    "concert_day_records": 52,
+    "concert_day_full_rate_pct": 48.1,
+    "non_concert_day_full_rate_pct": 0.0,
+    "risk_weight": 0.646,
+    "full_by_hour": {
+      "9": 1,
+      "10": 1,
+      "12": 1,
+      "13": 9,
+      "14": 3,
+      "15": 4,
+      "16": 4,
+      "17": 2
+    }
+  },
+  {
+    "zone": "P1B",
+    "canonical_id": 2,
+    "raw_ids_observed": [
+      2
+    ],
+    "gate": "동2문",
+    "capacity": 281,
+    "near_venues": [
+      "올림픽홀",
+      "테니스장",
+      "88잔디마당"
+    ],
+    "total_records": 75,
+    "full_count": 21,
+    "congested_count": 23,
+    "smooth_count": 31,
+    "full_rate_pct": 28.0,
+    "congested_or_full_pct": 58.7,
+    "concert_day_records": 67,
+    "concert_day_full_rate_pct": 31.3,
+    "non_concert_day_full_rate_pct": 0.0,
+    "risk_weight": 0.464,
+    "full_by_hour": {
+      "0": 1,
+      "12": 2,
+      "13": 3,
+      "14": 5,
+      "15": 8,
+      "16": 1,
+      "17": 1
+    }
+  },
+  {
+    "zone": "P9",
+    "canonical_id": 10,
+    "raw_ids_observed": [
+      10
+    ],
+    "gate": "남3문",
+    "capacity": 254,
+    "near_venues": [
+      "소마미술관",
+      "한성백제박물관"
+    ],
+    "total_records": 50,
+    "full_count": 19,
+    "congested_count": 18,
+    "smooth_count": 13,
+    "full_rate_pct": 38.0,
+    "congested_or_full_pct": 74.0,
+    "concert_day_records": 40,
+    "concert_day_full_rate_pct": 47.5,
+    "non_concert_day_full_rate_pct": 0.0,
+    "risk_weight": 0.596,
+    "full_by_hour": {
+      "9": 1,
+      "12": 1,
+      "13": 7,
+      "14": 2,
+      "15": 2,
+      "16": 5,
+      "17": 1
+    }
+  },
+  {
+    "zone": "P1A",
+    "canonical_id": 1,
+    "raw_ids_observed": [
+      1
+    ],
+    "gate": "남2문",
+    "capacity": 281,
+    "near_venues": [
+      "K-아트홀",
+      "벨로드롬",
+      "우리금융아트홀"
+    ],
+    "total_records": 65,
+    "full_count": 18,
+    "congested_count": 20,
+    "smooth_count": 27,
+    "full_rate_pct": 27.7,
+    "congested_or_full_pct": 58.5,
+    "concert_day_records": 57,
+    "concert_day_full_rate_pct": 31.6,
+    "non_concert_day_full_rate_pct": 0.0,
+    "risk_weight": 0.462,
+    "full_by_hour": {
+      "0": 1,
+      "14": 8,
+      "15": 7,
+      "16": 1,
+      "17": 1
+    }
+  },
+  {
+    "zone": "P7",
+    "canonical_id": 13,
+    "raw_ids_observed": [
+      8,
+      13
+    ],
+    "gate": "남2문",
+    "capacity": 137,
+    "near_venues": [
+      "우리금융아트홀",
+      "티켓링크 라이브 아레나(핸드볼경기장)"
+    ],
+    "total_records": 42,
+    "full_count": 17,
+    "congested_count": 8,
+    "smooth_count": 17,
+    "full_rate_pct": 40.5,
+    "congested_or_full_pct": 59.5,
+    "concert_day_records": 36,
+    "concert_day_full_rate_pct": 47.2,
+    "non_concert_day_full_rate_pct": 0.0,
+    "risk_weight": 0.519,
+    "full_by_hour": {
+      "0": 1,
+      "11": 2,
+      "13": 6,
+      "14": 4,
+      "15": 3,
+      "16": 1
+    }
+  },
+  {
+    "zone": "P10",
+    "canonical_id": 11,
+    "raw_ids_observed": [
+      11
+    ],
+    "gate": "남4문",
+    "capacity": 150,
+    "near_venues": [
+      "평화의광장",
+      "국립스포츠박물관"
+    ],
+    "total_records": 32,
+    "full_count": 12,
+    "congested_count": 12,
+    "smooth_count": 8,
+    "full_rate_pct": 37.5,
+    "congested_or_full_pct": 75.0,
+    "concert_day_records": 26,
+    "concert_day_full_rate_pct": 46.2,
+    "non_concert_day_full_rate_pct": 0.0,
+    "risk_weight": 0.6,
+    "full_by_hour": {
+      "9": 1,
+      "11": 1,
+      "12": 1,
+      "13": 2,
+      "14": 1,
+      "15": 2,
+      "16": 3,
+      "17": 1
+    }
+  }
+]

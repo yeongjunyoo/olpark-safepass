@@ -1,0 +1,218 @@
+[
+  {
+    "ym": "2023-01",
+    "year": 2023,
+    "month": 1,
+    "vehicles": 55937
+  },
+  {
+    "ym": "2023-02",
+    "year": 2023,
+    "month": 2,
+    "vehicles": 63981
+  },
+  {
+    "ym": "2023-03",
+    "year": 2023,
+    "month": 3,
+    "vehicles": 79091
+  },
+  {
+    "ym": "2023-04",
+    "year": 2023,
+    "month": 4,
+    "vehicles": 81173
+  },
+  {
+    "ym": "2023-05",
+    "year": 2023,
+    "month": 5,
+    "vehicles": 96132
+  },
+  {
+    "ym": "2023-06",
+    "year": 2023,
+    "month": 6,
+    "vehicles": 83769
+  },
+  {
+    "ym": "2023-07",
+    "year": 2023,
+    "month": 7,
+    "vehicles": 66628
+  },
+  {
+    "ym": "2023-08",
+    "year": 2023,
+    "month": 8,
+    "vehicles": 72256
+  },
+  {
+    "ym": "2023-09",
+    "year": 2023,
+    "month": 9,
+    "vehicles": 75656
+  },
+  {
+    "ym": "2023-10",
+    "year": 2023,
+    "month": 10,
+    "vehicles": 122511
+  },
+  {
+    "ym": "2023-11",
+    "year": 2023,
+    "month": 11,
+    "vehicles": 69551
+  },
+  {
+    "ym": "2023-12",
+    "year": 2023,
+    "month": 12,
+    "vehicles": 76574
+  },
+  {
+    "ym": "2024-01",
+    "year": 2024,
+    "month": 1,
+    "vehicles": 57651
+  },
+  {
+    "ym": "2024-02",
+    "year": 2024,
+    "month": 2,
+    "vehicles": 49041
+  },
+  {
+    "ym": "2024-03",
+    "year": 2024,
+    "month": 3,
+    "vehicles": 83634
+  },
+  {
+    "ym": "2024-04",
+    "year": 2024,
+    "month": 4,
+    "vehicles": 86480
+  },
+  {
+    "ym": "2024-05",
+    "year": 2024,
+    "month": 5,
+    "vehicles": 98369
+  },
+  {
+    "ym": "2024-06",
+    "year": 2024,
+    "month": 6,
+    "vehicles": 86575
+  },
+  {
+    "ym": "2024-07",
+    "year": 2024,
+    "month": 7,
+    "vehicles": 59808
+  },
+  {
+    "ym": "2024-08",
+    "year": 2024,
+    "month": 8,
+    "vehicles": 76120
+  },
+  {
+    "ym": "2024-09",
+    "year": 2024,
+    "month": 9,
+    "vehicles": 86004
+  },
+  {
+    "ym": "2024-10",
+    "year": 2024,
+    "month": 10,
+    "vehicles": 98408
+  },
+  {
+    "ym": "2024-11",
+    "year": 2024,
+    "month": 11,
+    "vehicles": 79772
+  },
+  {
+    "ym": "2024-12",
+    "year": 2024,
+    "month": 12,
+    "vehicles": 68462
+  },
+  {
+    "ym": "2025-01",
+    "year": 2025,
+    "month": 1,
+    "vehicles": 56185
+  },
+  {
+    "ym": "2025-02",
+    "year": 2025,
+    "month": 2,
+    "vehicles": 59881
+  },
+  {
+    "ym": "2025-03",
+    "year": 2025,
+    "month": 3,
+    "vehicles": 72549
+  },
+  {
+    "ym": "2025-04",
+    "year": 2025,
+    "month": 4,
+    "vehicles": 85562
+  },
+  {
+    "ym": "2025-05",
+    "year": 2025,
+    "month": 5,
+    "vehicles": 102822
+  },
+  {
+    "ym": "2025-06",
+    "year": 2025,
+    "month": 6,
+    "vehicles": 87091
+  },
+  {
+    "ym": "2025-07",
+    "year": 2025,
+    "month": 7,
+    "vehicles": 68505
+  },
+  {
+    "ym": "2025-08",
+    "year": 2025,
+    "month": 8,
+    "vehicles": 76408
+  },
+  {
+    "ym": "2025-09",
+    "year": 2025,
+    "month": 9,
+    "vehicles": 83344
+  },
+  {
+    "ym": "2025-10",
+    "year": 2025,
+    "month": 10,
+    "vehicles": 82361
+  },
+  {
+    "ym": "2025-11",
+    "year": 2025,
+    "month": 11,
+    "vehicles": 99064
+  },
+  {
+    "ym": "2025-12",
+    "year": 2025,
+    "month": 12,
+    "vehicles": 76923
+  }
+]

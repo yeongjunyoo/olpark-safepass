@@ -1,0 +1,12 @@
+name = "olpark-safepass-worker"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+
+[vars]
+ALLOWED_ORIGINS = "*"
+STATIC_FALLBACK_URL = "https://olpark-safepass.pages.dev/data/live_snapshot.json"
+
+# Configure API secrets securely via Wrangler CLI (NEVER commit keys):
+#   wrangler secret put KSPONCO_PARKING_KEY
+#   wrangler secret put SEOUL_CITYDATA_KEY
+#   wrangler secret put KMA_API_KEY

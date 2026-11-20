@@ -1,0 +1,18 @@
+{
+  "name": "올팍 세이프패스 (Olpark SafePass)",
+  "short_name": "Olpark SafePass",
+  "description": "올림픽공원 실시간 주차·혼잡 ML 예측, 시설 안전·무장애 스마트 귀가 및 3D 공연장 휠체어 시야 검증 플랫폼",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#0F2C59",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

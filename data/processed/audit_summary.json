@@ -1,0 +1,2773 @@
+{
+  "generated_at_kst": "2026-11-20T18:49:18+09:00",
+  "source_note": "100% 실물 CSV/API 감사 기반 (data/raw 35개 파일 + data.go.kr 58종 + ksponco.or.kr 45건 + 서울시 citydata)",
+  "reconciliation": {
+    "datagokr_direct_total": 58,
+    "datagokr_filedata": 30,
+    "datagokr_openapi": 28,
+    "datagokr_linked": 38,
+    "homepage_pubdata_total": 45,
+    "csv_15147873_total": 42,
+    "missing_from_homepage_count": 18,
+    "missing_from_homepage_samples": [
+      {
+        "id": "15099006",
+        "type": "fileData",
+        "name": "공연 포스터 정보"
+      },
+      {
+        "id": "15127487",
+        "type": "fileData",
+        "name": "올림픽공원 공연장 실감형 콘텐츠"
+      },
+      {
+        "id": "15131671",
+        "type": "fileData",
+        "name": "월별주차현황"
+      },
+      {
+        "id": "15133891",
+        "type": "fileData",
+        "name": "테니스장 이용 정보"
+      },
+      {
+        "id": "15138735",
+        "type": "fileData",
+        "name": "올림픽공원 입출차 정보"
+      },
+      {
+        "id": "15143220",
+        "type": "fileData",
+        "name": "잔디시설정보"
+      },
+      {
+        "id": "15144222",
+        "type": "fileData",
+        "name": "정원현황"
+      },
+      {
+        "id": "15144839",
+        "type": "fileData",
+        "name": "스포츠센터 종목정보"
+      },
+      {
+        "id": "15147873",
+        "type": "fileData",
+        "name": "공공데이터 개방목록"
+      },
+      {
+        "id": "15147992",
+        "type": "fileData",
+        "name": "스포츠센터 강좌 정보"
+      },
+      {
+        "id": "15149169",
+        "type": "fileData",
+        "name": "영문 공연정보"
+      },
+      {
+        "id": "15161406",
+        "type": "fileData",
+        "name": "공모참여 목록"
+      },
+      {
+        "id": "15164156",
+        "type": "fileData",
+        "name": "주차장 혼잡도 정보"
+      },
+      {
+        "id": "15168248",
+        "type": "fileData",
+        "name": "근무복 주문현황정보"
+      },
+      {
+        "id": "15168288",
+        "type": "fileData",
+        "name": "근무복 주문현황"
+      },
+      {
+        "id": "15159093",
+        "type": "openapi",
+        "name": "올림픽공원 입출차정보(전체구역)"
+      },
+      {
+        "id": "15164822",
+        "type": "openapi",
+        "name": "올림픽공원 차량입출차, 공연, 날씨정보 등 연계 데이터"
+      },
+      {
+        "id": "15168686",
+        "type": "openapi",
+        "name": "실시간 주차현황"
+      }
+    ],
+    "kcisa_dependent_openapi_count": 27,
+    "seoul_citydata_parking_total_lots": 4,
+    "seoul_citydata_parking_unavailable_lots": 4,
+    "seoul_citydata_parking_total_capacity": 2716
+  },
+  "vehicle_eda_202407": {
+    "total_records": 215528,
+    "date_range": [
+      "2024-07-01",
+      "2024-07-31"
+    ],
+    "null_pct": 0.0,
+    "negative_stay_count": 0,
+    "zero_stay_count": 59,
+    "dropoff_5m_count": 55407,
+    "dropoff_5m_pct": 25.71,
+    "dropoff_10m_count": 67642,
+    "dropoff_10m_pct": 31.38,
+    "stay_gt_10m_count": 147886,
+    "stay_gt_10m_pct": 68.62,
+    "stay_le_30m_count": 81716,
+    "stay_30m_4h_count": 119497,
+    "stay_gt_4h_count": 14315,
+    "stay_gt_24h_count": 310,
+    "stay_gt_7d_count": 40,
+    "valid_24h_stay_mean_min": 91.4,
+    "valid_24h_stay_median_min": 74.0,
+    "valid_24h_stay_p75_min": 129.0,
+    "valid_24h_stay_p90_min": 196.0,
+    "valid_24h_stay_p95_min": 275.0,
+    "daily_mean": 6952.5,
+    "daily_std": 604.6,
+    "daily_min": {
+      "date": "2024-07-07",
+      "count": 4984
+    },
+    "daily_max": {
+      "date": "2024-07-12",
+      "count": 8615
+    },
+    "corr_daily_entries_vs_night_exit": 0.817,
+    "corr_daily_entries_vs_rain_mm": -0.346,
+    "corr_daily_entries_vs_rain_hours": -0.366,
+    "daytime_hourly_by_rain": {
+      "no_rain_mean": 419.5,
+      "light_rain_0_5mm_mean": 378.7,
+      "light_rain_drop_pct": -9.7,
+      "heavy_rain_5mm_plus_mean": 346.0,
+      "heavy_rain_drop_pct": -17.5
+    },
+    "stay_histogram": [
+      {
+        "bucket": "0~5분 (즉시 회차)",
+        "count": 55407,
+        "pct": 25.71
+      },
+      {
+        "bucket": "5~10분 (픽업·회차)",
+        "count": 12235,
+        "pct": 5.68
+      },
+      {
+        "bucket": "10~30분 (단기 정차)",
+        "count": 14074,
+        "pct": 6.53
+      },
+      {
+        "bucket": "30~60분 (단기 방문)",
+        "count": 16080,
+        "pct": 7.46
+      },
+      {
+        "bucket": "1~2시간 (스포츠·산책)",
+        "count": 56776,
+        "pct": 26.34
+      },
+      {
+        "bucket": "2~4시간 (공연·관람)",
+        "count": 46641,
+        "pct": 21.64
+      },
+      {
+        "bucket": "4~24시간 (장기·종일)",
+        "count": 14005,
+        "pct": 6.5
+      },
+      {
+        "bucket": "24시간 초과 (장기 방치)",
+        "count": 310,
+        "pct": 0.14
+      }
+    ],
+    "subway_202407": {
+      "stations": [
+        {
+          "line": "5호선",
+          "station": "올림픽공원(한국체대)",
+          "ride_total": 182576,
+          "alight_total": 156761,
+          "total": 339337
+        },
+        {
+          "line": "8호선",
+          "station": "몽촌토성(평화의문)",
+          "ride_total": 201526,
+          "alight_total": 204568,
+          "total": 406094
+        },
+        {
+          "line": "9호선2~3단계",
+          "station": "한성백제",
+          "ride_total": 93052,
+          "alight_total": 83699,
+          "total": 176751
+        },
+        {
+          "line": "9호선2~3단계",
+          "station": "올림픽공원(한국체대)",
+          "ride_total": 208848,
+          "alight_total": 214626,
+          "total": 423474
+        }
+      ],
+      "ride_total": 686002,
+      "alight_total": 659654,
+      "grand_total": 1345656,
+      "hourly": [
+        {
+          "hour": 0,
+          "ride": 1019,
+          "alight": 4918
+        },
+        {
+          "hour": 1,
+          "ride": 2,
+          "alight": 47
+        },
+        {
+          "hour": 2,
+          "ride": 0,
+          "alight": 0
+        },
+        {
+          "hour": 3,
+          "ride": 0,
+          "alight": 0
+        },
+        {
+          "hour": 4,
+          "ride": 10,
+          "alight": 0
+        },
+        {
+          "hour": 5,
+          "ride": 6175,
+          "alight": 4884
+        },
+        {
+          "hour": 6,
+          "ride": 23054,
+          "alight": 19513
+        },
+        {
+          "hour": 7,
+          "ride": 55824,
+          "alight": 26968
+        },
+        {
+          "hour": 8,
+          "ride": 69648,
+          "alight": 63989
+        },
+        {
+          "hour": 9,
+          "ride": 42873,
+          "alight": 36694
+        },
+        {
+          "hour": 10,
+          "ride": 29298,
+          "alight": 26482
+        },
+        {
+          "hour": 11,
+          "ride": 29030,
+          "alight": 27062
+        },
+        {
+          "hour": 12,
+          "ride": 31037,
+          "alight": 29517
+        },
+        {
+          "hour": 13,
+          "ride": 31042,
+          "alight": 34478
+        },
+        {
+          "hour": 14,
+          "ride": 29806,
+          "alight": 34830
+        },
+        {
+          "hour": 15,
+          "ride": 33385,
+          "alight": 40521
+        },
+        {
+          "hour": 16,
+          "ride": 43308,
+          "alight": 42697
+        },
+        {
+          "hour": 17,
+          "ride": 52408,
+          "alight": 51247
+        },
+        {
+          "hour": 18,
+          "ride": 60678,
+          "alight": 64932
+        },
+        {
+          "hour": 19,
+          "ride": 34029,
+          "alight": 49870
+        },
+        {
+          "hour": 20,
+          "ride": 44384,
+          "alight": 30440
+        },
+        {
+          "hour": 21,
+          "ride": 36191,
+          "alight": 28935
+        },
+        {
+          "hour": 22,
+          "ride": 25200,
+          "alight": 25399
+        },
+        {
+          "hour": 23,
+          "ride": 7601,
+          "alight": 16231
+        }
+      ]
+    },
+    "subway_202610": {
+      "stations": [
+        {
+          "line": "5호선",
+          "station": "올림픽공원(한국체대)",
+          "ride_total": 184338,
+          "alight_total": 172157,
+          "total": 356495
+        },
+        {
+          "line": "8호선",
+          "station": "몽촌토성(평화의문)",
+          "ride_total": 281116,
+          "alight_total": 286469,
+          "total": 567585
+        },
+        {
+          "line": "9호선2~3단계",
+          "station": "한성백제",
+          "ride_total": 114485,
+          "alight_total": 102301,
+          "total": 216786
+        },
+        {
+          "line": "9호선2~3단계",
+          "station": "올림픽공원(한국체대)",
+          "ride_total": 337479,
+          "alight_total": 346954,
+          "total": 684433
+        }
+      ],
+      "ride_total": 917418,
+      "alight_total": 907881,
+      "grand_total": 1825299,
+      "hourly": [
+        {
+          "hour": 0,
+          "ride": 1439,
+          "alight": 5184
+        },
+        {
+          "hour": 1,
+          "ride": 5,
+          "alight": 44
+        },
+        {
+          "hour": 2,
+          "ride": 0,
+          "alight": 2
+        },
+        {
+          "hour": 3,
+          "ride": 0,
+          "alight": 0
+        },
+        {
+          "hour": 4,
+          "ride": 40,
+          "alight": 1
+        },
+        {
+          "hour": 5,
+          "ride": 8636,
+          "alight": 3724
+        },
+        {
+          "hour": 6,
+          "ride": 25923,
+          "alight": 16734
+        },
+        {
+          "hour": 7,
+          "ride": 59425,
+          "alight": 29609
+        },
+        {
+          "hour": 8,
+          "ride": 72176,
+          "alight": 71135
+        },
+        {
+          "hour": 9,
+          "ride": 50321,
+          "alight": 46133
+        },
+        {
+          "hour": 10,
+          "ride": 37855,
+          "alight": 41222
+        },
+        {
+          "hour": 11,
+          "ride": 36986,
+          "alight": 45864
+        },
+        {
+          "hour": 12,
+          "ride": 41597,
+          "alight": 49043
+        },
+        {
+          "hour": 13,
+          "ride": 42303,
+          "alight": 59794
+        },
+        {
+          "hour": 14,
+          "ride": 44183,
+          "alight": 63260
+        },
+        {
+          "hour": 15,
+          "ride": 55213,
+          "alight": 69322
+        },
+        {
+          "hour": 16,
+          "ride": 65004,
+          "alight": 74656
+        },
+        {
+          "hour": 17,
+          "ride": 73060,
+          "alight": 75154
+        },
+        {
+          "hour": 18,
+          "ride": 83938,
+          "alight": 79272
+        },
+        {
+          "hour": 19,
+          "ride": 59570,
+          "alight": 59915
+        },
+        {
+          "hour": 20,
+          "ride": 62263,
+          "alight": 38116
+        },
+        {
+          "hour": 21,
+          "ride": 50713,
+          "alight": 32854
+        },
+        {
+          "hour": 22,
+          "ride": 35387,
+          "alight": 28337
+        },
+        {
+          "hour": 23,
+          "ride": 11381,
+          "alight": 18506
+        }
+      ]
+    },
+    "subway_growth_pct_202407_to_202610": 35.6,
+    "corr_hourly_veh_in_vs_subway_alight": 0.811,
+    "corr_hourly_veh_out_vs_subway_ride": 0.83,
+    "hourly_profile_24h": [
+      {
+        "hour": 0,
+        "veh_entries_month": 316,
+        "veh_exits_month": 389,
+        "veh_entries_avg": 10.2,
+        "veh_exits_avg": 12.5,
+        "sub_alight_202407": 4918,
+        "sub_ride_202407": 1019,
+        "sub_alight_202610": 5184,
+        "sub_ride_202610": 1439
+      },
+      {
+        "hour": 1,
+        "veh_entries_month": 226,
+        "veh_exits_month": 259,
+        "veh_entries_avg": 7.3,
+        "veh_exits_avg": 8.4,
+        "sub_alight_202407": 47,
+        "sub_ride_202407": 2,
+        "sub_alight_202610": 44,
+        "sub_ride_202610": 5
+      },
+      {
+        "hour": 2,
+        "veh_entries_month": 165,
+        "veh_exits_month": 163,
+        "veh_entries_avg": 5.3,
+        "veh_exits_avg": 5.3,
+        "sub_alight_202407": 0,
+        "sub_ride_202407": 0,
+        "sub_alight_202610": 2,
+        "sub_ride_202610": 0
+      },
+      {
+        "hour": 3,
+        "veh_entries_month": 216,
+        "veh_exits_month": 152,
+        "veh_entries_avg": 7.0,
+        "veh_exits_avg": 4.9,
+        "sub_alight_202407": 0,
+        "sub_ride_202407": 0,
+        "sub_alight_202610": 0,
+        "sub_ride_202610": 0
+      },
+      {
+        "hour": 4,
+        "veh_entries_month": 602,
+        "veh_exits_month": 158,
+        "veh_entries_avg": 19.4,
+        "veh_exits_avg": 5.1,
+        "sub_alight_202407": 0,
+        "sub_ride_202407": 10,
+        "sub_alight_202610": 1,
+        "sub_ride_202610": 40
+      },
+      {
+        "hour": 5,
+        "veh_entries_month": 8118,
+        "veh_exits_month": 638,
+        "veh_entries_avg": 261.9,
+        "veh_exits_avg": 20.6,
+        "sub_alight_202407": 4884,
+        "sub_ride_202407": 6175,
+        "sub_alight_202610": 3724,
+        "sub_ride_202610": 8636
+      },
+      {
+        "hour": 6,
+        "veh_entries_month": 9100,
+        "veh_exits_month": 3369,
+        "veh_entries_avg": 293.5,
+        "veh_exits_avg": 108.7,
+        "sub_alight_202407": 19513,
+        "sub_ride_202407": 23054,
+        "sub_alight_202610": 16734,
+        "sub_ride_202610": 25923
+      },
+      {
+        "hour": 7,
+        "veh_entries_month": 7951,
+        "veh_exits_month": 10635,
+        "veh_entries_avg": 256.5,
+        "veh_exits_avg": 343.1,
+        "sub_alight_202407": 26968,
+        "sub_ride_202407": 55824,
+        "sub_alight_202610": 29609,
+        "sub_ride_202610": 59425
+      },
+      {
+        "hour": 8,
+        "veh_entries_month": 20762,
+        "veh_exits_month": 14239,
+        "veh_entries_avg": 669.7,
+        "veh_exits_avg": 459.3,
+        "sub_alight_202407": 63989,
+        "sub_ride_202407": 69648,
+        "sub_alight_202610": 71135,
+        "sub_ride_202610": 72176
+      },
+      {
+        "hour": 9,
+        "veh_entries_month": 16804,
+        "veh_exits_month": 8892,
+        "veh_entries_avg": 542.1,
+        "veh_exits_avg": 286.8,
+        "sub_alight_202407": 36694,
+        "sub_ride_202407": 42873,
+        "sub_alight_202610": 46133,
+        "sub_ride_202610": 50321
+      },
+      {
+        "hour": 10,
+        "veh_entries_month": 16386,
+        "veh_exits_month": 13974,
+        "veh_entries_avg": 528.6,
+        "veh_exits_avg": 450.8,
+        "sub_alight_202407": 26482,
+        "sub_ride_202407": 29298,
+        "sub_alight_202610": 41222,
+        "sub_ride_202610": 37855
+      },
+      {
+        "hour": 11,
+        "veh_entries_month": 10702,
+        "veh_exits_month": 15774,
+        "veh_entries_avg": 345.2,
+        "veh_exits_avg": 508.8,
+        "sub_alight_202407": 27062,
+        "sub_ride_202407": 29030,
+        "sub_alight_202610": 45864,
+        "sub_ride_202610": 36986
+      },
+      {
+        "hour": 12,
+        "veh_entries_month": 11742,
+        "veh_exits_month": 16918,
+        "veh_entries_avg": 378.8,
+        "veh_exits_avg": 545.7,
+        "sub_alight_202407": 29517,
+        "sub_ride_202407": 31037,
+        "sub_alight_202610": 49043,
+        "sub_ride_202610": 41597
+      },
+      {
+        "hour": 13,
+        "veh_entries_month": 15988,
+        "veh_exits_month": 12402,
+        "veh_entries_avg": 515.7,
+        "veh_exits_avg": 400.1,
+        "sub_alight_202407": 34478,
+        "sub_ride_202407": 31042,
+        "sub_alight_202610": 59794,
+        "sub_ride_202610": 42303
+      },
+      {
+        "hour": 14,
+        "veh_entries_month": 13283,
+        "veh_exits_month": 11091,
+        "veh_entries_avg": 428.5,
+        "veh_exits_avg": 357.8,
+        "sub_alight_202407": 34830,
+        "sub_ride_202407": 29806,
+        "sub_alight_202610": 63260,
+        "sub_ride_202610": 44183
+      },
+      {
+        "hour": 15,
+        "veh_entries_month": 14247,
+        "veh_exits_month": 14668,
+        "veh_entries_avg": 459.6,
+        "veh_exits_avg": 473.2,
+        "sub_alight_202407": 40521,
+        "sub_ride_202407": 33385,
+        "sub_alight_202610": 69322,
+        "sub_ride_202610": 55213
+      },
+      {
+        "hour": 16,
+        "veh_entries_month": 13653,
+        "veh_exits_month": 14948,
+        "veh_entries_avg": 440.4,
+        "veh_exits_avg": 482.2,
+        "sub_alight_202407": 42697,
+        "sub_ride_202407": 43308,
+        "sub_alight_202610": 74656,
+        "sub_ride_202610": 65004
+      },
+      {
+        "hour": 17,
+        "veh_entries_month": 13555,
+        "veh_exits_month": 15536,
+        "veh_entries_avg": 437.3,
+        "veh_exits_avg": 501.2,
+        "sub_alight_202407": 51247,
+        "sub_ride_202407": 52408,
+        "sub_alight_202610": 75154,
+        "sub_ride_202610": 73060
+      },
+      {
+        "hour": 18,
+        "veh_entries_month": 13747,
+        "veh_exits_month": 14445,
+        "veh_entries_avg": 443.5,
+        "veh_exits_avg": 466.0,
+        "sub_alight_202407": 64932,
+        "sub_ride_202407": 60678,
+        "sub_alight_202610": 79272,
+        "sub_ride_202610": 83938
+      },
+      {
+        "hour": 19,
+        "veh_entries_month": 11733,
+        "veh_exits_month": 11110,
+        "veh_entries_avg": 378.5,
+        "veh_exits_avg": 358.4,
+        "sub_alight_202407": 49870,
+        "sub_ride_202407": 34029,
+        "sub_alight_202610": 59915,
+        "sub_ride_202610": 59570
+      },
+      {
+        "hour": 20,
+        "veh_entries_month": 10334,
+        "veh_exits_month": 13474,
+        "veh_entries_avg": 333.4,
+        "veh_exits_avg": 434.6,
+        "sub_alight_202407": 30440,
+        "sub_ride_202407": 44384,
+        "sub_alight_202610": 38116,
+        "sub_ride_202610": 62263
+      },
+      {
+        "hour": 21,
+        "veh_entries_month": 3820,
+        "veh_exits_month": 13545,
+        "veh_entries_avg": 123.2,
+        "veh_exits_avg": 436.9,
+        "sub_alight_202407": 28935,
+        "sub_ride_202407": 36191,
+        "sub_alight_202610": 32854,
+        "sub_ride_202610": 50713
+      },
+      {
+        "hour": 22,
+        "veh_entries_month": 1481,
+        "veh_exits_month": 7623,
+        "veh_entries_avg": 47.8,
+        "veh_exits_avg": 245.9,
+        "sub_alight_202407": 25399,
+        "sub_ride_202407": 25200,
+        "sub_alight_202610": 28337,
+        "sub_ride_202610": 35387
+      },
+      {
+        "hour": 23,
+        "veh_entries_month": 597,
+        "veh_exits_month": 1061,
+        "veh_entries_avg": 19.3,
+        "veh_exits_avg": 34.2,
+        "sub_alight_202407": 16231,
+        "sub_ride_202407": 7601,
+        "sub_alight_202610": 18506,
+        "sub_ride_202610": 11381
+      }
+    ]
+  },
+  "zone_congestion_15164156": {
+    "total_rows": 699,
+    "date_range": [
+      "2025-02-12",
+      "2026-08-12"
+    ],
+    "unique_dates_recorded": 92,
+    "calendar_span_days": 547,
+    "oracle_bug_rows": 699,
+    "oracle_bug_pct": 100.0,
+    "oracle_bug_samples": [
+      {
+        "일련번호": 730,
+        "주차장아이디": 2,
+        "주차구역": "P1B",
+        "혼잡도": "혼잡",
+        "등록일": "2026-08-12",
+        "등록시간": "17:08:12"
+      },
+      {
+        "일련번호": 729,
+        "주차장아이디": 1,
+        "주차구역": "P1A",
+        "혼잡도": "혼잡",
+        "등록일": "2026-08-12",
+        "등록시간": "17:08:12"
+      },
+      {
+        "일련번호": 728,
+        "주차장아이디": 13,
+        "주차구역": "P7",
+        "혼잡도": "만차",
+        "등록일": "2026-06-06",
+        "등록시간": "00:06:06"
+      },
+      {
+        "일련번호": 727,
+        "주차장아이디": 7,
+        "주차구역": "P6",
+        "혼잡도": "만차",
+        "등록일": "2026-06-06",
+        "등록시간": "00:06:06"
+      },
+      {
+        "일련번호": 726,
+        "주차장아이디": 6,
+        "주차구역": "P5",
+        "혼잡도": "만차",
+        "등록일": "2026-06-06",
+        "등록시간": "00:06:06"
+      },
+      {
+        "일련번호": 725,
+        "주차장아이디": 5,
+        "주차구역": "P4",
+        "혼잡도": "만차",
+        "등록일": "2026-06-06",
+        "등록시간": "00:06:06"
+      }
+    ],
+    "id_conflicts": [
+      {
+        "zone": "P5",
+        "raw_id": 5,
+        "count": 1,
+        "min_date": "2025-12-27",
+        "max_date": "2025-12-27"
+      },
+      {
+        "zone": "P5",
+        "raw_id": 6,
+        "count": 74,
+        "min_date": "2025-02-16",
+        "max_date": "2026-06-06"
+      },
+      {
+        "zone": "P7",
+        "raw_id": 8,
+        "count": 40,
+        "min_date": "2025-02-15",
+        "max_date": "2025-06-02"
+      },
+      {
+        "zone": "P7",
+        "raw_id": 13,
+        "count": 2,
+        "min_date": "2026-03-10",
+        "max_date": "2026-06-06"
+      }
+    ],
+    "status_counts": {
+      "만차": 263,
+      "혼잡": 239,
+      "원활": 197
+    },
+    "zones": [
+      {
+        "zone": "P6",
+        "canonical_id": 7,
+        "raw_ids_observed": [
+          7
+        ],
+        "gate": "남2문",
+        "capacity": 167,
+        "near_venues": [
+          "티켓링크 라이브 아레나(핸드볼경기장)",
+          "KSPO DOME"
+        ],
+        "total_records": 82,
+        "full_count": 35,
+        "congested_count": 29,
+        "smooth_count": 18,
+        "full_rate_pct": 42.7,
+        "congested_or_full_pct": 78.0,
+        "concert_day_records": 72,
+        "concert_day_full_rate_pct": 48.6,
+        "non_concert_day_full_rate_pct": 0.0,
+        "risk_weight": 0.639,
+        "full_by_hour": {
+          "0": 1,
+          "10": 2,
+          "11": 4,
+          "12": 3,
+          "13": 10,
+          "14": 7,
+          "15": 3,
+          "16": 3,
+          "17": 2
+        }
+      },
+      {
+        "zone": "P5",
+        "canonical_id": 6,
+        "raw_ids_observed": [
+          5,
+          6
+        ],
+        "gate": "북2문",
+        "capacity": 176,
+        "near_venues": [
+          "KSPO DOME",
+          "올림픽수영장"
+        ],
+        "total_records": 75,
+        "full_count": 32,
+        "congested_count": 30,
+        "smooth_count": 13,
+        "full_rate_pct": 42.7,
+        "congested_or_full_pct": 82.7,
+        "concert_day_records": 66,
+        "concert_day_full_rate_pct": 47.0,
+        "non_concert_day_full_rate_pct": 11.1,
+        "risk_weight": 0.667,
+        "full_by_hour": {
+          "0": 1,
+          "9": 1,
+          "10": 5,
+          "11": 4,
+          "12": 1,
+          "13": 6,
+          "14": 7,
+          "15": 5,
+          "16": 1,
+          "20": 1
+        }
+      },
+      {
+        "zone": "P4",
+        "canonical_id": 5,
+        "raw_ids_observed": [
+          5
+        ],
+        "gate": "북2문",
+        "capacity": 117,
+        "near_venues": [
+          "올림픽수영장",
+          "KSPO DOME",
+          "88호수수변무대"
+        ],
+        "total_records": 76,
+        "full_count": 31,
+        "congested_count": 29,
+        "smooth_count": 16,
+        "full_rate_pct": 40.8,
+        "congested_or_full_pct": 78.9,
+        "concert_day_records": 65,
+        "concert_day_full_rate_pct": 46.2,
+        "non_concert_day_full_rate_pct": 9.1,
+        "risk_weight": 0.637,
+        "full_by_hour": {
+          "0": 1,
+          "9": 1,
+          "10": 7,
+          "11": 5,
+          "13": 5,
+          "14": 5,
+          "15": 5,
+          "16": 1,
+          "20": 1
+        }
+      },
+      {
+        "zone": "P11",
+        "canonical_id": 12,
+        "raw_ids_observed": [
+          12
+        ],
+        "gate": "동2문",
+        "capacity": 190,
+        "near_venues": [
+          "올림픽테니스경기장",
+          "올림픽홀"
+        ],
+        "total_records": 60,
+        "full_count": 27,
+        "congested_count": 24,
+        "smooth_count": 9,
+        "full_rate_pct": 45.0,
+        "congested_or_full_pct": 85.0,
+        "concert_day_records": 53,
+        "concert_day_full_rate_pct": 50.9,
+        "non_concert_day_full_rate_pct": 0.0,
+        "risk_weight": 0.69,
+        "full_by_hour": {
+          "9": 1,
+          "10": 2,
+          "11": 2,
+          "12": 2,
+          "13": 6,
+          "14": 6,
+          "15": 3,
+          "16": 4,
+          "17": 1
+        }
+      },
+      {
+        "zone": "P2",
+        "canonical_id": 3,
+        "raw_ids_observed": [
+          3
+        ],
+        "gate": "동2문",
+        "capacity": 320,
+        "near_venues": [
+          "올림픽홀",
+          "KSPO DOME",
+          "88잔디마당"
+        ],
+        "total_records": 81,
+        "full_count": 26,
+        "congested_count": 22,
+        "smooth_count": 33,
+        "full_rate_pct": 32.1,
+        "congested_or_full_pct": 59.3,
+        "concert_day_records": 72,
+        "concert_day_full_rate_pct": 36.1,
+        "non_concert_day_full_rate_pct": 0.0,
+        "risk_weight": 0.484,
+        "full_by_hour": {
+          "0": 1,
+          "11": 1,
+          "12": 1,
+          "13": 5,
+          "14": 5,
+          "15": 9,
+          "16": 3,
+          "17": 1
+        }
+      },
+      {
+        "zone": "P8",
+        "canonical_id": 9,
+        "raw_ids_observed": [
+          9
+        ],
+        "gate": "남2문/남3문",
+        "capacity": 160,
+        "near_venues": [
+          "벨로드롬",
+          "야생화단지"
+        ],
+        "total_records": 61,
+        "full_count": 25,
+        "congested_count": 24,
+        "smooth_count": 12,
+        "full_rate_pct": 41.0,
+        "congested_or_full_pct": 80.3,
+        "concert_day_records": 52,
+        "concert_day_full_rate_pct": 48.1,
+        "non_concert_day_full_rate_pct": 0.0,
+        "risk_weight": 0.646,
+        "full_by_hour": {
+          "9": 1,
+          "10": 1,
+          "12": 1,
+          "13": 9,
+          "14": 3,
+          "15": 4,
+          "16": 4,
+          "17": 2
+        }
+      },
+      {
+        "zone": "P1B",
+        "canonical_id": 2,
+        "raw_ids_observed": [
+          2
+        ],
+        "gate": "동2문",
+        "capacity": 281,
+        "near_venues": [
+          "올림픽홀",
+          "테니스장",
+          "88잔디마당"
+        ],
+        "total_records": 75,
+        "full_count": 21,
+        "congested_count": 23,
+        "smooth_count": 31,
+        "full_rate_pct": 28.0,
+        "congested_or_full_pct": 58.7,
+        "concert_day_records": 67,
+        "concert_day_full_rate_pct": 31.3,
+        "non_concert_day_full_rate_pct": 0.0,
+        "risk_weight": 0.464,
+        "full_by_hour": {
+          "0": 1,
+          "12": 2,
+          "13": 3,
+          "14": 5,
+          "15": 8,
+          "16": 1,
+          "17": 1
+        }
+      },
+      {
+        "zone": "P9",
+        "canonical_id": 10,
+        "raw_ids_observed": [
+          10
+        ],
+        "gate": "남3문",
+        "capacity": 254,
+        "near_venues": [
+          "소마미술관",
+          "한성백제박물관"
+        ],
+        "total_records": 50,
+        "full_count": 19,
+        "congested_count": 18,
+        "smooth_count": 13,
+        "full_rate_pct": 38.0,
+        "congested_or_full_pct": 74.0,
+        "concert_day_records": 40,
+        "concert_day_full_rate_pct": 47.5,
+        "non_concert_day_full_rate_pct": 0.0,
+        "risk_weight": 0.596,
+        "full_by_hour": {
+          "9": 1,
+          "12": 1,
+          "13": 7,
+          "14": 2,
+          "15": 2,
+          "16": 5,
+          "17": 1
+        }
+      },
+      {
+        "zone": "P1A",
+        "canonical_id": 1,
+        "raw_ids_observed": [
+          1
+        ],
+        "gate": "남2문",
+        "capacity": 281,
+        "near_venues": [
+          "K-아트홀",
+          "벨로드롬",
+          "우리금융아트홀"
+        ],
+        "total_records": 65,
+        "full_count": 18,
+        "congested_count": 20,
+        "smooth_count": 27,
+        "full_rate_pct": 27.7,
+        "congested_or_full_pct": 58.5,
+        "concert_day_records": 57,
+        "concert_day_full_rate_pct": 31.6,
+        "non_concert_day_full_rate_pct": 0.0,
+        "risk_weight": 0.462,
+        "full_by_hour": {
+          "0": 1,
+          "14": 8,
+          "15": 7,
+          "16": 1,
+          "17": 1
+        }
+      },
+      {
+        "zone": "P7",
+        "canonical_id": 13,
+        "raw_ids_observed": [
+          8,
+          13
+        ],
+        "gate": "남2문",
+        "capacity": 137,
+        "near_venues": [
+          "우리금융아트홀",
+          "티켓링크 라이브 아레나(핸드볼경기장)"
+        ],
+        "total_records": 42,
+        "full_count": 17,
+        "congested_count": 8,
+        "smooth_count": 17,
+        "full_rate_pct": 40.5,
+        "congested_or_full_pct": 59.5,
+        "concert_day_records": 36,
+        "concert_day_full_rate_pct": 47.2,
+        "non_concert_day_full_rate_pct": 0.0,
+        "risk_weight": 0.519,
+        "full_by_hour": {
+          "0": 1,
+          "11": 2,
+          "13": 6,
+          "14": 4,
+          "15": 3,
+          "16": 1
+        }
+      },
+      {
+        "zone": "P10",
+        "canonical_id": 11,
+        "raw_ids_observed": [
+          11
+        ],
+        "gate": "남4문",
+        "capacity": 150,
+        "near_venues": [
+          "평화의광장",
+          "국립스포츠박물관"
+        ],
+        "total_records": 32,
+        "full_count": 12,
+        "congested_count": 12,
+        "smooth_count": 8,
+        "full_rate_pct": 37.5,
+        "congested_or_full_pct": 75.0,
+        "concert_day_records": 26,
+        "concert_day_full_rate_pct": 46.2,
+        "non_concert_day_full_rate_pct": 0.0,
+        "risk_weight": 0.6,
+        "full_by_hour": {
+          "9": 1,
+          "11": 1,
+          "12": 1,
+          "13": 2,
+          "14": 1,
+          "15": 2,
+          "16": 3,
+          "17": 1
+        }
+      }
+    ],
+    "by_hour": [
+      {
+        "hour": 0,
+        "total": 7,
+        "full": 7,
+        "congested": 0,
+        "smooth": 0
+      },
+      {
+        "hour": 8,
+        "total": 2,
+        "full": 0,
+        "congested": 1,
+        "smooth": 1
+      },
+      {
+        "hour": 9,
+        "total": 35,
+        "full": 6,
+        "congested": 10,
+        "smooth": 19
+      },
+      {
+        "hour": 10,
+        "total": 102,
+        "full": 17,
+        "congested": 41,
+        "smooth": 44
+      },
+      {
+        "hour": 11,
+        "total": 70,
+        "full": 19,
+        "congested": 34,
+        "smooth": 17
+      },
+      {
+        "hour": 12,
+        "total": 24,
+        "full": 12,
+        "congested": 11,
+        "smooth": 1
+      },
+      {
+        "hour": 13,
+        "total": 133,
+        "full": 59,
+        "congested": 50,
+        "smooth": 24
+      },
+      {
+        "hour": 14,
+        "total": 103,
+        "full": 53,
+        "congested": 35,
+        "smooth": 15
+      },
+      {
+        "hour": 15,
+        "total": 85,
+        "full": 51,
+        "congested": 25,
+        "smooth": 9
+      },
+      {
+        "hour": 16,
+        "total": 48,
+        "full": 27,
+        "congested": 13,
+        "smooth": 8
+      },
+      {
+        "hour": 17,
+        "total": 18,
+        "full": 10,
+        "congested": 7,
+        "smooth": 1
+      },
+      {
+        "hour": 18,
+        "total": 28,
+        "full": 0,
+        "congested": 9,
+        "smooth": 19
+      },
+      {
+        "hour": 19,
+        "total": 3,
+        "full": 0,
+        "congested": 0,
+        "smooth": 3
+      },
+      {
+        "hour": 20,
+        "total": 13,
+        "full": 2,
+        "congested": 0,
+        "smooth": 11
+      },
+      {
+        "hour": 21,
+        "total": 28,
+        "full": 0,
+        "congested": 3,
+        "smooth": 25
+      }
+    ]
+  },
+  "monthly_parking_15131671": {
+    "rows": 72,
+    "olympicpark_202407": 59808,
+    "olympicpark_monthly": [
+      {
+        "ym": "2023-01",
+        "year": 2023,
+        "month": 1,
+        "vehicles": 55937
+      },
+      {
+        "ym": "2023-02",
+        "year": 2023,
+        "month": 2,
+        "vehicles": 63981
+      },
+      {
+        "ym": "2023-03",
+        "year": 2023,
+        "month": 3,
+        "vehicles": 79091
+      },
+      {
+        "ym": "2023-04",
+        "year": 2023,
+        "month": 4,
+        "vehicles": 81173
+      },
+      {
+        "ym": "2023-05",
+        "year": 2023,
+        "month": 5,
+        "vehicles": 96132
+      },
+      {
+        "ym": "2023-06",
+        "year": 2023,
+        "month": 6,
+        "vehicles": 83769
+      },
+      {
+        "ym": "2023-07",
+        "year": 2023,
+        "month": 7,
+        "vehicles": 66628
+      },
+      {
+        "ym": "2023-08",
+        "year": 2023,
+        "month": 8,
+        "vehicles": 72256
+      },
+      {
+        "ym": "2023-09",
+        "year": 2023,
+        "month": 9,
+        "vehicles": 75656
+      },
+      {
+        "ym": "2023-10",
+        "year": 2023,
+        "month": 10,
+        "vehicles": 122511
+      },
+      {
+        "ym": "2023-11",
+        "year": 2023,
+        "month": 11,
+        "vehicles": 69551
+      },
+      {
+        "ym": "2023-12",
+        "year": 2023,
+        "month": 12,
+        "vehicles": 76574
+      },
+      {
+        "ym": "2024-01",
+        "year": 2024,
+        "month": 1,
+        "vehicles": 57651
+      },
+      {
+        "ym": "2024-02",
+        "year": 2024,
+        "month": 2,
+        "vehicles": 49041
+      },
+      {
+        "ym": "2024-03",
+        "year": 2024,
+        "month": 3,
+        "vehicles": 83634
+      },
+      {
+        "ym": "2024-04",
+        "year": 2024,
+        "month": 4,
+        "vehicles": 86480
+      },
+      {
+        "ym": "2024-05",
+        "year": 2024,
+        "month": 5,
+        "vehicles": 98369
+      },
+      {
+        "ym": "2024-06",
+        "year": 2024,
+        "month": 6,
+        "vehicles": 86575
+      },
+      {
+        "ym": "2024-07",
+        "year": 2024,
+        "month": 7,
+        "vehicles": 59808
+      },
+      {
+        "ym": "2024-08",
+        "year": 2024,
+        "month": 8,
+        "vehicles": 76120
+      },
+      {
+        "ym": "2024-09",
+        "year": 2024,
+        "month": 9,
+        "vehicles": 86004
+      },
+      {
+        "ym": "2024-10",
+        "year": 2024,
+        "month": 10,
+        "vehicles": 98408
+      },
+      {
+        "ym": "2024-11",
+        "year": 2024,
+        "month": 11,
+        "vehicles": 79772
+      },
+      {
+        "ym": "2024-12",
+        "year": 2024,
+        "month": 12,
+        "vehicles": 68462
+      },
+      {
+        "ym": "2025-01",
+        "year": 2025,
+        "month": 1,
+        "vehicles": 56185
+      },
+      {
+        "ym": "2025-02",
+        "year": 2025,
+        "month": 2,
+        "vehicles": 59881
+      },
+      {
+        "ym": "2025-03",
+        "year": 2025,
+        "month": 3,
+        "vehicles": 72549
+      },
+      {
+        "ym": "2025-04",
+        "year": 2025,
+        "month": 4,
+        "vehicles": 85562
+      },
+      {
+        "ym": "2025-05",
+        "year": 2025,
+        "month": 5,
+        "vehicles": 102822
+      },
+      {
+        "ym": "2025-06",
+        "year": 2025,
+        "month": 6,
+        "vehicles": 87091
+      },
+      {
+        "ym": "2025-07",
+        "year": 2025,
+        "month": 7,
+        "vehicles": 68505
+      },
+      {
+        "ym": "2025-08",
+        "year": 2025,
+        "month": 8,
+        "vehicles": 76408
+      },
+      {
+        "ym": "2025-09",
+        "year": 2025,
+        "month": 9,
+        "vehicles": 83344
+      },
+      {
+        "ym": "2025-10",
+        "year": 2025,
+        "month": 10,
+        "vehicles": 82361
+      },
+      {
+        "ym": "2025-11",
+        "year": 2025,
+        "month": 11,
+        "vehicles": 99064
+      },
+      {
+        "ym": "2025-12",
+        "year": 2025,
+        "month": 12,
+        "vehicles": 76923
+      }
+    ],
+    "yearly_totals": {
+      "2023": {
+        "미사경정공원": 840897,
+        "올림픽공원": 943259
+      },
+      "2024": {
+        "미사경정공원": 588505,
+        "올림픽공원": 930324
+      },
+      "2025": {
+        "미사경정공원": 719624,
+        "올림픽공원": 950695
+      }
+    }
+  },
+  "events_en_15149169": {
+    "rows": 286,
+    "date_range": [
+      "2018-08-01",
+      "2026-10-17"
+    ],
+    "by_year": {
+      "2018": 6,
+      "2019": 23,
+      "2020": 9,
+      "2023": 22,
+      "2024": 60,
+      "2025": 96,
+      "2026": 70
+    }
+  },
+  "xr_3d_15127487": {
+    "rows": 14,
+    "venues_included": [
+      "88잔디마당",
+      "KSPO DOME",
+      "SK핸드볼경기장",
+      "수변무대",
+      "우리금융아트홀"
+    ],
+    "missing_major_venue": "올림픽홀 (15099006 포스터 최다 공연장 71건이나 3D 미개방)"
+  },
+  "six_defects": [
+    {
+      "id": "DEFECT-01",
+      "severity": "critical",
+      "dataset_id": "15164156",
+      "dataset_name": "주차장 혼잡도 정보",
+      "title": "Oracle 시간 포맷 버그(HH24:MM:DD) 100% 오염 및 P7 구역 ID 충돌(8→13)",
+      "metric_headline": "699/699행 (100.0%) 시각 깨짐",
+      "summary": "등록시간의 분:초 자리에 실제 시각이 아니라 등록일의 월:일이 출력됨(SQL 포맷 문자열 HH24:MI:SS 대신 HH24:MM:DD 오기). 또한 P7 구역의 주차장아이디가 8에서 13으로 변경됐고 P5에 ID=5 오기 1건이 존재하며, 547일 기간 중 92일만 수동 입력됨.",
+      "safepass_fix": "등록시간 앞 2자리(HH24)만 신뢰 복원하고 P1A~P11 구역명 기준으로 정규화 ID를 매핑한 뒤, 공식 공연일정과 교차 결합해 구역별 만차 위험 가중치를 추출함.",
+      "evidence_samples": [
+        {
+          "일련번호": 730,
+          "주차장아이디": 2,
+          "주차구역": "P1B",
+          "혼잡도": "혼잡",
+          "등록일": "2026-08-12",
+          "등록시간": "17:08:12"
+        },
+        {
+          "일련번호": 729,
+          "주차장아이디": 1,
+          "주차구역": "P1A",
+          "혼잡도": "혼잡",
+          "등록일": "2026-08-12",
+          "등록시간": "17:08:12"
+        },
+        {
+          "일련번호": 728,
+          "주차장아이디": 13,
+          "주차구역": "P7",
+          "혼잡도": "만차",
+          "등록일": "2026-06-06",
+          "등록시간": "00:06:06"
+        },
+        {
+          "일련번호": 727,
+          "주차장아이디": 7,
+          "주차구역": "P6",
+          "혼잡도": "만차",
+          "등록일": "2026-06-06",
+          "등록시간": "00:06:06"
+        },
+        {
+          "일련번호": 726,
+          "주차장아이디": 6,
+          "주차구역": "P5",
+          "혼잡도": "만차",
+          "등록일": "2026-06-06",
+          "등록시간": "00:06:06"
+        }
+      ],
+      "id_conflicts": [
+        {
+          "zone": "P5",
+          "raw_id": 5,
+          "count": 1,
+          "min_date": "2025-12-27",
+          "max_date": "2025-12-27"
+        },
+        {
+          "zone": "P5",
+          "raw_id": 6,
+          "count": 74,
+          "min_date": "2025-02-16",
+          "max_date": "2026-06-06"
+        },
+        {
+          "zone": "P7",
+          "raw_id": 8,
+          "count": 40,
+          "min_date": "2025-02-15",
+          "max_date": "2025-06-02"
+        },
+        {
+          "zone": "P7",
+          "raw_id": 13,
+          "count": 2,
+          "min_date": "2026-03-10",
+          "max_date": "2026-06-06"
+        }
+      ]
+    },
+    {
+      "id": "DEFECT-02",
+      "severity": "high",
+      "dataset_id": "15131671 vs 15138735",
+      "dataset_name": "월별주차현황 vs 올림픽공원 입출차 정보",
+      "title": "동일 월(2024-07) 집계 기준 3.60배 괴리 및 10분 회차(31.4%) 미분리",
+      "metric_headline": "59,808대 vs 215,528건 (3.60배 괴리, 회차 31.38%)",
+      "summary": "2024년 7월 올림픽공원 차량 수가 월별주차현황(15131671)은 59,808대인 반면 입출차 원본(15138735)은 215,528건으로 3.60배 차이남. 10분 이하 무료 회차(67,642건, 31.38%)를 제외해도 147,886건(2.47배)으로 유료정산/정기권/면제 집계 정의 메타데이터가 누락됨.",
+      "safepass_fix": "체류시간(출차-입차)으로 10분 이하 회차 차량과 실주차 차량을 자동 분리하고, 분 단위 스윕라인으로 정확한 동시 재차대수를 산출함.",
+      "evidence_numbers": {
+        "monthly_15131671_202407": 59808,
+        "raw_15138735_202407": 215528,
+        "stay_gt_10m_202407": 147886,
+        "dropoff_10m_202407": 67642,
+        "ratio_all": 3.6,
+        "ratio_gt_10m": 2.47
+      }
+    },
+    {
+      "id": "DEFECT-03",
+      "severity": "critical",
+      "dataset_id": "15168686 (pubData/64) + 서울시 citydata",
+      "dataset_name": "올림픽공원 실시간 주차현황 API",
+      "title": "구역 미분리 단일 합계(parking_sum) + 파라미터 대소문자 오기(ApiKey→401) + 서울시 공백(CUR_PRK_YN=N)",
+      "metric_headline": "단일 키 parking_sum만 반환 · 서울시 도시데이터 4/4 주차장 미제공",
+      "summary": "KSPO&CO 실시간 API는 P1A~P11이나 출입문(동2·남2·북2) 구분 없이 합산 단일 숫자만 반환하며, 안내 문서 파라미터명 ApiKey로 호출 시 HTTP 401 반환(실제 소문자 apiKey만 200 OK). 한편 서울시 실시간 도시데이터(citydata/올림픽공원)의 주차장 4곳(총 2,716면)은 전부 CUR_PRK_YN=N으로 실시간 대수가 비어 있음.",
+      "safepass_fix": "SafePass가 KSPO&CO 실시간 API로 서울시 도시데이터의 공백을 메우고, 15164156 구역별 만차 확률 가중치와 당일 공연장 위치를 결합해 P1A~P11 구역별 예상 혼잡도로 분해함.",
+      "evidence_numbers": {
+        "seoul_citydata_lots": 4,
+        "seoul_citydata_unavailable": 4,
+        "seoul_citydata_capacity": 2716
+      }
+    },
+    {
+      "id": "DEFECT-04",
+      "severity": "high",
+      "dataset_id": "15101610 · 15110953 · 15114776 · 15118652",
+      "dataset_name": "4개 스포츠센터 강좌정보 CSV (39,367행)",
+      "title": "4개 센터 스키마 비표준 + 시작일자 범위문자열('~') 100% 오염 + 금액 컬럼명 4종 불일치",
+      "metric_headline": "수영장·일산 100% 날짜오염 · 금액 컬럼명 4종 상이 · 수강대상 88.5% 결측",
+      "summary": "올림픽수영장(7,133행)과 일산(17,146행)의 100% 행에서 시작일자에 'YYYY-MM-DD~YYYY-MM-DD'가 통째로 들어가고 종료일자에 시작일이 복사됨. 금액 컬럼명은 강좌금액/수강금액/금액/수강료로 4개 센터가 모두 다르며 올림픽스포츠센터 수강대상은 88.5% 결측.",
+      "safepass_fix": "정규화 스키마 매핑 및 '~' 분할 파서로 통합 표준 스키마를 제안함.",
+      "evidence_samples": [
+        {
+          "id": "15101610",
+          "name": "올림픽수영장 강좌정보",
+          "rows": 7133,
+          "start_col": "시작일자",
+          "end_col": "종료일자",
+          "fee_col": "강좌금액",
+          "tilde_contamination_pct": 100.0,
+          "sample_start": "2026-01-01~9999-12-31",
+          "sample_end": "2026-01-01",
+          "target_null_pct": null
+        },
+        {
+          "id": "15110953",
+          "name": "올림픽스포츠센터 강좌정보",
+          "rows": 2137,
+          "start_col": "수강시작일",
+          "end_col": "수강종료일",
+          "fee_col": "수강금액",
+          "tilde_contamination_pct": 0.0,
+          "sample_start": "2026-01-01",
+          "sample_end": "9999-12-31",
+          "target_null_pct": 88.49
+        },
+        {
+          "id": "15114776",
+          "name": "일산스포츠센터 강좌정보",
+          "rows": 17146,
+          "start_col": "시작일",
+          "end_col": "종료일",
+          "fee_col": "금액",
+          "tilde_contamination_pct": 100.0,
+          "sample_start": "2026-10-01~9999-12-31",
+          "sample_end": "2026-10-01",
+          "target_null_pct": null
+        },
+        {
+          "id": "15118652",
+          "name": "분당스포츠센터 강좌정보",
+          "rows": 12951,
+          "start_col": "기간시작일",
+          "end_col": "기간종료일",
+          "fee_col": "수강료",
+          "tilde_contamination_pct": 0.0,
+          "sample_start": "2025-08-01",
+          "sample_end": "9999-12-31",
+          "target_null_pct": null
+        }
+      ]
+    },
+    {
+      "id": "DEFECT-05",
+      "severity": "medium",
+      "dataset_id": "15127487",
+      "dataset_name": "올림픽공원 공연장 실감형 콘텐츠 (14종, 1.59GB)",
+      "title": "최다 공연장 '올림픽홀' 3D 누락 & KSPO DOME 웹표준 GLB/라이다 E57 미개방",
+      "metric_headline": "올림픽홀 0종 · KSPO DOME GLB/E57 누락 (SKP/DAE만 개방)",
+      "summary": "공연 포스터(15099006) 기준 최다 개최 공연장인 올림픽홀이 실감형 3D 목록에서 전면 누락됐고, 국내 대표 아레나 KSPO DOME은 브라우저 WebGL 표준인 GLB와 3D 라이다 E57이 빠짐. 또한 88잔디마당·수변무대 GLB는 폐기 확장(KHR_materials_pbrSpecularGlossiness)을 포함.",
+      "safepass_fix": "실물 88JandiMadang.glb(10.87MB)와 OlympicPark_LakeSideStage.glb를 웹 Three.js 뷰어에 탑재하고, KSPO DOME·핸드볼·우리금융·올림픽홀 휠체어석 시야 검증을 3D 파라메트릭 아레나 모델과 결합함.",
+      "evidence_numbers": {
+        "included_facilities": 5,
+        "total_files": 14,
+        "kspo_dome_glb": false,
+        "olympic_hall_files": 0
+      }
+    },
+    {
+      "id": "DEFECT-06",
+      "severity": "high",
+      "dataset_id": "전체 포털 거버넌스 (58종 vs 45건 vs 42건)",
+      "dataset_name": "data.go.kr · ksponco.or.kr · culture.go.kr 연계 구조",
+      "title": "포털 비동기화(홈페이지 15종 누락) + culture.go.kr 단일장애점(27/28종 502 중단) + 테니스 API 401",
+      "metric_headline": "홈페이지 누락 18종 · OpenAPI 27/28종 외부점검 마비",
+      "summary": "data.go.kr 공식 58종 중 핵심 15종(입출차·혼잡도·실감형3D 등)이 기관 홈페이지 pubData(45건)에서 누락됨. OpenAPI 28종 중 27종이 culture.go.kr(KCISA)에 종속돼 2026-11-19~11-22 점검 시 전면 502 중단됨. 근무복 주문현황(15168248/15168288) 동일일 이중개방 및 pubData 59·60 테니스 API 401 방치.",
+      "safepass_fix": "KSPO&CO 자체 API(parkingorsApi, eventInfoListTextAjax) + 정형 CSV + 서울시/기상청 직접 API 다중화 캐시 Fallback으로 2028년 무중단 운영을 보장하고, 11-22 18시 점검 해제 즉시 자동 수거 파이프라인을 구축함.",
+      "evidence_numbers": {
+        "datagokr_58": 58,
+        "homepage_45": 45,
+        "csv_list_42": 42,
+        "missing_on_homepage": 18,
+        "kcisa_spof_apis": 27
+      }
+    }
+  ],
+  "five_new_schema_proposals": [
+    {
+      "no": 1,
+      "code": "SCHEMA-P1",
+      "title": "주차구역별(P1A~P11·출입문별) 실시간 잔여면수·만차상태 표준 JSON API",
+      "priority": "최우선 (즉시 효과)",
+      "resolves_defect": "DEFECT-01, DEFECT-03",
+      "endpoint_proposal": "GET /online/main/parkingZonesApi.do?apiKey={key}&format=json",
+      "csv_headers": [
+        "observed_at_kst",
+        "zone_code",
+        "gate_name",
+        "total_capacity",
+        "disabled_capacity",
+        "occupied_count",
+        "available_count",
+        "occupancy_pct",
+        "congestion_level",
+        "dropoff_10m_rate"
+      ],
+      "sample_json": {
+        "observed_at_kst": "2026-11-21T17:30:00+09:00",
+        "park_total_occupied": 1940,
+        "park_total_capacity": 2716,
+        "zones": [
+          {
+            "zone_code": "P5",
+            "gate_name": "북2문",
+            "total_capacity": 176,
+            "disabled_capacity": 8,
+            "occupied_count": 168,
+            "available_count": 8,
+            "occupancy_pct": 95.5,
+            "congestion_level": "만차임박"
+          },
+          {
+            "zone_code": "P1A",
+            "gate_name": "남2문",
+            "total_capacity": 281,
+            "disabled_capacity": 10,
+            "occupied_count": 172,
+            "available_count": 109,
+            "occupancy_pct": 61.2,
+            "congestion_level": "보통"
+          }
+        ]
+      },
+      "expected_impact": "서울시 도시데이터 CUR_PRK_YN=N 공백 해소, 내비게이션·SafePass의 게이트별(동2·남2·북2) 실시간 우회 유도로 대기 공회전 및 민원(615회) 절감."
+    },
+    {
+      "no": 2,
+      "code": "SCHEMA-P2",
+      "title": "비식별 차량 입출차 표준 스키마 (출입 게이트·차종·10분 회차·할인유형 포함)",
+      "priority": "높음",
+      "resolves_defect": "DEFECT-02",
+      "endpoint_proposal": "월별 정례 CSV + REST API (data.go.kr 직접 호스팅)",
+      "csv_headers": [
+        "entry_ts_kst",
+        "exit_ts_kst",
+        "stay_minutes",
+        "entry_gate",
+        "exit_gate",
+        "zone_code",
+        "vehicle_class",
+        "is_dropoff_10m",
+        "pass_type",
+        "discount_category"
+      ],
+      "sample_json": {
+        "entry_ts_kst": "2026-11-21T16:42:10+09:00",
+        "exit_ts_kst": "2026-11-21T20:38:55+09:00",
+        "stay_minutes": 236.8,
+        "entry_gate": "동2문",
+        "exit_gate": "북2문",
+        "zone_code": "P5",
+        "vehicle_class": "소형",
+        "is_dropoff_10m": false,
+        "pass_type": "일반후불",
+        "discount_category": "없음"
+      },
+      "expected_impact": "월별주차현황(15131671)과의 3.60배 집계 괴리 완전 해소 및 대형 셔틀버스/회차/장애인 차량 분리 분석 가능."
+    },
+    {
+      "no": 3,
+      "code": "SCHEMA-P3",
+      "title": "공연장 실감형 3D(올림픽홀 신규·KSPO DOME GLB) + 휠체어석·시야각 좌표 표준 JSON",
+      "priority": "높음 (공익성·접근성)",
+      "resolves_defect": "DEFECT-05",
+      "endpoint_proposal": "15127487 확장 패키지 (Draco 압축 GLB + sightline_seats.json)",
+      "csv_headers": [
+        "venue_code",
+        "venue_name",
+        "section",
+        "seat_type",
+        "floor",
+        "x_m",
+        "y_m",
+        "z_m",
+        "eye_height_cm",
+        "stage_center_dist_m",
+        "standing_occlusion_risk",
+        "railing_height_cm"
+      ],
+      "sample_json": {
+        "venue_code": "02",
+        "venue_name": "KSPO DOME",
+        "section": "1F-W1(휠체어석)",
+        "seat_type": "wheelchair",
+        "floor": 1,
+        "x_m": 0.0,
+        "y_m": 1.15,
+        "z_m": 28.5,
+        "eye_height_cm": 115,
+        "stage_center_dist_m": 31.2,
+        "standing_occlusion_risk": "HIGH_IF_FRONT_STANDS",
+        "railing_height_cm": 110
+      },
+      "expected_impact": "KSPO DOME·핸드볼 휠체어석 시야 민원(조회 1,262회·828회·470회)의 과학적 사전 검증 및 중소 대관사 무대 설계 지원."
+    },
+    {
+      "no": 4,
+      "code": "SCHEMA-P4",
+      "title": "무장애(배리어프리)·시설안전 GIS 표준 데이터 (경사로·단차·장애인주차 85면·AED·야간통제)",
+      "priority": "최우선 (2026-11-19 시민제안·VOC 직결)",
+      "resolves_defect": "ON 고객소통 보류과제 해결",
+      "endpoint_proposal": "GeoJSON / CSV 표준 개방 (공원 안전 지도 연계)",
+      "csv_headers": [
+        "poi_id",
+        "category",
+        "name",
+        "lat",
+        "lng",
+        "step_free",
+        "max_slope_deg",
+        "disabled_spaces",
+        "night_control_22h",
+        "contact_tel",
+        "updated_date"
+      ],
+      "sample_json": {
+        "poi_id": "BARRIER-P5-01",
+        "category": "disabled_parking",
+        "name": "KSPO DOME 인접 P5 장애인 전용 주차구역",
+        "lat": 37.5191,
+        "lng": 127.1274,
+        "step_free": true,
+        "max_slope_deg": 3.2,
+        "disabled_spaces": 8,
+        "night_control_22h": false,
+        "contact_tel": "02-410-1119",
+        "updated_date": "2026-11-20"
+      },
+      "expected_impact": "2026-11-19 시민제안(시설 안전 지도·스마트 귀가 동선) 및 휠체어/유모차 이동 민원을 민간 앱·지도 생태계 전체로 즉시 확산."
+    },
+    {
+      "no": 5,
+      "code": "SCHEMA-P5",
+      "title": "통합 공연·대관 일정 JSON API (KOPIS ID·예상 관객수·입퇴장 시각) & 4개 스포츠센터 강좌 단일 스키마",
+      "priority": "중상 (SPOF 해소)",
+      "resolves_defect": "DEFECT-04, DEFECT-06",
+      "endpoint_proposal": "GET /online/main/eventsStandardApi.do (KSPO&CO 직접 이중화) + 4개 센터 통합 강좌 CSV",
+      "csv_headers": [
+        "event_id",
+        "kopis_id",
+        "venue_code",
+        "venue_name",
+        "title_ko",
+        "title_en",
+        "event_date",
+        "doors_open_kst",
+        "start_kst",
+        "est_end_kst",
+        "expected_attendance",
+        "ticket_url_global"
+      ],
+      "sample_json": {
+        "event_id": "EVT-5159",
+        "kopis_id": "PF251234",
+        "venue_code": "02",
+        "venue_name": "KSPO DOME",
+        "title_ko": "[서울] 2026 조용필 & 위대한탄생 콘서트",
+        "title_en": "2026 Cho Yong-pil Concert in Seoul",
+        "event_date": "2026-11-28",
+        "doors_open_kst": "16:30",
+        "start_kst": "18:00",
+        "est_end_kst": "20:30",
+        "expected_attendance": 14500,
+        "ticket_url_global": "https://world.nol.com/en/ticket/"
+      },
+      "expected_impact": "culture.go.kr 점검 시 27개 OpenAPI 전면 마비(SPOF) 해소 및 4개 스포츠센터 39,367건 강좌 데이터의 날짜 오염·컬럼 불일치 일괄 정정."
+    }
+  ],
+  "catalog_58": [
+    {
+      "no": 1,
+      "id": "15089962",
+      "name": "자주 묻는 질문정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-22",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15089962/fileData.do"
+    },
+    {
+      "no": 2,
+      "id": "15090255",
+      "name": "정보목록데이터",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "반기",
+      "modified": "2026-08-11",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15090255/fileData.do"
+    },
+    {
+      "no": 3,
+      "id": "15090257",
+      "name": "사전정보공표 정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "반기",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15090257/fileData.do"
+    },
+    {
+      "no": 4,
+      "id": "15090260",
+      "name": "사업실명제",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "반기",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15090260/fileData.do"
+    },
+    {
+      "no": 5,
+      "id": "15090715",
+      "name": "올림픽공원 핫뉴스 정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "반기",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15090715/fileData.do"
+    },
+    {
+      "no": 6,
+      "id": "15090719",
+      "name": "스케이트장 이벤트 정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "수시 (1회성 데이터)",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15090719/fileData.do"
+    },
+    {
+      "no": 7,
+      "id": "15098997",
+      "name": "스포츠센터 이벤트 정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "반기",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15098997/fileData.do"
+    },
+    {
+      "no": 8,
+      "id": "15099006",
+      "name": "공연 포스터 정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15099006/fileData.do"
+    },
+    {
+      "no": 9,
+      "id": "15101610",
+      "name": "올림픽수영장 강좌정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15101610/fileData.do"
+    },
+    {
+      "no": 10,
+      "id": "15110953",
+      "name": "올림픽스포츠센터 강좌정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "반기",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15110953/fileData.do"
+    },
+    {
+      "no": 11,
+      "id": "15114776",
+      "name": "일산스포츠센터 강좌정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15114776/fileData.do"
+    },
+    {
+      "no": 12,
+      "id": "15118652",
+      "name": "분당스포츠센터 강좌정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15118652/fileData.do"
+    },
+    {
+      "no": 13,
+      "id": "15119388",
+      "name": "온라인 강습 동영상",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-30",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15119388/fileData.do"
+    },
+    {
+      "no": 14,
+      "id": "15127487",
+      "name": "올림픽공원 공연장 실감형 콘텐츠",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-22",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15127487/fileData.do"
+    },
+    {
+      "no": 15,
+      "id": "15131671",
+      "name": "월별주차현황",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15131671/fileData.do"
+    },
+    {
+      "no": 16,
+      "id": "15133891",
+      "name": "테니스장 이용 정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15133891/fileData.do"
+    },
+    {
+      "no": 17,
+      "id": "15137824",
+      "name": "보도자료배포현황",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-30",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15137824/fileData.do"
+    },
+    {
+      "no": 18,
+      "id": "15137825",
+      "name": "언론보도현황",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-30",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15137825/fileData.do"
+    },
+    {
+      "no": 19,
+      "id": "15138735",
+      "name": "올림픽공원 입출차 정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15138735/fileData.do"
+    },
+    {
+      "no": 20,
+      "id": "15143220",
+      "name": "잔디시설정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15143220/fileData.do"
+    },
+    {
+      "no": 21,
+      "id": "15144222",
+      "name": "정원현황",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15144222/fileData.do"
+    },
+    {
+      "no": 22,
+      "id": "15144839",
+      "name": "스포츠센터 종목정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15144839/fileData.do"
+    },
+    {
+      "no": 23,
+      "id": "15147873",
+      "name": "공공데이터 개방목록",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-22",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15147873/fileData.do"
+    },
+    {
+      "no": 24,
+      "id": "15147992",
+      "name": "스포츠센터 강좌 정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-22",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15147992/fileData.do"
+    },
+    {
+      "no": 25,
+      "id": "15149169",
+      "name": "영문 공연정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15149169/fileData.do"
+    },
+    {
+      "no": 26,
+      "id": "15160326",
+      "name": "비정형데이터_생태갤러리",
+      "type": "파일(CSV/JPG)",
+      "format": "JPG",
+      "update_cycle": "연간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15160326/fileData.do"
+    },
+    {
+      "no": 27,
+      "id": "15161406",
+      "name": "공모참여 목록",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-22",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15161406/fileData.do"
+    },
+    {
+      "no": 28,
+      "id": "15164156",
+      "name": "주차장 혼잡도 정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "월간",
+      "modified": "2026-09-22",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15164156/fileData.do"
+    },
+    {
+      "no": 29,
+      "id": "15168248",
+      "name": "근무복 주문현황정보",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-30",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15168248/fileData.do"
+    },
+    {
+      "no": 30,
+      "id": "15168288",
+      "name": "근무복 주문현황",
+      "type": "파일(CSV/JPG)",
+      "format": "CSV",
+      "update_cycle": "연간",
+      "modified": "2026-09-30",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15168288/fileData.do"
+    },
+    {
+      "no": 31,
+      "id": "3037877",
+      "name": "올림픽공원 공연정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/3037877/openapi.do"
+    },
+    {
+      "no": 32,
+      "id": "3074924",
+      "name": "올림픽공원 운영현황",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/3074924/openapi.do"
+    },
+    {
+      "no": 33,
+      "id": "15008517",
+      "name": "올림픽공원 도서정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15008517/openapi.do"
+    },
+    {
+      "no": 34,
+      "id": "15015212",
+      "name": "올림픽공원 대관정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15015212/openapi.do"
+    },
+    {
+      "no": 35,
+      "id": "15024888",
+      "name": "올림픽공원 수목정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15024888/openapi.do"
+    },
+    {
+      "no": 36,
+      "id": "15029122",
+      "name": "올림픽공원 교육강좌정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15029122/openapi.do"
+    },
+    {
+      "no": 37,
+      "id": "15038496",
+      "name": "올림픽공원 및 미사경정공원 유실물 정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15038496/openapi.do"
+    },
+    {
+      "no": 38,
+      "id": "15043066",
+      "name": "채용정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15043066/openapi.do"
+    },
+    {
+      "no": 39,
+      "id": "15056513",
+      "name": "올림픽공원 스포츠센터 정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15056513/openapi.do"
+    },
+    {
+      "no": 40,
+      "id": "15056581",
+      "name": "올림픽공원 생태공원 갤러리",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15056581/openapi.do"
+    },
+    {
+      "no": 41,
+      "id": "15056810",
+      "name": "올림픽공원 스케이트장 정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15056810/openapi.do"
+    },
+    {
+      "no": 42,
+      "id": "15056986",
+      "name": "올림픽공원 장미광장",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15056986/openapi.do"
+    },
+    {
+      "no": 43,
+      "id": "15057697",
+      "name": "올팍축구장 정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15057697/openapi.do"
+    },
+    {
+      "no": 44,
+      "id": "15058240",
+      "name": "포토 갤러리",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15058240/openapi.do"
+    },
+    {
+      "no": 45,
+      "id": "15059122",
+      "name": "스포츠센터 월회원 이용현황",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15059122/openapi.do"
+    },
+    {
+      "no": 46,
+      "id": "15059219",
+      "name": "일산올림픽스포츠센터 정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15059219/openapi.do"
+    },
+    {
+      "no": 47,
+      "id": "15059479",
+      "name": "분당올림픽스포츠센터 정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15059479/openapi.do"
+    },
+    {
+      "no": 48,
+      "id": "15059528",
+      "name": "올림픽수영장 정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15059528/openapi.do"
+    },
+    {
+      "no": 49,
+      "id": "15064257",
+      "name": "역대수상 및 인증기록정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15064257/openapi.do"
+    },
+    {
+      "no": 50,
+      "id": "15064258",
+      "name": "협력기관정보",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15064258/openapi.do"
+    },
+    {
+      "no": 51,
+      "id": "15100879",
+      "name": "사회공헌",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15100879/openapi.do"
+    },
+    {
+      "no": 52,
+      "id": "15100880",
+      "name": "보도자료",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15100880/openapi.do"
+    },
+    {
+      "no": 53,
+      "id": "15100882",
+      "name": "공지사항",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15100882/openapi.do"
+    },
+    {
+      "no": 54,
+      "id": "15100883",
+      "name": "홍보동영상",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15100883/openapi.do"
+    },
+    {
+      "no": 55,
+      "id": "15100884",
+      "name": "올팍소식",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": true,
+      "kcisa_dependent": true,
+      "safepass_used": false,
+      "url": "https://www.data.go.kr/data/15100884/openapi.do"
+    },
+    {
+      "no": 56,
+      "id": "15159093",
+      "name": "올림픽공원 입출차정보(전체구역)",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-08-11",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": true,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15159093/openapi.do"
+    },
+    {
+      "no": 57,
+      "id": "15164822",
+      "name": "올림픽공원 차량입출차, 공연, 날씨정보 등 연계 데이터",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-09-21",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": true,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15164822/openapi.do"
+    },
+    {
+      "no": 58,
+      "id": "15168686",
+      "name": "실시간 주차현황",
+      "type": "OpenAPI",
+      "format": "XML",
+      "update_cycle": "실시간",
+      "modified": "2026-10-13",
+      "in_homepage_pubdata": false,
+      "kcisa_dependent": false,
+      "safepass_used": true,
+      "url": "https://www.data.go.kr/data/15168686/openapi.do"
+    }
+  ]
+}

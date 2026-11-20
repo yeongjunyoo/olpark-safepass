@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>문화공공데이터광장 - 시스템점검안내 페이지</title>
+    <link rel="stylesheet" href="/data/assets/css/reset.css">
+    <link rel="stylesheet" href="/data/assets/css/common.css">
+    <link rel="stylesheet" href="/data/assets/css/main.css">
+
+    <style>
+        @font-face{font-family:'JalnanGothic';font-style:normal;src:local("JalnanGothic"),local("JalnanGothic"),url(/data/assets/fonts/JalnanGothic.eot),url(/data/assets/fonts/JalnanGothic.woff) format("woff"),url(/data/assets/fonts/JalnanGothic.otf) format("opentype");}
+
+        .system__check__info {display:flex; align-items:center; justify-content:center; width:100%; height:100%; background:#eee; text-align:center}
+        .system__check__info > div {padding:0 20px; width:545px; max-width:100%;}
+        .system__check__info > div strong {font-family:'JalnanGothic'; font-weihgt:500; font-size:35px;}
+        .system__check__info > div strong em {font-style:normal; color:#ea0000}
+        .system__check__info > div .img {padding:40px 0 30px;}
+        .system__check__info > div .img img {width:340px; max-width:100%; height:auto;}
+        .system__check__info > div .txt p {font-weight:500; font-size:18px; color:#6e6e6e; letter-spacing:-0.7px;}
+        .system__check__info > div .txt p + p {padding-top:23px}
+        .system__check__info > div .txt p em {font-style:normal; font-weight:500; color:#ea0000}
+        .system__check__info > div .date {display:flex; flex-direction:column; justify-content:center; margin-top:25px; padding:0 10px; height:100px; background:#fff4a9; border-radius:18px;}
+        .system__check__info > div .date p {font-family:'JalnanGothic'; font-size:20px; font-weight:800; color:#000;}
+        .system__check__info > div .date p br {display:none;}
+        @media screen and (max-width:550px) {
+            .system__check__info > div strong {font-size:20px;}
+            .system__check__info > div .img {padding:20px 0 10px;}
+            .system__check__info > div .img img {width:200px;}
+            .system__check__info > div .txt p {font-size:13px; word-break:keep-all;}
+            .system__check__info > div .txt p br {display:none;}
+            .system__check__info > div .txt p + p {padding-top:15px}
+            .system__check__info > div .date {margin-top:15px; height:100px; border-radius:15px;}
+            .system__check__info > div .date p {font-size:15px; font-weight:800}
+        }
+        @media screen and (max-width:420px) {
+            .system__check__info > div .date p br {display:block;}
+        }
+    </style>
+</head>
+<body>
+    <!-- system__check__info -->
+    <div class="system__check__info">
+        <div>
+            <strong>홈페이지 서비스 <em>점검 안내</em></strong>
+            <p class="img"><img src="/data/assets/images/img-system-chck-info.png" alt="문화공공데이터광장 홈페이지 서비스 점검 안내"></p>
+            <div class="txt">
+                <p>문화공공데이터광장은 더욱 편리하고 안정된 서비스를 제공하고자,</br> 아래와 같이 서비스 점검 작업이 진행될 예정입니다.</p>
+                <!-- <p>점검시간 동안 문화공공데이터광장 홈페이지(API 호출 포함)</br> <em>서비스 이용이 일시적으로 중단</em>될 수 있으니 많은 양해 부탁드립니다.</p> -->
+                <p>점검시간 동안 문화공공데이터광장 (홈페이지, OPEN API 호출, 데이터 다운로드 등) <em>전체 서비스 이용이 중단</em>되오니</br> 많은 양해 부탁드립니다.</p>
+            </div>
+            <div class="date">
+                <p>작업 일시</p>
+                <!-- <p>2025년 6월 27일(금) 19:00</br> ~ 6월 28일(토) 22:00</p> -->
+                <!-- <p>2025년 6월 29일(화) 19:00</br> ~ 22:00</p> -->
+                <!-- <p>2025년 8월 29일(금) 19:00</br> ~ 8월 30일(토) 22:00</p> -->
+                <p>2026년 11월 19일(목) 18:15 ~ 11월 22일(일)18:00</p>
+            </div>
+        </div>
+    </div>
+    <!--// system__check__info -->
+</body>
+</html>

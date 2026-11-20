@@ -1,0 +1,2319 @@
+{
+  "generated_at_kst": "2026-11-20T18:53:50+09:00",
+  "dataset": "202407",
+  "validation_scheme": "Leave-One-Day-Out GroupKFold (n_splits=31 calendar dates, zero same-day leakage)",
+  "architecture": "Joint Partially-Penalized Diurnal+Concert+Weather Ridge + LightGBM Residual Booster",
+  "n_hours": 744,
+  "n_days": 31,
+  "metrics_by_model": {
+    "baseline_a": {
+      "entries_h": {
+        "mae": 35.91,
+        "rmse": 68.17,
+        "r2": 0.9104,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            27.97,
+            44.68
+          ],
+          "rmse_ci95": [
+            50.43,
+            85.92
+          ],
+          "r2_ci95": [
+            0.8719,
+            0.9468
+          ]
+        },
+        "bootstrap_vs_base_b": {
+          "mae_ci95": [
+            27.97,
+            44.68
+          ],
+          "rmse_ci95": [
+            50.43,
+            85.92
+          ],
+          "r2_ci95": [
+            0.8719,
+            0.9468
+          ],
+          "mae_gain_vs_ref_ci95": [
+            2.64,
+            18.32
+          ],
+          "p_value_vs_ref": 0.003
+        }
+      },
+      "exits_h": {
+        "mae": 37.62,
+        "rmse": 75.45,
+        "r2": 0.8801,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            29.21,
+            47.1
+          ],
+          "rmse_ci95": [
+            54.48,
+            96.2
+          ],
+          "r2_ci95": [
+            0.8225,
+            0.9311
+          ]
+        }
+      },
+      "night_exit_20_22h_hourly": {
+        "mae": 75.57,
+        "rmse": 147.82,
+        "r2": 0.2166,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            47.67,
+            109.18
+          ],
+          "rmse_ci95": [
+            85.2,
+            206.4
+          ],
+          "r2_ci95": [
+            -0.0283,
+            0.5308
+          ]
+        }
+      },
+      "night_exit_20_22h_daily_sum": {
+        "mae": 179.5,
+        "rmse": 282.6,
+        "r2": -0.2463
+      },
+      "active_parked_peak_h": {
+        "mae": 71.71,
+        "rmse": 151.03,
+        "r2": 0.8285
+      },
+      "congestion_4class": {
+        "accuracy": 0.8669,
+        "macro_f1": 0.668
+      },
+      "top5_night_exit_days": {
+        "hits": 0,
+        "total": 5,
+        "hit_rate_pct": 0.0,
+        "actual_top5_dates": [
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-11"
+        ],
+        "predicted_top5_dates": [
+          "2024-07-07",
+          "2024-07-28",
+          "2024-07-06",
+          "2024-07-27",
+          "2024-07-14"
+        ],
+        "matched_dates": []
+      },
+      "top5_daily_entry_days": {
+        "hits": 0,
+        "total": 5,
+        "hit_rate_pct": 0.0,
+        "actual_top5_dates": [
+          "2024-07-12",
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-13",
+          "2024-07-27"
+        ],
+        "predicted_top5_dates": [
+          "2024-07-07",
+          "2024-07-06",
+          "2024-07-18",
+          "2024-07-17",
+          "2024-07-02"
+        ],
+        "matched_dates": []
+      }
+    },
+    "baseline_b": {
+      "entries_h": {
+        "mae": 45.64,
+        "rmse": 110.7,
+        "r2": 0.7637,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            32.43,
+            61.07
+          ],
+          "rmse_ci95": [
+            75.59,
+            143.39
+          ],
+          "r2_ci95": [
+            0.6253,
+            0.8851
+          ],
+          "mae_gain_vs_ref_ci95": [
+            -18.32,
+            -2.64
+          ],
+          "p_value_vs_ref": 0.997
+        },
+        "bootstrap_vs_base_b": null
+      },
+      "exits_h": {
+        "mae": 47.9,
+        "rmse": 125.22,
+        "r2": 0.6697,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            34.51,
+            63.04
+          ],
+          "rmse_ci95": [
+            85.63,
+            159.62
+          ],
+          "r2_ci95": [
+            0.487,
+            0.8323
+          ],
+          "mae_gain_vs_ref_ci95": [
+            -18.24,
+            -4.08
+          ],
+          "p_value_vs_ref": 1.0
+        }
+      },
+      "night_exit_20_22h_hourly": {
+        "mae": 157.8,
+        "rmse": 318.97,
+        "r2": -2.6476,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            91.34,
+            234.96
+          ],
+          "rmse_ci95": [
+            208.42,
+            418.87
+          ],
+          "r2_ci95": [
+            -6.4995,
+            -1.0254
+          ],
+          "mae_gain_vs_ref_ci95": [
+            -145.92,
+            -32.63
+          ],
+          "p_value_vs_ref": 1.0
+        }
+      },
+      "night_exit_20_22h_daily_sum": {
+        "mae": 427.2,
+        "rmse": 756.9,
+        "r2": -7.9389
+      },
+      "active_parked_peak_h": {
+        "mae": 100.77,
+        "rmse": 272.52,
+        "r2": 0.4416
+      },
+      "congestion_4class": {
+        "accuracy": 0.8522,
+        "macro_f1": 0.6913
+      },
+      "top5_night_exit_days": {
+        "hits": 3,
+        "total": 5,
+        "hit_rate_pct": 60.0,
+        "actual_top5_dates": [
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-11"
+        ],
+        "predicted_top5_dates": [
+          "2024-07-06",
+          "2024-07-14",
+          "2024-07-13",
+          "2024-07-21",
+          "2024-07-20"
+        ],
+        "matched_dates": [
+          "2024-07-13",
+          "2024-07-20",
+          "2024-07-21"
+        ]
+      },
+      "top5_daily_entry_days": {
+        "hits": 3,
+        "total": 5,
+        "hit_rate_pct": 60.0,
+        "actual_top5_dates": [
+          "2024-07-12",
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-13",
+          "2024-07-27"
+        ],
+        "predicted_top5_dates": [
+          "2024-07-06",
+          "2024-07-14",
+          "2024-07-13",
+          "2024-07-21",
+          "2024-07-20"
+        ],
+        "matched_dates": [
+          "2024-07-13",
+          "2024-07-20",
+          "2024-07-21"
+        ]
+      }
+    },
+    "safepass_no_weather": {
+      "entries_h": {
+        "mae": 33.91,
+        "rmse": 50.03,
+        "r2": 0.9517,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            28.98,
+            39.25
+          ],
+          "rmse_ci95": [
+            41.14,
+            58.4
+          ],
+          "r2_ci95": [
+            0.9392,
+            0.9645
+          ],
+          "mae_gain_vs_ref_ci95": [
+            -2.2,
+            7.04
+          ],
+          "p_value_vs_ref": 0.206
+        },
+        "bootstrap_vs_base_b": {
+          "mae_ci95": [
+            28.98,
+            39.25
+          ],
+          "rmse_ci95": [
+            41.14,
+            58.4
+          ],
+          "r2_ci95": [
+            0.9392,
+            0.9645
+          ],
+          "mae_gain_vs_ref_ci95": [
+            2.57,
+            22.28
+          ],
+          "p_value_vs_ref": 0.003
+        }
+      },
+      "exits_h": {
+        "mae": 36.11,
+        "rmse": 62.27,
+        "r2": 0.9183,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            29.99,
+            43.43
+          ],
+          "rmse_ci95": [
+            46.92,
+            77.15
+          ],
+          "r2_ci95": [
+            0.8842,
+            0.9506
+          ],
+          "mae_gain_vs_ref_ci95": [
+            -2.7,
+            5.87
+          ],
+          "p_value_vs_ref": 0.263
+        }
+      },
+      "night_exit_20_22h_hourly": {
+        "mae": 57.04,
+        "rmse": 102.63,
+        "r2": 0.6224,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            39.29,
+            78.64
+          ],
+          "rmse_ci95": [
+            65.29,
+            141.03
+          ],
+          "r2_ci95": [
+            0.5134,
+            0.7565
+          ],
+          "mae_gain_vs_ref_ci95": [
+            2.85,
+            33.94
+          ],
+          "p_value_vs_ref": 0.008
+        }
+      },
+      "night_exit_20_22h_daily_sum": {
+        "mae": 136.3,
+        "rmse": 186.2,
+        "r2": 0.459
+      },
+      "active_parked_peak_h": {
+        "mae": 70.73,
+        "rmse": 143.69,
+        "r2": 0.8448
+      },
+      "congestion_4class": {
+        "accuracy": 0.8925,
+        "macro_f1": 0.7443
+      },
+      "top5_night_exit_days": {
+        "hits": 4,
+        "total": 5,
+        "hit_rate_pct": 80.0,
+        "actual_top5_dates": [
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-11"
+        ],
+        "predicted_top5_dates": [
+          "2024-07-13",
+          "2024-07-20",
+          "2024-07-27",
+          "2024-07-12",
+          "2024-07-21"
+        ],
+        "matched_dates": [
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-20",
+          "2024-07-21"
+        ]
+      },
+      "top5_daily_entry_days": {
+        "hits": 4,
+        "total": 5,
+        "hit_rate_pct": 80.0,
+        "actual_top5_dates": [
+          "2024-07-12",
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-13",
+          "2024-07-27"
+        ],
+        "predicted_top5_dates": [
+          "2024-07-12",
+          "2024-07-20",
+          "2024-07-13",
+          "2024-07-27",
+          "2024-07-26"
+        ],
+        "matched_dates": [
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-20",
+          "2024-07-27"
+        ]
+      }
+    },
+    "safepass_forecast": {
+      "entries_h": {
+        "mae": 30.91,
+        "rmse": 54.06,
+        "r2": 0.9436,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            25.27,
+            37.56
+          ],
+          "rmse_ci95": [
+            38.86,
+            70.77
+          ],
+          "r2_ci95": [
+            0.9067,
+            0.9684
+          ],
+          "mae_gain_vs_ref_ci95": [
+            -0.43,
+            10.92
+          ],
+          "p_value_vs_ref": 0.038
+        },
+        "bootstrap_vs_base_b": {
+          "mae_ci95": [
+            25.27,
+            37.56
+          ],
+          "rmse_ci95": [
+            38.86,
+            70.77
+          ],
+          "r2_ci95": [
+            0.9067,
+            0.9684
+          ],
+          "mae_gain_vs_ref_ci95": [
+            4.9,
+            25.87
+          ],
+          "p_value_vs_ref": 0.0
+        }
+      },
+      "exits_h": {
+        "mae": 34.28,
+        "rmse": 65.5,
+        "r2": 0.9096,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            27.78,
+            42.22
+          ],
+          "rmse_ci95": [
+            46.06,
+            84.74
+          ],
+          "r2_ci95": [
+            0.8578,
+            0.9513
+          ],
+          "mae_gain_vs_ref_ci95": [
+            -2.1,
+            8.06
+          ],
+          "p_value_vs_ref": 0.1
+        }
+      },
+      "night_exit_20_22h_hourly": {
+        "mae": 62.05,
+        "rmse": 111.66,
+        "r2": 0.553,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            39.74,
+            89.92
+          ],
+          "rmse_ci95": [
+            66.69,
+            152.46
+          ],
+          "r2_ci95": [
+            0.2783,
+            0.7573
+          ],
+          "mae_gain_vs_ref_ci95": [
+            -6.98,
+            30.73
+          ],
+          "p_value_vs_ref": 0.094
+        }
+      },
+      "night_exit_20_22h_daily_sum": {
+        "mae": 139.9,
+        "rmse": 205.0,
+        "r2": 0.3442
+      },
+      "active_parked_peak_h": {
+        "mae": 68.95,
+        "rmse": 153.97,
+        "r2": 0.8218
+      },
+      "congestion_4class": {
+        "accuracy": 0.9019,
+        "macro_f1": 0.7499
+      },
+      "top5_night_exit_days": {
+        "hits": 4,
+        "total": 5,
+        "hit_rate_pct": 80.0,
+        "actual_top5_dates": [
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-11"
+        ],
+        "predicted_top5_dates": [
+          "2024-07-27",
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-12",
+          "2024-07-13"
+        ],
+        "matched_dates": [
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-20",
+          "2024-07-21"
+        ]
+      },
+      "top5_daily_entry_days": {
+        "hits": 4,
+        "total": 5,
+        "hit_rate_pct": 80.0,
+        "actual_top5_dates": [
+          "2024-07-12",
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-13",
+          "2024-07-27"
+        ],
+        "predicted_top5_dates": [
+          "2024-07-27",
+          "2024-07-12",
+          "2024-07-20",
+          "2024-07-13",
+          "2024-07-19"
+        ],
+        "matched_dates": [
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-20",
+          "2024-07-27"
+        ]
+      }
+    },
+    "safepass_nowcast": {
+      "entries_h": {
+        "mae": 28.23,
+        "rmse": 48.04,
+        "r2": 0.9555,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            23.48,
+            33.93
+          ],
+          "rmse_ci95": [
+            35.19,
+            62.06
+          ],
+          "r2_ci95": [
+            0.928,
+            0.974
+          ],
+          "mae_gain_vs_ref_ci95": [
+            2.75,
+            13.76
+          ],
+          "p_value_vs_ref": 0.0
+        },
+        "bootstrap_vs_base_b": {
+          "mae_ci95": [
+            23.48,
+            33.93
+          ],
+          "rmse_ci95": [
+            35.19,
+            62.06
+          ],
+          "r2_ci95": [
+            0.928,
+            0.974
+          ],
+          "mae_gain_vs_ref_ci95": [
+            7.86,
+            28.69
+          ],
+          "p_value_vs_ref": 0.0
+        }
+      },
+      "exits_h": {
+        "mae": 33.34,
+        "rmse": 64.41,
+        "r2": 0.9126,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            26.92,
+            40.84
+          ],
+          "rmse_ci95": [
+            44.49,
+            83.5
+          ],
+          "r2_ci95": [
+            0.8625,
+            0.9545
+          ],
+          "mae_gain_vs_ref_ci95": [
+            -0.79,
+            9.01
+          ],
+          "p_value_vs_ref": 0.053
+        }
+      },
+      "night_exit_20_22h_hourly": {
+        "mae": 61.26,
+        "rmse": 112.44,
+        "r2": 0.5467,
+        "bootstrap_vs_base_a": {
+          "mae_ci95": [
+            38.99,
+            89.14
+          ],
+          "rmse_ci95": [
+            65.74,
+            154.7
+          ],
+          "r2_ci95": [
+            0.3163,
+            0.7657
+          ],
+          "mae_gain_vs_ref_ci95": [
+            -2.39,
+            28.42
+          ],
+          "p_value_vs_ref": 0.048
+        }
+      },
+      "night_exit_20_22h_daily_sum": {
+        "mae": 121.7,
+        "rmse": 178.2,
+        "r2": 0.5045
+      },
+      "active_parked_peak_h": {
+        "mae": 46.62,
+        "rmse": 98.52,
+        "r2": 0.927
+      },
+      "congestion_4class": {
+        "accuracy": 0.9113,
+        "macro_f1": 0.7956
+      },
+      "top5_night_exit_days": {
+        "hits": 4,
+        "total": 5,
+        "hit_rate_pct": 80.0,
+        "actual_top5_dates": [
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-11"
+        ],
+        "predicted_top5_dates": [
+          "2024-07-20",
+          "2024-07-27",
+          "2024-07-21",
+          "2024-07-12",
+          "2024-07-13"
+        ],
+        "matched_dates": [
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-20",
+          "2024-07-21"
+        ]
+      },
+      "top5_daily_entry_days": {
+        "hits": 4,
+        "total": 5,
+        "hit_rate_pct": 80.0,
+        "actual_top5_dates": [
+          "2024-07-12",
+          "2024-07-20",
+          "2024-07-21",
+          "2024-07-13",
+          "2024-07-27"
+        ],
+        "predicted_top5_dates": [
+          "2024-07-27",
+          "2024-07-12",
+          "2024-07-20",
+          "2024-07-13",
+          "2024-07-19"
+        ],
+        "matched_dates": [
+          "2024-07-12",
+          "2024-07-13",
+          "2024-07-20",
+          "2024-07-27"
+        ]
+      }
+    }
+  },
+  "benchmarks": [
+    {
+      "model_id": "baseline_a",
+      "name_ko": "Baseline A · 기존 공식 parking.do 방식",
+      "name_en": "Baseline A · Official parking.do (Flat DOW×Hour)",
+      "type_ko": "평일/주말 × 시간대 평탄 평균 (날씨·공연 미반영)",
+      "type_en": "Flat weekday/weekend × hour mean (No weather/concerts)",
+      "hourly_mae": 35.91,
+      "hourly_rmse": 68.17,
+      "r2": 0.9104,
+      "exit_mae": 37.62,
+      "exit_r2": 0.8801,
+      "night_exit_mae": 75.57,
+      "night_exit_r2": 0.2166,
+      "top5_night_hit_pct": 0.0,
+      "congestion_4class_acc": 86.7,
+      "uses_weather": false,
+      "uses_concerts": false,
+      "is_winner": false
+    },
+    {
+      "model_id": "baseline_b",
+      "name_ko": "Baseline B · 경쟁작 olparkspot.com 규칙 방식",
+      "name_en": "Baseline B · Competitor olparkspot.com Rule (1.7x/2.7x)",
+      "type_ko": "단순 공연일 1.7x / 동시공연 2.7x 고정 배수 (날씨 교호작용 미반영)",
+      "type_en": "Fixed 1.7x single / 2.7x dual concert multiplier (No weather)",
+      "hourly_mae": 45.64,
+      "hourly_rmse": 110.7,
+      "r2": 0.7637,
+      "exit_mae": 47.9,
+      "exit_r2": 0.6697,
+      "night_exit_mae": 157.8,
+      "night_exit_r2": -2.6476,
+      "top5_night_hit_pct": 60.0,
+      "congestion_4class_acc": 85.2,
+      "uses_weather": false,
+      "uses_concerts": true,
+      "is_winner": false
+    },
+    {
+      "model_id": "safepass_no_weather",
+      "name_ko": "Ablation · SafePass (날씨·교호작용 제외)",
+      "name_en": "Ablation · SafePass (No Weather / Interaction)",
+      "type_ko": "결합 Ridge+LGBM (달력·공연 수용인원·시각오프셋만 사용)",
+      "type_en": "Joint Ridge+LGBM (Calendar + Concert offsets only)",
+      "hourly_mae": 33.91,
+      "hourly_rmse": 50.03,
+      "r2": 0.9517,
+      "exit_mae": 36.11,
+      "exit_r2": 0.9183,
+      "night_exit_mae": 57.04,
+      "night_exit_r2": 0.6224,
+      "top5_night_hit_pct": 80.0,
+      "congestion_4class_acc": 89.2,
+      "uses_weather": false,
+      "uses_concerts": true,
+      "is_winner": false
+    },
+    {
+      "model_id": "safepass_forecast",
+      "name_ko": "Model C · SafePass 72h 사전예측 (Ridge+LGBM)",
+      "name_en": "Model C · SafePass 72h Forecast (Ridge+LGBM)",
+      "type_ko": "결합 Ridge+LGBM (달력+공연수용인원·시각오프셋+기상+강수×공연 교호작용)",
+      "type_en": "Joint Ridge+LGBM (Calendar+Show Offsets+Weather+Rain×Concert)",
+      "hourly_mae": 30.91,
+      "hourly_rmse": 54.06,
+      "r2": 0.9436,
+      "exit_mae": 34.28,
+      "exit_r2": 0.9096,
+      "night_exit_mae": 62.05,
+      "night_exit_r2": 0.553,
+      "top5_night_hit_pct": 80.0,
+      "congestion_4class_acc": 90.2,
+      "uses_weather": true,
+      "uses_concerts": true,
+      "is_winner": true
+    },
+    {
+      "model_id": "safepass_nowcast",
+      "name_ko": "Model C+ · SafePass 실시간 보정 (+1h Nowcast)",
+      "name_en": "Model C+ · SafePass Live Nowcast (+1h Telemetry)",
+      "type_ko": "Model C + 실시간 parkingorsApi 직전 1~2시간 추세 결합",
+      "type_en": "Model C + Real-time parkingorsApi lag-1h/2h trend",
+      "hourly_mae": 28.23,
+      "hourly_rmse": 48.04,
+      "r2": 0.9555,
+      "exit_mae": 33.34,
+      "exit_r2": 0.9126,
+      "night_exit_mae": 61.26,
+      "night_exit_r2": 0.5467,
+      "top5_night_hit_pct": 80.0,
+      "congestion_4class_acc": 91.1,
+      "uses_weather": true,
+      "uses_concerts": true,
+      "is_winner": false
+    }
+  ],
+  "feature_importances": {
+    "entries_h": [
+      {
+        "feature": "multi_venue_x_pre",
+        "combined_importance_pct": 13.11,
+        "lgb_importance_pct": 2.35,
+        "ridge_std_coef": 26.37,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_m1",
+        "combined_importance_pct": 11.98,
+        "lgb_importance_pct": 16.09,
+        "ridge_std_coef": 15.22,
+        "direction": "+"
+      },
+      {
+        "feature": "ta_dev_x_daytime",
+        "combined_importance_pct": 9.31,
+        "lgb_importance_pct": 25.65,
+        "ridge_std_coef": 3.43,
+        "direction": "+"
+      },
+      {
+        "feature": "concert_cap_x_evening",
+        "combined_importance_pct": 8.98,
+        "lgb_importance_pct": 5.47,
+        "ridge_std_coef": 15.61,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_x_cap_arrival",
+        "combined_importance_pct": 8.53,
+        "lgb_importance_pct": 12.13,
+        "ridge_std_coef": 10.41,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_day_x_no_dome_day",
+        "combined_importance_pct": 8.43,
+        "lgb_importance_pct": 13.32,
+        "ridge_std_coef": -9.43,
+        "direction": "-"
+      },
+      {
+        "feature": "cap_p3",
+        "combined_importance_pct": 5.75,
+        "lgb_importance_pct": 2.55,
+        "ridge_std_coef": 10.61,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_m2",
+        "combined_importance_pct": 5.05,
+        "lgb_importance_pct": 1.81,
+        "ridge_std_coef": 9.59,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_m3",
+        "combined_importance_pct": 4.38,
+        "lgb_importance_pct": 1.12,
+        "ridge_std_coef": 8.61,
+        "direction": "+"
+      },
+      {
+        "feature": "sun_x_morning",
+        "combined_importance_pct": 3.96,
+        "lgb_importance_pct": 0.49,
+        "ridge_std_coef": -8.1,
+        "direction": "-"
+      },
+      {
+        "feature": "cap_p1",
+        "combined_importance_pct": 3.39,
+        "lgb_importance_pct": 3.96,
+        "ridge_std_coef": -4.68,
+        "direction": "-"
+      },
+      {
+        "feature": "multi_venue_x_exit",
+        "combined_importance_pct": 2.86,
+        "lgb_importance_pct": 7.45,
+        "ridge_std_coef": 1.34,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_x_cap_exit",
+        "combined_importance_pct": 2.75,
+        "lgb_importance_pct": 3.14,
+        "ridge_std_coef": -3.85,
+        "direction": "-"
+      },
+      {
+        "feature": "cap_p2",
+        "combined_importance_pct": 2.67,
+        "lgb_importance_pct": 2.74,
+        "ridge_std_coef": 3.92,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_p4",
+        "combined_importance_pct": 2.24,
+        "lgb_importance_pct": 0.11,
+        "ridge_std_coef": 4.69,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_0",
+        "combined_importance_pct": 1.74,
+        "lgb_importance_pct": 0.8,
+        "ridge_std_coef": -3.19,
+        "direction": "-"
+      },
+      {
+        "feature": "rain_day_x_multi_venue_exit",
+        "combined_importance_pct": 1.56,
+        "lgb_importance_pct": 0.0,
+        "ridge_std_coef": -3.32,
+        "direction": "-"
+      },
+      {
+        "feature": "rain_hr_x_no_dome_day",
+        "combined_importance_pct": 1.54,
+        "lgb_importance_pct": 0.57,
+        "ridge_std_coef": -2.91,
+        "direction": "-"
+      }
+    ],
+    "exits_h": [
+      {
+        "feature": "cap_p3",
+        "combined_importance_pct": 13.27,
+        "lgb_importance_pct": 9.57,
+        "ridge_std_coef": 19.95,
+        "direction": "+"
+      },
+      {
+        "feature": "concert_cap_x_evening",
+        "combined_importance_pct": 10.49,
+        "lgb_importance_pct": 14.36,
+        "ridge_std_coef": 11.87,
+        "direction": "+"
+      },
+      {
+        "feature": "ta_dev_x_daytime",
+        "combined_importance_pct": 10.08,
+        "lgb_importance_pct": 23.82,
+        "ridge_std_coef": 5.64,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_m1",
+        "combined_importance_pct": 8.4,
+        "lgb_importance_pct": 2.52,
+        "ridge_std_coef": 14.66,
+        "direction": "+"
+      },
+      {
+        "feature": "multi_venue_x_exit",
+        "combined_importance_pct": 6.74,
+        "lgb_importance_pct": 3.18,
+        "ridge_std_coef": 11.1,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_p4",
+        "combined_importance_pct": 5.91,
+        "lgb_importance_pct": 5.96,
+        "ridge_std_coef": 7.91,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_day_x_no_dome_day",
+        "combined_importance_pct": 5.61,
+        "lgb_importance_pct": 6.97,
+        "ridge_std_coef": -6.74,
+        "direction": "-"
+      },
+      {
+        "feature": "rain_day_x_multi_venue_exit",
+        "combined_importance_pct": 5.26,
+        "lgb_importance_pct": 0.0,
+        "ridge_std_coef": 10.09,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_p1",
+        "combined_importance_pct": 4.78,
+        "lgb_importance_pct": 6.56,
+        "ridge_std_coef": -5.4,
+        "direction": "-"
+      },
+      {
+        "feature": "multi_venue_x_pre",
+        "combined_importance_pct": 4.68,
+        "lgb_importance_pct": 0.05,
+        "ridge_std_coef": 8.94,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_x_cap_arrival",
+        "combined_importance_pct": 4.6,
+        "lgb_importance_pct": 8.33,
+        "ridge_std_coef": 4.03,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_x_cap_exit",
+        "combined_importance_pct": 4.59,
+        "lgb_importance_pct": 8.27,
+        "ridge_std_coef": 4.05,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_m2",
+        "combined_importance_pct": 3.91,
+        "lgb_importance_pct": 2.67,
+        "ridge_std_coef": 5.97,
+        "direction": "+"
+      },
+      {
+        "feature": "sun_x_morning",
+        "combined_importance_pct": 2.93,
+        "lgb_importance_pct": 0.1,
+        "ridge_std_coef": -5.57,
+        "direction": "-"
+      },
+      {
+        "feature": "rain_hr_x_no_dome_day",
+        "combined_importance_pct": 2.29,
+        "lgb_importance_pct": 0.82,
+        "ridge_std_coef": -3.93,
+        "direction": "-"
+      },
+      {
+        "feature": "cap_p2",
+        "combined_importance_pct": 2.13,
+        "lgb_importance_pct": 3.76,
+        "ridge_std_coef": -1.92,
+        "direction": "-"
+      },
+      {
+        "feature": "cap_m3",
+        "combined_importance_pct": 1.52,
+        "lgb_importance_pct": 0.81,
+        "ridge_std_coef": 2.44,
+        "direction": "+"
+      },
+      {
+        "feature": "fri_x_evening",
+        "combined_importance_pct": 1.52,
+        "lgb_importance_pct": 0.1,
+        "ridge_std_coef": 2.86,
+        "direction": "+"
+      }
+    ],
+    "active_parked_peak_h": [
+      {
+        "feature": "concert_cap_x_evening",
+        "combined_importance_pct": 15.72,
+        "lgb_importance_pct": 24.35,
+        "ridge_std_coef": 29.48,
+        "direction": "+"
+      },
+      {
+        "feature": "multi_venue_x_exit",
+        "combined_importance_pct": 14.32,
+        "lgb_importance_pct": 20.15,
+        "ridge_std_coef": 28.98,
+        "direction": "+"
+      },
+      {
+        "feature": "multi_venue_x_pre",
+        "combined_importance_pct": 8.35,
+        "lgb_importance_pct": 1.69,
+        "ridge_std_coef": 27.46,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_0",
+        "combined_importance_pct": 7.12,
+        "lgb_importance_pct": 4.17,
+        "ridge_std_coef": 20.56,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_day_x_multi_venue_exit",
+        "combined_importance_pct": 6.75,
+        "lgb_importance_pct": 0.0,
+        "ridge_std_coef": 23.64,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_p1",
+        "combined_importance_pct": 6.7,
+        "lgb_importance_pct": 6.01,
+        "ridge_std_coef": 17.16,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_x_cap_arrival",
+        "combined_importance_pct": 6.21,
+        "lgb_importance_pct": 5.05,
+        "ridge_std_coef": 16.45,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_day_x_no_dome_day",
+        "combined_importance_pct": 5.66,
+        "lgb_importance_pct": 4.54,
+        "ridge_std_coef": -15.06,
+        "direction": "-"
+      },
+      {
+        "feature": "ta_dev_x_daytime",
+        "combined_importance_pct": 4.95,
+        "lgb_importance_pct": 14.62,
+        "ridge_std_coef": -1.99,
+        "direction": "-"
+      },
+      {
+        "feature": "sun_x_morning",
+        "combined_importance_pct": 4.35,
+        "lgb_importance_pct": 0.21,
+        "ridge_std_coef": -15.03,
+        "direction": "-"
+      },
+      {
+        "feature": "cap_p2",
+        "combined_importance_pct": 3.15,
+        "lgb_importance_pct": 1.07,
+        "ridge_std_coef": 9.92,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_x_cap_exit",
+        "combined_importance_pct": 3.15,
+        "lgb_importance_pct": 8.19,
+        "ridge_std_coef": 2.44,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_m1",
+        "combined_importance_pct": 3.12,
+        "lgb_importance_pct": 1.69,
+        "ridge_std_coef": 9.15,
+        "direction": "+"
+      },
+      {
+        "feature": "sat_x_evening",
+        "combined_importance_pct": 2.48,
+        "lgb_importance_pct": 2.17,
+        "ridge_std_coef": -6.4,
+        "direction": "-"
+      },
+      {
+        "feature": "cap_m3",
+        "combined_importance_pct": 2.36,
+        "lgb_importance_pct": 0.2,
+        "ridge_std_coef": 8.07,
+        "direction": "+"
+      },
+      {
+        "feature": "rain_hr_x_no_dome_day",
+        "combined_importance_pct": 1.99,
+        "lgb_importance_pct": 0.53,
+        "ridge_std_coef": -6.4,
+        "direction": "-"
+      },
+      {
+        "feature": "cap_p3",
+        "combined_importance_pct": 1.39,
+        "lgb_importance_pct": 1.71,
+        "ridge_std_coef": 3.07,
+        "direction": "+"
+      },
+      {
+        "feature": "cap_m2",
+        "combined_importance_pct": 1.19,
+        "lgb_importance_pct": 0.81,
+        "ridge_std_coef": 3.33,
+        "direction": "+"
+      }
+    ]
+  },
+  "case_studies": [
+    {
+      "date": "2024-07-12",
+      "dowKo": "금",
+      "dowEn": "Fri",
+      "labelKo": "최대 입차일 (금 · 무강수 · KSPO DOME)",
+      "labelEn": "Peak Entry Day (Fri · Dry · KSPO DOME)",
+      "totalEntries": 8615,
+      "stayGt10m": 5414,
+      "nightExit2022": 1628,
+      "peakActiveParked": 953,
+      "rainMm": 0.0,
+      "tempMaxC": 30.1,
+      "concertsKo": "KSPO DOME 더보이즈(15,000석) + 10분 회차 3,201대 집중",
+      "concertsEn": "KSPO DOME THE BOYZ (15k seats) + 3,201 short drop-offs",
+      "highlightTagKo": "월 최대 일입차 8,615대",
+      "highlightTagEn": "Monthly Peak 8,615 Entries",
+      "oof_comparison": {
+        "actual_daily_entries": 8615,
+        "baseline_a_daily_entries": 6887,
+        "baseline_b_daily_entries": 8077,
+        "safepass_forecast_daily_entries": 7636,
+        "safepass_nowcast_daily_entries": 7968,
+        "actual_night_exit_20_22": 1628,
+        "baseline_a_night_exit_20_22": 1079,
+        "baseline_b_night_exit_20_22": 1834,
+        "safepass_forecast_night_exit_20_22": 1246,
+        "safepass_nowcast_night_exit_20_22": 1271
+      },
+      "hourly_oof": [
+        {
+          "h": 0,
+          "act_in": 22,
+          "pred_in": 16,
+          "base_a_in": 9,
+          "act_out": 27,
+          "pred_out": 19,
+          "base_a_out": 10,
+          "base_b_out": 10
+        },
+        {
+          "h": 1,
+          "act_in": 24,
+          "pred_in": 13,
+          "base_a_in": 6,
+          "act_out": 42,
+          "pred_out": 15,
+          "base_a_out": 6,
+          "base_b_out": 6
+        },
+        {
+          "h": 2,
+          "act_in": 16,
+          "pred_in": 13,
+          "base_a_in": 5,
+          "act_out": 12,
+          "pred_out": 14,
+          "base_a_out": 5,
+          "base_b_out": 5
+        },
+        {
+          "h": 3,
+          "act_in": 11,
+          "pred_in": 15,
+          "base_a_in": 8,
+          "act_out": 10,
+          "pred_out": 14,
+          "base_a_out": 5,
+          "base_b_out": 5
+        },
+        {
+          "h": 4,
+          "act_in": 32,
+          "pred_in": 30,
+          "base_a_in": 23,
+          "act_out": 12,
+          "pred_out": 14,
+          "base_a_out": 5,
+          "base_b_out": 5
+        },
+        {
+          "h": 5,
+          "act_in": 331,
+          "pred_in": 343,
+          "base_a_in": 340,
+          "act_out": 16,
+          "pred_out": 32,
+          "base_a_out": 23,
+          "base_b_out": 23
+        },
+        {
+          "h": 6,
+          "act_in": 355,
+          "pred_in": 364,
+          "base_a_in": 358,
+          "act_out": 121,
+          "pred_out": 130,
+          "base_a_out": 127,
+          "base_b_out": 127
+        },
+        {
+          "h": 7,
+          "act_in": 291,
+          "pred_in": 294,
+          "base_a_in": 287,
+          "act_out": 434,
+          "pred_out": 420,
+          "base_a_out": 421,
+          "base_b_out": 421
+        },
+        {
+          "h": 8,
+          "act_in": 750,
+          "pred_in": 758,
+          "base_a_in": 757,
+          "act_out": 542,
+          "pred_out": 559,
+          "base_a_out": 560,
+          "base_b_out": 560
+        },
+        {
+          "h": 9,
+          "act_in": 589,
+          "pred_in": 548,
+          "base_a_in": 547,
+          "act_out": 326,
+          "pred_out": 289,
+          "base_a_out": 288,
+          "base_b_out": 288
+        },
+        {
+          "h": 10,
+          "act_in": 478,
+          "pred_in": 496,
+          "base_a_in": 498,
+          "act_out": 474,
+          "pred_out": 450,
+          "base_a_out": 453,
+          "base_b_out": 453
+        },
+        {
+          "h": 11,
+          "act_in": 332,
+          "pred_in": 299,
+          "base_a_in": 294,
+          "act_out": 559,
+          "pred_out": 514,
+          "base_a_out": 514,
+          "base_b_out": 514
+        },
+        {
+          "h": 12,
+          "act_in": 384,
+          "pred_in": 345,
+          "base_a_in": 343,
+          "act_out": 544,
+          "pred_out": 521,
+          "base_a_out": 524,
+          "base_b_out": 524
+        },
+        {
+          "h": 13,
+          "act_in": 527,
+          "pred_in": 461,
+          "base_a_in": 464,
+          "act_out": 400,
+          "pred_out": 354,
+          "base_a_out": 355,
+          "base_b_out": 355
+        },
+        {
+          "h": 14,
+          "act_in": 478,
+          "pred_in": 373,
+          "base_a_in": 364,
+          "act_out": 413,
+          "pred_out": 329,
+          "base_a_out": 326,
+          "base_b_out": 326
+        },
+        {
+          "h": 15,
+          "act_in": 503,
+          "pred_in": 376,
+          "base_a_in": 369,
+          "act_out": 503,
+          "pred_out": 422,
+          "base_a_out": 418,
+          "base_b_out": 418
+        },
+        {
+          "h": 16,
+          "act_in": 551,
+          "pred_in": 455,
+          "base_a_in": 344,
+          "act_out": 580,
+          "pred_out": 492,
+          "base_a_out": 441,
+          "base_b_out": 441
+        },
+        {
+          "h": 17,
+          "act_in": 720,
+          "pred_in": 539,
+          "base_a_in": 437,
+          "act_out": 665,
+          "pred_out": 542,
+          "base_a_out": 469,
+          "base_b_out": 469
+        },
+        {
+          "h": 18,
+          "act_in": 775,
+          "pred_in": 676,
+          "base_a_in": 494,
+          "act_out": 715,
+          "pred_out": 627,
+          "base_a_out": 465,
+          "base_b_out": 465
+        },
+        {
+          "h": 19,
+          "act_in": 471,
+          "pred_in": 448,
+          "base_a_in": 425,
+          "act_out": 392,
+          "pred_out": 402,
+          "base_a_out": 364,
+          "base_b_out": 364
+        },
+        {
+          "h": 20,
+          "act_in": 379,
+          "pred_in": 374,
+          "base_a_in": 361,
+          "act_out": 398,
+          "pred_out": 374,
+          "base_a_out": 392,
+          "base_b_out": 666
+        },
+        {
+          "h": 21,
+          "act_in": 272,
+          "pred_in": 185,
+          "base_a_in": 107,
+          "act_out": 573,
+          "pred_out": 423,
+          "base_a_out": 426,
+          "base_b_out": 725
+        },
+        {
+          "h": 22,
+          "act_in": 237,
+          "pred_in": 160,
+          "base_a_in": 35,
+          "act_out": 657,
+          "pred_out": 448,
+          "base_a_out": 260,
+          "base_b_out": 443
+        },
+        {
+          "h": 23,
+          "act_in": 87,
+          "pred_in": 56,
+          "base_a_in": 13,
+          "act_out": 135,
+          "pred_out": 95,
+          "base_a_out": 25,
+          "base_b_out": 25
+        }
+      ]
+    },
+    {
+      "date": "2024-07-20",
+      "dowKo": "토",
+      "dowEn": "Sat",
+      "labelKo": "우천 동시공연 야간병목 최악일 (14.9mm)",
+      "labelEn": "Rain + Dual-Venue Worst Night Exit (14.9mm)",
+      "totalEntries": 7914,
+      "stayGt10m": 5578,
+      "nightExit2022": 1840,
+      "peakActiveParked": 1934,
+      "rainMm": 14.9,
+      "tempMaxC": 30.4,
+      "concertsKo": "KSPO DOME SG워너비(15,000석) + 올림픽홀 휘인(3,000석) + 우리금융 정글북",
+      "concertsEn": "KSPO DOME SG Wannabe (15k) + Olympic Hall Whee In (3k) + Woori Art Hall",
+      "highlightTagKo": "월 최고 야간출차 1,840대 · 동시주차 1,934대",
+      "highlightTagEn": "Peak Night Exits 1,840 · 1,934 Simultaneous",
+      "oof_comparison": {
+        "actual_daily_entries": 7914,
+        "baseline_a_daily_entries": 6784,
+        "baseline_b_daily_entries": 8428,
+        "safepass_forecast_daily_entries": 7492,
+        "safepass_nowcast_daily_entries": 7619,
+        "actual_night_exit_20_22": 1840,
+        "baseline_a_night_exit_20_22": 1063,
+        "baseline_b_night_exit_20_22": 2729,
+        "safepass_forecast_night_exit_20_22": 1625,
+        "safepass_nowcast_night_exit_20_22": 1660
+      },
+      "hourly_oof": [
+        {
+          "h": 0,
+          "act_in": 17,
+          "pred_in": 18,
+          "base_a_in": 13,
+          "act_out": 17,
+          "pred_out": 25,
+          "base_a_out": 18,
+          "base_b_out": 18
+        },
+        {
+          "h": 1,
+          "act_in": 12,
+          "pred_in": 14,
+          "base_a_in": 8,
+          "act_out": 3,
+          "pred_out": 18,
+          "base_a_out": 10,
+          "base_b_out": 10
+        },
+        {
+          "h": 2,
+          "act_in": 5,
+          "pred_in": 10,
+          "base_a_in": 4,
+          "act_out": 7,
+          "pred_out": 13,
+          "base_a_out": 5,
+          "base_b_out": 5
+        },
+        {
+          "h": 3,
+          "act_in": 6,
+          "pred_in": 10,
+          "base_a_in": 4,
+          "act_out": 6,
+          "pred_out": 12,
+          "base_a_out": 4,
+          "base_b_out": 4
+        },
+        {
+          "h": 4,
+          "act_in": 5,
+          "pred_in": 15,
+          "base_a_in": 9,
+          "act_out": 6,
+          "pred_out": 13,
+          "base_a_out": 5,
+          "base_b_out": 5
+        },
+        {
+          "h": 5,
+          "act_in": 42,
+          "pred_in": 43,
+          "base_a_in": 39,
+          "act_out": 18,
+          "pred_out": 22,
+          "base_a_out": 14,
+          "base_b_out": 14
+        },
+        {
+          "h": 6,
+          "act_in": 111,
+          "pred_in": 112,
+          "base_a_in": 109,
+          "act_out": 45,
+          "pred_out": 65,
+          "base_a_out": 59,
+          "base_b_out": 59
+        },
+        {
+          "h": 7,
+          "act_in": 179,
+          "pred_in": 186,
+          "base_a_in": 166,
+          "act_out": 148,
+          "pred_out": 134,
+          "base_a_out": 114,
+          "base_b_out": 114
+        },
+        {
+          "h": 8,
+          "act_in": 501,
+          "pred_in": 420,
+          "base_a_in": 407,
+          "act_out": 174,
+          "pred_out": 191,
+          "base_a_out": 173,
+          "base_b_out": 173
+        },
+        {
+          "h": 9,
+          "act_in": 518,
+          "pred_in": 548,
+          "base_a_in": 523,
+          "act_out": 315,
+          "pred_out": 295,
+          "base_a_out": 274,
+          "base_b_out": 274
+        },
+        {
+          "h": 10,
+          "act_in": 708,
+          "pred_in": 650,
+          "base_a_in": 607,
+          "act_out": 475,
+          "pred_out": 454,
+          "base_a_out": 437,
+          "base_b_out": 437
+        },
+        {
+          "h": 11,
+          "act_in": 451,
+          "pred_in": 499,
+          "base_a_in": 493,
+          "act_out": 496,
+          "pred_out": 489,
+          "base_a_out": 488,
+          "base_b_out": 488
+        },
+        {
+          "h": 12,
+          "act_in": 471,
+          "pred_in": 484,
+          "base_a_in": 478,
+          "act_out": 632,
+          "pred_out": 591,
+          "base_a_out": 604,
+          "base_b_out": 604
+        },
+        {
+          "h": 13,
+          "act_in": 671,
+          "pred_in": 667,
+          "base_a_in": 654,
+          "act_out": 482,
+          "pred_out": 520,
+          "base_a_out": 531,
+          "base_b_out": 531
+        },
+        {
+          "h": 14,
+          "act_in": 608,
+          "pred_in": 550,
+          "base_a_in": 599,
+          "act_out": 371,
+          "pred_out": 423,
+          "base_a_out": 446,
+          "base_b_out": 446
+        },
+        {
+          "h": 15,
+          "act_in": 784,
+          "pred_in": 648,
+          "base_a_in": 693,
+          "act_out": 587,
+          "pred_out": 571,
+          "base_a_out": 625,
+          "base_b_out": 625
+        },
+        {
+          "h": 16,
+          "act_in": 1117,
+          "pred_in": 880,
+          "base_a_in": 632,
+          "act_out": 639,
+          "pred_out": 701,
+          "base_a_out": 574,
+          "base_b_out": 574
+        },
+        {
+          "h": 17,
+          "act_in": 870,
+          "pred_in": 705,
+          "base_a_in": 335,
+          "act_out": 855,
+          "pred_out": 786,
+          "base_a_out": 528,
+          "base_b_out": 528
+        },
+        {
+          "h": 18,
+          "act_in": 247,
+          "pred_in": 255,
+          "base_a_in": 266,
+          "act_out": 580,
+          "pred_out": 420,
+          "base_a_out": 418,
+          "base_b_out": 418
+        },
+        {
+          "h": 19,
+          "act_in": 108,
+          "pred_in": 221,
+          "base_a_in": 256,
+          "act_out": 227,
+          "pred_out": 272,
+          "base_a_out": 354,
+          "base_b_out": 354
+        },
+        {
+          "h": 20,
+          "act_in": 193,
+          "pred_in": 268,
+          "base_a_in": 259,
+          "act_out": 410,
+          "pred_out": 666,
+          "base_a_out": 578,
+          "base_b_out": 1561
+        },
+        {
+          "h": 21,
+          "act_in": 177,
+          "pred_in": 192,
+          "base_a_in": 145,
+          "act_out": 1188,
+          "pred_out": 632,
+          "base_a_out": 343,
+          "base_b_out": 926
+        },
+        {
+          "h": 22,
+          "act_in": 73,
+          "pred_in": 73,
+          "base_a_in": 59,
+          "act_out": 242,
+          "pred_out": 327,
+          "base_a_out": 142,
+          "base_b_out": 241
+        },
+        {
+          "h": 23,
+          "act_in": 40,
+          "pred_in": 24,
+          "base_a_in": 25,
+          "act_out": 74,
+          "pred_out": 39,
+          "base_a_out": 42,
+          "base_b_out": 42
+        }
+      ]
+    },
+    {
+      "date": "2024-07-21",
+      "dowKo": "일",
+      "dowEn": "Sun",
+      "labelKo": "우천 동시공연 본주차장 만차 초과일 (8.5mm)",
+      "labelEn": "Rain + Dual-Venue Full Capacity Saturation (8.5mm)",
+      "totalEntries": 7797,
+      "stayGt10m": 5439,
+      "nightExit2022": 1731,
+      "peakActiveParked": 2159,
+      "rainMm": 8.5,
+      "tempMaxC": 29.6,
+      "concertsKo": "KSPO DOME SG워너비 + 올림픽홀 휘인 + 우리금융 정글북 (우천 8.5mm)",
+      "concertsEn": "SG Wannabe + Whee In + Jungle Book (8.5mm rain)",
+      "highlightTagKo": "동시주차 2,159대 (본주차장 2,120면 초과!)",
+      "highlightTagEn": "2,159 Simultaneous Parked (>2,120 Main Lot!)",
+      "oof_comparison": {
+        "actual_daily_entries": 7797,
+        "baseline_a_daily_entries": 6801,
+        "baseline_b_daily_entries": 8556,
+        "safepass_forecast_daily_entries": 6991,
+        "safepass_nowcast_daily_entries": 7167,
+        "actual_night_exit_20_22": 1731,
+        "baseline_a_night_exit_20_22": 1079,
+        "baseline_b_night_exit_20_22": 2773,
+        "safepass_forecast_night_exit_20_22": 1421,
+        "safepass_nowcast_night_exit_20_22": 1443
+      },
+      "hourly_oof": [
+        {
+          "h": 0,
+          "act_in": 7,
+          "pred_in": 21,
+          "base_a_in": 14,
+          "act_out": 10,
+          "pred_out": 27,
+          "base_a_out": 19,
+          "base_b_out": 19
+        },
+        {
+          "h": 1,
+          "act_in": 5,
+          "pred_in": 17,
+          "base_a_in": 9,
+          "act_out": 8,
+          "pred_out": 18,
+          "base_a_out": 10,
+          "base_b_out": 10
+        },
+        {
+          "h": 2,
+          "act_in": 4,
+          "pred_in": 12,
+          "base_a_in": 4,
+          "act_out": 1,
+          "pred_out": 15,
+          "base_a_out": 6,
+          "base_b_out": 6
+        },
+        {
+          "h": 3,
+          "act_in": 1,
+          "pred_in": 13,
+          "base_a_in": 5,
+          "act_out": 2,
+          "pred_out": 14,
+          "base_a_out": 5,
+          "base_b_out": 5
+        },
+        {
+          "h": 4,
+          "act_in": 10,
+          "pred_in": 16,
+          "base_a_in": 9,
+          "act_out": 3,
+          "pred_out": 14,
+          "base_a_out": 5,
+          "base_b_out": 5
+        },
+        {
+          "h": 5,
+          "act_in": 23,
+          "pred_in": 48,
+          "base_a_in": 41,
+          "act_out": 9,
+          "pred_out": 24,
+          "base_a_out": 15,
+          "base_b_out": 15
+        },
+        {
+          "h": 6,
+          "act_in": 58,
+          "pred_in": 118,
+          "base_a_in": 117,
+          "act_out": 27,
+          "pred_out": 62,
+          "base_a_out": 61,
+          "base_b_out": 61
+        },
+        {
+          "h": 7,
+          "act_in": 109,
+          "pred_in": 147,
+          "base_a_in": 176,
+          "act_out": 77,
+          "pred_out": 105,
+          "base_a_out": 124,
+          "base_b_out": 124
+        },
+        {
+          "h": 8,
+          "act_in": 320,
+          "pred_in": 398,
+          "base_a_in": 433,
+          "act_out": 123,
+          "pred_out": 159,
+          "base_a_out": 180,
+          "base_b_out": 180
+        },
+        {
+          "h": 9,
+          "act_in": 488,
+          "pred_in": 502,
+          "base_a_in": 528,
+          "act_out": 218,
+          "pred_out": 270,
+          "base_a_out": 287,
+          "base_b_out": 287
+        },
+        {
+          "h": 10,
+          "act_in": 656,
+          "pred_in": 604,
+          "base_a_in": 615,
+          "act_out": 349,
+          "pred_out": 433,
+          "base_a_out": 455,
+          "base_b_out": 455
+        },
+        {
+          "h": 11,
+          "act_in": 407,
+          "pred_in": 456,
+          "base_a_in": 499,
+          "act_out": 391,
+          "pred_out": 468,
+          "base_a_out": 503,
+          "base_b_out": 503
+        },
+        {
+          "h": 12,
+          "act_in": 505,
+          "pred_in": 473,
+          "base_a_in": 473,
+          "act_out": 557,
+          "pred_out": 604,
+          "base_a_out": 614,
+          "base_b_out": 614
+        },
+        {
+          "h": 13,
+          "act_in": 798,
+          "pred_in": 631,
+          "base_a_in": 635,
+          "act_out": 585,
+          "pred_out": 497,
+          "base_a_out": 516,
+          "base_b_out": 516
+        },
+        {
+          "h": 14,
+          "act_in": 744,
+          "pred_in": 593,
+          "base_a_in": 580,
+          "act_out": 426,
+          "pred_out": 443,
+          "base_a_out": 439,
+          "base_b_out": 439
+        },
+        {
+          "h": 15,
+          "act_in": 1067,
+          "pred_in": 856,
+          "base_a_in": 653,
+          "act_out": 650,
+          "pred_out": 692,
+          "base_a_out": 616,
+          "base_b_out": 616
+        },
+        {
+          "h": 16,
+          "act_in": 1183,
+          "pred_in": 849,
+          "base_a_in": 623,
+          "act_out": 808,
+          "pred_out": 691,
+          "base_a_out": 550,
+          "base_b_out": 550
+        },
+        {
+          "h": 17,
+          "act_in": 305,
+          "pred_in": 285,
+          "base_a_in": 416,
+          "act_out": 498,
+          "pred_out": 537,
+          "base_a_out": 579,
+          "base_b_out": 579
+        },
+        {
+          "h": 18,
+          "act_in": 261,
+          "pred_in": 223,
+          "base_a_in": 264,
+          "act_out": 586,
+          "pred_out": 371,
+          "base_a_out": 417,
+          "base_b_out": 417
+        },
+        {
+          "h": 19,
+          "act_in": 259,
+          "pred_in": 286,
+          "base_a_in": 235,
+          "act_out": 528,
+          "pred_out": 309,
+          "base_a_out": 311,
+          "base_b_out": 311
+        },
+        {
+          "h": 20,
+          "act_in": 240,
+          "pred_in": 291,
+          "base_a_in": 252,
+          "act_out": 1060,
+          "pred_out": 771,
+          "base_a_out": 485,
+          "base_b_out": 1310
+        },
+        {
+          "h": 21,
+          "act_in": 159,
+          "pred_in": 122,
+          "base_a_in": 148,
+          "act_out": 416,
+          "pred_out": 488,
+          "base_a_out": 453,
+          "base_b_out": 1224
+        },
+        {
+          "h": 22,
+          "act_in": 120,
+          "pred_in": 11,
+          "base_a_in": 52,
+          "act_out": 255,
+          "pred_out": 162,
+          "base_a_out": 140,
+          "base_b_out": 238
+        },
+        {
+          "h": 23,
+          "act_in": 68,
+          "pred_in": 20,
+          "base_a_in": 21,
+          "act_out": 138,
+          "pred_out": 30,
+          "base_a_out": 33,
+          "base_b_out": 33
+        }
+      ]
+    },
+    {
+      "date": "2024-07-07",
+      "dowKo": "일",
+      "dowEn": "Sun",
+      "labelKo": "장마 강수 비대형공연 최저일 (28.7mm)",
+      "labelEn": "Monsoon Rain Non-Arena Quietest Day (28.7mm)",
+      "totalEntries": 4984,
+      "stayGt10m": 3564,
+      "nightExit2022": 521,
+      "peakActiveParked": 884,
+      "rainMm": 28.7,
+      "tempMaxC": 28.0,
+      "concertsKo": "올림픽홀 10CM (KSPO DOME 미개최 + 장마 28.7mm)",
+      "concertsEn": "Olympic Hall 10CM only (No KSPO DOME + 28.7mm rain)",
+      "highlightTagKo": "월 최저 4,984대 (우천 일반수요 -17.5% 역전 증빙)",
+      "highlightTagEn": "Monthly Min 4,984 (Rain -17.5% Sign Reversal Proof)",
+      "oof_comparison": {
+        "actual_daily_entries": 4984,
+        "baseline_a_daily_entries": 7203,
+        "baseline_b_daily_entries": 8383,
+        "safepass_forecast_daily_entries": 5328,
+        "safepass_nowcast_daily_entries": 5259,
+        "actual_night_exit_20_22": 521,
+        "baseline_a_night_exit_20_22": 1252,
+        "baseline_b_night_exit_20_22": 2128,
+        "safepass_forecast_night_exit_20_22": 708,
+        "safepass_nowcast_night_exit_20_22": 673
+      },
+      "hourly_oof": [
+        {
+          "h": 0,
+          "act_in": 9,
+          "pred_in": 24,
+          "base_a_in": 14,
+          "act_out": 13,
+          "pred_out": 29,
+          "base_a_out": 18,
+          "base_b_out": 18
+        },
+        {
+          "h": 1,
+          "act_in": 15,
+          "pred_in": 18,
+          "base_a_in": 8,
+          "act_out": 18,
+          "pred_out": 19,
+          "base_a_out": 8,
+          "base_b_out": 8
+        },
+        {
+          "h": 2,
+          "act_in": 6,
+          "pred_in": 15,
+          "base_a_in": 4,
+          "act_out": 12,
+          "pred_out": 16,
+          "base_a_out": 5,
+          "base_b_out": 5
+        },
+        {
+          "h": 3,
+          "act_in": 3,
+          "pred_in": 15,
+          "base_a_in": 5,
+          "act_out": 3,
+          "pred_out": 16,
+          "base_a_out": 5,
+          "base_b_out": 5
+        },
+        {
+          "h": 4,
+          "act_in": 5,
+          "pred_in": 20,
+          "base_a_in": 9,
+          "act_out": 4,
+          "pred_out": 16,
+          "base_a_out": 5,
+          "base_b_out": 5
+        },
+        {
+          "h": 5,
+          "act_in": 30,
+          "pred_in": 50,
+          "base_a_in": 40,
+          "act_out": 10,
+          "pred_out": 26,
+          "base_a_out": 15,
+          "base_b_out": 15
+        },
+        {
+          "h": 6,
+          "act_in": 67,
+          "pred_in": 92,
+          "base_a_in": 115,
+          "act_out": 49,
+          "pred_out": 38,
+          "base_a_out": 58,
+          "base_b_out": 58
+        },
+        {
+          "h": 7,
+          "act_in": 108,
+          "pred_in": 126,
+          "base_a_in": 176,
+          "act_out": 58,
+          "pred_out": 87,
+          "base_a_out": 127,
+          "base_b_out": 127
+        },
+        {
+          "h": 8,
+          "act_in": 314,
+          "pred_in": 371,
+          "base_a_in": 434,
+          "act_out": 138,
+          "pred_out": 135,
+          "base_a_out": 178,
+          "base_b_out": 178
+        },
+        {
+          "h": 9,
+          "act_in": 478,
+          "pred_in": 451,
+          "base_a_in": 529,
+          "act_out": 205,
+          "pred_out": 236,
+          "base_a_out": 289,
+          "base_b_out": 289
+        },
+        {
+          "h": 10,
+          "act_in": 465,
+          "pred_in": 558,
+          "base_a_in": 642,
+          "act_out": 328,
+          "pred_out": 397,
+          "base_a_out": 458,
+          "base_b_out": 458
+        },
+        {
+          "h": 11,
+          "act_in": 346,
+          "pred_in": 442,
+          "base_a_in": 508,
+          "act_out": 373,
+          "pred_out": 452,
+          "base_a_out": 506,
+          "base_b_out": 506
+        },
+        {
+          "h": 12,
+          "act_in": 384,
+          "pred_in": 439,
+          "base_a_in": 491,
+          "act_out": 446,
+          "pred_out": 582,
+          "base_a_out": 630,
+          "base_b_out": 630
+        },
+        {
+          "h": 13,
+          "act_in": 543,
+          "pred_in": 565,
+          "base_a_in": 672,
+          "act_out": 476,
+          "pred_out": 470,
+          "base_a_out": 531,
+          "base_b_out": 531
+        },
+        {
+          "h": 14,
+          "act_in": 515,
+          "pred_in": 421,
+          "base_a_in": 612,
+          "act_out": 356,
+          "pred_out": 339,
+          "base_a_out": 449,
+          "base_b_out": 449
+        },
+        {
+          "h": 15,
+          "act_in": 480,
+          "pred_in": 423,
+          "base_a_in": 736,
+          "act_out": 431,
+          "pred_out": 452,
+          "base_a_out": 647,
+          "base_b_out": 647
+        },
+        {
+          "h": 16,
+          "act_in": 453,
+          "pred_in": 441,
+          "base_a_in": 727,
+          "act_out": 574,
+          "pred_out": 396,
+          "base_a_out": 584,
+          "base_b_out": 584
+        },
+        {
+          "h": 17,
+          "act_in": 312,
+          "pred_in": 258,
+          "base_a_in": 415,
+          "act_out": 563,
+          "pred_out": 452,
+          "base_a_out": 570,
+          "base_b_out": 570
+        },
+        {
+          "h": 18,
+          "act_in": 116,
+          "pred_in": 202,
+          "base_a_in": 285,
+          "act_out": 292,
+          "pred_out": 390,
+          "base_a_out": 459,
+          "base_b_out": 459
+        },
+        {
+          "h": 19,
+          "act_in": 87,
+          "pred_in": 129,
+          "base_a_in": 259,
+          "act_out": 107,
+          "pred_out": 165,
+          "base_a_out": 371,
+          "base_b_out": 371
+        },
+        {
+          "h": 20,
+          "act_in": 96,
+          "pred_in": 150,
+          "base_a_in": 272,
+          "act_out": 109,
+          "pred_out": 368,
+          "base_a_out": 621,
+          "base_b_out": 1056
+        },
+        {
+          "h": 21,
+          "act_in": 118,
+          "pred_in": 67,
+          "base_a_in": 154,
+          "act_out": 374,
+          "pred_out": 268,
+          "base_a_out": 459,
+          "base_b_out": 781
+        },
+        {
+          "h": 22,
+          "act_in": 23,
+          "pred_in": 24,
+          "base_a_in": 66,
+          "act_out": 38,
+          "pred_out": 72,
+          "base_a_out": 171,
+          "base_b_out": 291
+        },
+        {
+          "h": 23,
+          "act_in": 11,
+          "pred_in": 27,
+          "base_a_in": 29,
+          "act_out": 23,
+          "pred_out": 46,
+          "base_a_out": 50,
+          "base_b_out": 50
+        }
+      ]
+    }
+  ]
+}

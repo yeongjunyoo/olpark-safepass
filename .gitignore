@@ -1,0 +1,20 @@
+# Dependencies & Build artifacts
+web/node_modules/
+web/dist/
+worker/node_modules/
+worker/.wrangler/
+
+# Python caches
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local secrets & raw archives (source CSVs can be re-fetched via scripts/)
+.env
+.env.*
+*.secret
+data/raw/*.zip
+data/raw/15138735_*.csv
+runs/qa/screenshots/*.tmp*
+.DS_Store
+Thumbs.db

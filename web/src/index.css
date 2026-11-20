@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --brand-navy: #0f2c59;
+  --brand-navy-dark: #091d3c;
+  --brand-eco: #0f766e;
+  --brand-eco-light: #ccfbf1;
+  --brand-amber: #b45309;
+  --brand-red: #b91c1c;
+  font-family: 'Pretendard Variable', 'Pretendard', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, -apple-system, sans-serif;
+}
+
+/* KWCAG 2.2 Font Size Scaling */
+html[data-font-scale="100"] {
+  font-size: 16px;
+}
+html[data-font-scale="115"] {
+  font-size: 18.4px;
+}
+html[data-font-scale="130"] {
+  font-size: 20.8px;
+}
+
+/* KWCAG 2.2 Focus Visible Ring */
+:focus-visible {
+  outline: 3px solid #2563eb !important;
+  outline-offset: 2px !important;
+}
+
+/* Skip Navigation */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 9999;
+  background: #0f2c59;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* KWCAG 2.2 High-Contrast Mode (AAA >= 12:1 contrast) */
+html[data-contrast="high"] body,
+html[data-contrast="high"] #root,
+html[data-contrast="high"] main,
+html[data-contrast="high"] header,
+html[data-contrast="high"] footer,
+html[data-contrast="high"] nav,
+html[data-contrast="high"] section,
+html[data-contrast="high"] article,
+html[data-contrast="high"] li,
+html[data-contrast="high"] table,
+html[data-contrast="high"] thead,
+html[data-contrast="high"] tbody,
+html[data-contrast="high"] tr,
+html[data-contrast="high"] [class*="bg-white"],
+html[data-contrast="high"] [class*="bg-slate-"],
+html[data-contrast="high"] [class*="bg-teal-"],
+html[data-contrast="high"] [class*="bg-amber-"],
+html[data-contrast="high"] [class*="bg-red-"],
+html[data-contrast="high"] [class*="bg-blue-"],
+html[data-contrast="high"] [class*="bg-sky-"],
+html[data-contrast="high"] [class*="bg-emerald-"],
+html[data-contrast="high"] [class*="bg-gradient-"] {
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border-color: #ffd400 !important;
+}
+
+html[data-contrast="high"] h1,
+html[data-contrast="high"] h2,
+html[data-contrast="high"] h3,
+html[data-contrast="high"] p,
+html[data-contrast="high"] span,
+html[data-contrast="high"] div,
+html[data-contrast="high"] label,
+html[data-contrast="high"] td,
+html[data-contrast="high"] th,
+html[data-contrast="high"] strong {
+  color: #ffffff !important;
+}
+
+html[data-contrast="high"] h1,
+html[data-contrast="high"] h2,
+html[data-contrast="high"] a {
+  color: #ffd400 !important;
+}
+
+html[data-contrast="high"] [class*="text-teal-"],
+html[data-contrast="high"] [class*="text-[#0F766E]"],
+html[data-contrast="high"] [class*="text-emerald-"] {
+  color: #00f0ff !important;
+}
+
+html[data-contrast="high"] [class*="text-amber-"],
+html[data-contrast="high"] [class*="text-red-"] {
+  color: #ffd400 !important;
+}
+
+html[data-contrast="high"] button,
+html[data-contrast="high"] select,
+html[data-contrast="high"] input {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border-color: #ffd400 !important;
+}
+
+html[data-contrast="high"] button[aria-selected="true"],
+html[data-contrast="high"] button[aria-pressed="true"] {
+  background-color: #ffd400 !important;
+  color: #000000 !important;
+}
+
+html[data-contrast="high"] button[aria-selected="true"] span,
+html[data-contrast="high"] button[aria-selected="true"] svg,
+html[data-contrast="high"] button[aria-pressed="true"] span,
+html[data-contrast="high"] button[aria-pressed="true"] svg {
+  color: #000000 !important;
+}
+
+html[data-contrast="high"] :focus-visible {
+  outline: 3px solid #ffd400 !important;
+  outline-offset: 3px !important;
+}
+
+/* Leaflet tweaks */
+.leaflet-container {
+  font-family: inherit;
+  z-index: 1;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px rgba(15, 44, 89, 0.18);
+}
+
+/* Custom thin scrollbars for horizontal tabs on mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
