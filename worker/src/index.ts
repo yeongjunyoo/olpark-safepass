@@ -25,7 +25,8 @@ const TOTAL_PARKING_CAPACITY = 2716;
 function corsHeaders(request: Request, env: Env): Record<string, string> {
   const origin = request.headers.get('Origin') || '*';
   const allowList = (env.ALLOWED_ORIGINS || '*').split(',').map((s) => s.trim());
-  const allowedOrigin = allowList.includes('*') || allowList.includes(origin) ? origin : allowList[0];
+  // Use literal '*' whenever wildcard is allowed so shared 5-min Edge Cache works across all origins!
+  const allowedOrigin = allowList.includes('*') ? '*' : allowList.includes(origin) ? origin : allowList[0];
 
   return {
     'Access-Control-Allow-Origin': allowedOrigin,
@@ -213,6 +214,7 @@ export default {
     const cached = await cache.match(cacheKey);
     if (cached) {
       const hitHeaders = new Headers(cached.headers);
+      hitHeaders.set('Access-Control-Allow-Origin', headers['Access-Control-Allow-Origin']);
       hitHeaders.set('X-SafePass-Cache', 'HIT');
       return new Response(cached.body, { status: cached.status, headers: hitHeaders });
     }
