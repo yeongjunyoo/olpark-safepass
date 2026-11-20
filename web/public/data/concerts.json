@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-20T18:53:52+09:00",
+  "updated_at": "2026-11-21T07:12:07+09:00",
   "items": [
     {
       "id": "kspo-5158",
@@ -10,7 +10,7 @@
       "start_date": "2026-11-21",
       "end_date": "2026-11-22",
       "show_times": "2026.11.21.(SAT) 6PM  2026.11.22.(SUN) 5PM",
-      "status": "upcoming",
+      "status": "live",
       "expected_capacity": 15000,
       "ticket_url": "https://nol.yanolja.com/ticket/products/26013078",
       "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
