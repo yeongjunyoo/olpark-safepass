@@ -1,12 +1,15 @@
 """KSPO&CO 2026 SafePass — 3D .glb Asset Prep & Park Safety/Barrier-Free POI Builder.
 
 Outputs:
-  - web/public/models/88JandiMadang.glb            (10.87 MB, verified glTF 2.0)
-  - web/public/models/OlympicPark_LakeSideStage.glb (24.72 MB, verified glTF 2.0)
-  - web/public/models/models_manifest.json         (full 15127487 5-venue 3D catalog + wheelchair sightline specs)
-  - web/public/data/park_safety_poi.json           (venues, P1A~P11 parking + 12 disabled zones 85 spaces,
-                                                    4 subway stations w/ walk times, 22:00 night control,
-                                                    Songpa overflow public parking, AED/info centers, 15 official FAQs)
+  - web/public/models/KSPODome.glb                  (1.49 MB, Draco glTF 2.0, from 453.53 MB DAE)
+  - web/public/models/SKHandball.glb                (1.49 MB, Draco glTF 2.0, from 53.66 MB GLB)
+  - web/public/models/WooriArtHall.glb              (4.24 MB, Draco glTF 2.0, from 162.36 MB GLB)
+  - web/public/models/88JandiMadang.glb             (1.47 MB, Draco glTF 2.0, from 10.36 MB GLB)
+  - web/public/models/OlympicPark_LakeSideStage.glb (1.36 MB, Draco glTF 2.0, from 23.57 MB GLB)
+  - web/public/models/models_manifest.json          (full 15127487 5-venue Draco 3D catalog, 10.05 MB total)
+  - web/public/data/park_safety_poi.json            (venues, P1A~P11 parking + 12 disabled zones 85 spaces,
+                                                     4 subway stations w/ walk times, 22:00 night control,
+                                                     Songpa overflow public parking, AED/info centers, 15 official FAQs)
 """
 from __future__ import annotations
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Lang, PopulationForecastPoint } from '../types/data';
 import type { HourlyPrediction } from '../lib/mlEngine';
+import { localizeCongestLevel, localizeHourLabel, localizeMonthLabel, tr } from '../lib/i18n';
 import { AccessibleTableToggle } from './AccessibleTableToggle';
 
 interface PopChartProps {
@@ -41,30 +42,37 @@ export function PopulationForecastChart({ data, lang }: PopChartProps) {
   return (
     <div
       role="region"
-      aria-label={
-        lang === 'ko'
-          ? '서울시 실시간 도시데이터 올림픽공원 향후 12시간 인구 예측 그래프'
-          : 'Seoul Live CityData 12-hour Olympic Park population forecast chart'
-      }
+      aria-label={tr(
+        lang,
+        '서울시 실시간 도시데이터 올림픽공원 향후 12시간 인구 예측 그래프',
+        'Seoul Live CityData 12-hour Olympic Park population forecast chart',
+        'ソウル市リアルタイム都市データ オリンピック公園今後12時間人出予測グラフ'
+      )}
     >
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600">
-        <span>
+        <span aria-live="polite">
           {active
-            ? lang === 'ko'
-              ? `선택 시각 ${active.hourLabel}: 추정 ${active.min.toLocaleString()}~${active.max.toLocaleString()}명 (${active.level})`
-              : `Selected ${active.hourLabel}: Est. ${active.min.toLocaleString()}–${active.max.toLocaleString()} people (${active.level})`
-            : lang === 'ko'
-              ? '막대 또는 점에 마우스를 올리거나 키보드로 선택하면 시간별 추정 인구를 확인할 수 있습니다.'
-              : 'Hover or focus a point to inspect hourly estimated crowd.'}
+            ? tr(
+                lang,
+                `선택 시각 ${localizeHourLabel(lang, active.hourLabel)}: 추정 ${active.min.toLocaleString()}~${active.max.toLocaleString()}명 (${active.level})`,
+                `Selected ${localizeHourLabel(lang, active.hourLabel)}: Est. ${active.min.toLocaleString()}–${active.max.toLocaleString()} people (${localizeCongestLevel(lang, active.level)})`,
+                `選択時刻 ${localizeHourLabel(lang, active.hourLabel)}：推定 ${active.min.toLocaleString()}〜${active.max.toLocaleString()}人（${localizeCongestLevel(lang, active.level)}）`
+              )
+            : tr(
+                lang,
+                '막대 또는 점에 마우스를 올리거나 키보드로 선택하면 시간별 추정 인구를 확인할 수 있습니다.',
+                'Hover or focus a point to inspect hourly estimated crowd.',
+                'ポイントにカーソルを合わせるかキーボードで選択すると、時間帯別の推定人数を確認できます。'
+              )}
         </span>
         <div className="flex items-center gap-3">
           <span className="inline-flex items-center gap-1">
             <span className="h-2.5 w-2.5 rounded-full bg-[#0F2C59]" />
-            {lang === 'ko' ? '여유' : 'Smooth'}
+            {tr(lang, '여유', 'Smooth', '余裕')}
           </span>
           <span className="inline-flex items-center gap-1">
             <span className="h-2.5 w-2.5 rounded-full bg-[#0F766E]" />
-            {lang === 'ko' ? '보통 (20~21시 피크)' : 'Moderate (20-21h peak)'}
+            {tr(lang, '보통 (20~21시 피크)', 'Moderate (20–21h peak)', '普通（20〜21時ピーク）')}
           </span>
         </div>
       </div>
@@ -73,13 +81,13 @@ export function PopulationForecastChart({ data, lang }: PopChartProps) {
         viewBox={`0 0 ${width} ${height}`}
         className="w-full overflow-visible"
         role="img"
-        aria-label={
-          lang === 'ko'
-            ? `향후 12시간 올림픽공원 인구 예측: 최대 ${Math.max(...data.map((d) => d.max)).toLocaleString()}명`
-            : `12-hour population forecast peaking at ${Math.max(...data.map((d) => d.max)).toLocaleString()}`
-        }
+        aria-label={tr(
+          lang,
+          `향후 12시간 올림픽공원 인구 예측: 최대 ${Math.max(...data.map((d) => d.max)).toLocaleString()}명`,
+          `12-hour population forecast peaking at ${Math.max(...data.map((d) => d.max)).toLocaleString()}`,
+          `今後12時間オリンピック公園人出予測：最大${Math.max(...data.map((d) => d.max)).toLocaleString()}人`
+        )}
       >
-        {/* Horizontal grid lines */}
         {[0, 4000, 8000, 12000].map((tick) => {
           const y = yAt(tick);
           return (
@@ -92,11 +100,9 @@ export function PopulationForecastChart({ data, lang }: PopChartProps) {
           );
         })}
 
-        {/* Area fill */}
         <path d={areaPath} fill="#0F766E" fillOpacity="0.12" />
         <path d={linePath} fill="none" stroke="#0F2C59" strokeWidth="2.5" strokeLinejoin="round" />
 
-        {/* Points and range bars */}
         {data.map((d, i) => {
           const x = xAt(i);
           const yMid = yAt(d.mid);
@@ -104,13 +110,15 @@ export function PopulationForecastChart({ data, lang }: PopChartProps) {
           const yMax = yAt(d.max);
           const col = levelColor(d.level);
           const isSel = activeIdx === i;
+          const hLbl = localizeHourLabel(lang, d.hourLabel);
+          const lvlLbl = localizeCongestLevel(lang, d.level);
 
           return (
             <g
               key={d.time}
               tabIndex={0}
               role="button"
-              aria-label={`${d.hourLabel}: ${d.min.toLocaleString()}~${d.max.toLocaleString()} (${d.level})`}
+              aria-label={`${hLbl}: ${d.min.toLocaleString()}~${d.max.toLocaleString()} (${lvlLbl})`}
               onMouseEnter={() => setActiveIdx(i)}
               onMouseLeave={() => setActiveIdx(null)}
               onFocus={() => setActiveIdx(i)}
@@ -120,7 +128,7 @@ export function PopulationForecastChart({ data, lang }: PopChartProps) {
               <line x1={x} y1={yMax} x2={x} y2={yMin} stroke={col} strokeWidth={isSel ? 8 : 5} strokeLinecap="round" opacity={0.35} />
               <circle cx={x} cy={yMid} r={isSel ? 6 : 4.5} fill={col} stroke="#FFFFFF" strokeWidth="2" />
               <text x={x} y={height - 10} textAnchor="middle" fontSize="11" fontWeight={isSel ? '700' : '500'} fill="#334155">
-                {d.hourLabel}
+                {hLbl}
               </text>
             </g>
           );
@@ -129,17 +137,19 @@ export function PopulationForecastChart({ data, lang }: PopChartProps) {
 
       <AccessibleTableToggle
         lang={lang}
-        caption={
-          lang === 'ko'
-            ? '서울시 실시간 도시데이터 올림픽공원 향후 12시간 인구 예측 표'
-            : 'Seoul Live CityData 12-Hour Population Forecast Table'
-        }
-        headers={
-          lang === 'ko'
-            ? ['예측 시각', '최소 추정(명)', '최대 추정(명)', '혼잡 단계']
-            : ['Forecast Time', 'Min Est.', 'Max Est.', 'Congestion Level']
-        }
-        rows={data.map((d) => [d.time, d.min.toLocaleString(), d.max.toLocaleString(), d.level])}
+        caption={tr(
+          lang,
+          '서울시 실시간 도시데이터 올림픽공원 향후 12시간 인구 예측 표',
+          'Seoul Live CityData 12-Hour Population Forecast Table',
+          'ソウル市リアルタイム都市データ オリンピック公園今後12時間人出予測表'
+        )}
+        headers={tr(
+          lang,
+          ['예측 시각', '최소 추정(명)', '최대 추정(명)', '혼잡 단계'],
+          ['Forecast Time', 'Min Est.', 'Max Est.', 'Congestion Level'],
+          ['予測時刻', '最小推定（人）', '最大推定（人）', '混雑度']
+        )}
+        rows={data.map((d) => [d.time, d.min.toLocaleString(), d.max.toLocaleString(), localizeCongestLevel(lang, d.level)])}
       />
     </div>
   );
@@ -175,37 +185,41 @@ export function HourlyTrafficChart({ hourly, lang }: HourlyTrafficChartProps) {
   return (
     <div
       role="region"
-      aria-label={
-        lang === 'ko'
-          ? '24시간 시간별 입차·출차·순재차 ML 예측 차트'
-          : '24-hour ML predicted entries, exits, and net parked vehicles chart'
-      }
+      aria-label={tr(
+        lang,
+        '24시간 시간별 입차·출차·순재차 ML 예측 차트',
+        '24-hour ML predicted entries, exits, and net parked vehicles chart',
+        '24時間別の入庫・出庫・滞留台数ML予測チャート'
+      )}
     >
       <div className="mb-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
         <div className="flex flex-wrap items-center gap-3 text-slate-700">
           <span className="inline-flex items-center gap-1.5 font-medium">
             <span className="h-3 w-3 rounded-sm bg-[#2563EB]" />
-            {lang === 'ko' ? '시간별 입차(대)' : 'Hourly Entries'}
+            {tr(lang, '시간별 입차(대)', 'Hourly Entries', '時間別入庫（台）')}
           </span>
           <span className="inline-flex items-center gap-1.5 font-medium">
             <span className="h-3 w-3 rounded-sm bg-[#D97706]" />
-            {lang === 'ko' ? '시간별 출차(대)' : 'Hourly Exits'}
+            {tr(lang, '시간별 출차(대)', 'Hourly Exits', '時間別出庫（台）')}
           </span>
           <span className="inline-flex items-center gap-1.5 font-medium">
             <span className="h-0.5 w-4 bg-[#0F2C59]" />
-            {lang === 'ko' ? '누적 재차(우축, 2,716면)' : 'Net Parked (Right axis)'}
+            {tr(lang, '누적 재차(우축, 2,716면)', 'Net Parked (Right axis)', '累積駐車（右軸・2,716台）')}
           </span>
           <span className="inline-flex items-center gap-1.5 font-medium text-[#B91C1C]">
             <span className="h-3 w-3 rounded-sm bg-red-100 border border-red-400" />
-            {lang === 'ko' ? '20~22시 야간 출차 병목대' : '20–22h Night Exit Zone'}
+            {tr(lang, '20~22시 야간 출차 병목대', '20–22h Night Exit Zone', '20〜22時 夜間出庫集中帯')}
           </span>
         </div>
 
         {sel && (
-          <div className="rounded-md bg-slate-100 px-2.5 py-1 font-semibold text-[#0F2C59]">
-            {lang === 'ko'
-              ? `${sel.label} | 입차 ${sel.entries}대 · 출차 ${sel.exits}대 · 재차 ${sel.netParked.toLocaleString()}대 (${sel.occupancyPct}%)`
-              : `${String(sel.hour).padStart(2, '0')}:00 | In ${sel.entries} · Out ${sel.exits} · Parked ${sel.netParked.toLocaleString()} (${sel.occupancyPct}%)`}
+          <div aria-live="polite" className="rounded-md bg-slate-100 px-2.5 py-1 font-semibold text-[#0F2C59]">
+            {tr(
+              lang,
+              `${sel.label} | 입차 ${sel.entries}대 · 출차 ${sel.exits}대 · 재차 ${sel.netParked.toLocaleString()}대 (${sel.occupancyPct}%)`,
+              `${String(sel.hour).padStart(2, '0')}:00 | In ${sel.entries} · Out ${sel.exits} · Parked ${sel.netParked.toLocaleString()} (${sel.occupancyPct}%)`,
+              `${String(sel.hour).padStart(2, '0')}時 | 入庫 ${sel.entries}台 · 出庫 ${sel.exits}台 · 滞留 ${sel.netParked.toLocaleString()}台（${sel.occupancyPct}%）`
+            )}
           </div>
         )}
       </div>
@@ -214,13 +228,13 @@ export function HourlyTrafficChart({ hourly, lang }: HourlyTrafficChartProps) {
         viewBox={`0 0 ${width} ${height}`}
         className="w-full overflow-visible"
         role="img"
-        aria-label={
-          lang === 'ko'
-            ? '24시간 입차, 출차 및 누적 주차 대수 예측 차트'
-            : '24-hour predicted traffic flow and parking inventory chart'
-        }
+        aria-label={tr(
+          lang,
+          '24시간 입차, 출차 및 누적 주차 대수 예측 차트',
+          '24-hour predicted traffic flow and parking inventory chart',
+          '24時間の入庫・出庫および累積駐車台数予測チャート'
+        )}
       >
-        {/* 20~22h Night Bottleneck Highlight Band */}
         <rect
           x={xSlot(20)}
           y={pad.top}
@@ -230,10 +244,9 @@ export function HourlyTrafficChart({ hourly, lang }: HourlyTrafficChartProps) {
           opacity="0.65"
         />
         <text x={xSlot(20) + slotW * 1.5} y={pad.top + 13} textAnchor="middle" fontSize="10" fontWeight="700" fill="#B91C1C">
-          {lang === 'ko' ? '20~22시 출차 병목' : '20-22h Bottleneck'}
+          {tr(lang, '20~22시 출차 병목', '20–22h Bottleneck', '20〜22時 出庫集中')}
         </text>
 
-        {/* Horizontal Flow Gridlines */}
         {[0, 250, 500, 750, 1000].map((v) => {
           if (v > maxFlow + 50) return null;
           const y = yFlow(v);
@@ -247,7 +260,6 @@ export function HourlyTrafficChart({ hourly, lang }: HourlyTrafficChartProps) {
           );
         })}
 
-        {/* 85% Warning Capacity Line on Right Axis */}
         <line
           x1={pad.left}
           y1={yInv(2308)}
@@ -267,7 +279,6 @@ export function HourlyTrafficChart({ hourly, lang }: HourlyTrafficChartProps) {
           1,358
         </text>
 
-        {/* Bars per hour */}
         {hourly.map((h) => {
           const x = xSlot(h.hour);
           const barW = Math.max(4, slotW * 0.36);
@@ -280,7 +291,12 @@ export function HourlyTrafficChart({ hourly, lang }: HourlyTrafficChartProps) {
               key={h.hour}
               tabIndex={0}
               role="button"
-              aria-label={`${h.label} 입차 ${h.entries}대, 출차 ${h.exits}대, 순재차 ${h.netParked}대 (${h.occupancyPct}%)`}
+              aria-label={tr(
+                lang,
+                `${h.label} 입차 ${h.entries}대, 출차 ${h.exits}대, 순재차 ${h.netParked}대 (${h.occupancyPct}%)`,
+                `${String(h.hour).padStart(2, '0')}:00 In ${h.entries}, Out ${h.exits}, Parked ${h.netParked} (${h.occupancyPct}%)`,
+                `${String(h.hour).padStart(2, '0')}時 入庫${h.entries}台、出庫${h.exits}台、滞留${h.netParked}台（${h.occupancyPct}%）`
+              )}
               onMouseEnter={() => setSelectedHour(h.hour)}
               onFocus={() => setSelectedHour(h.hour)}
               className="cursor-pointer outline-none"
@@ -322,7 +338,6 @@ export function HourlyTrafficChart({ hourly, lang }: HourlyTrafficChartProps) {
           );
         })}
 
-        {/* Net Parked Line */}
         <path d={invPath} fill="none" stroke="#0F2C59" strokeWidth="2.6" strokeLinejoin="round" />
         {hourly.map((h) => (
           <circle
@@ -340,18 +355,20 @@ export function HourlyTrafficChart({ hourly, lang }: HourlyTrafficChartProps) {
 
       <AccessibleTableToggle
         lang={lang}
-        caption={
-          lang === 'ko'
-            ? '24시간 시간별 입차·출차·순재차 및 주차 점유율 ML 예측 표'
-            : '24-Hour ML Predicted Entries, Exits & Occupancy Table'
-        }
-        headers={
-          lang === 'ko'
-            ? ['시각', '예측 입차(대)', '예측 출차(대)', '예측 재차(대)', '점유율(%)']
-            : ['Hour', 'Entries', 'Exits', 'Net Parked', 'Occupancy (%)']
-        }
+        caption={tr(
+          lang,
+          '24시간 시간별 입차·출차·순재차 및 주차 점유율 ML 예측 표',
+          '24-Hour ML Predicted Entries, Exits & Occupancy Table',
+          '24時間別の入庫・出庫・滞留台数および駐車占有率ML予測表'
+        )}
+        headers={tr(
+          lang,
+          ['시각', '예측 입차(대)', '예측 출차(대)', '예측 재차(대)', '점유율(%)'],
+          ['Hour', 'Entries', 'Exits', 'Net Parked', 'Occupancy (%)'],
+          ['時刻', '予測入庫（台）', '予測出庫（台）', '予測滞留（台）', '占有率（%）']
+        )}
         rows={hourly.map((h) => [
-          h.label,
+          localizeHourLabel(lang, h.label),
           h.entries.toLocaleString(),
           h.exits.toLocaleString(),
           h.netParked.toLocaleString(),
@@ -380,20 +397,26 @@ export function MonthlySeasonalityChart({
   return (
     <div
       role="region"
-      aria-label={
-        lang === 'ko'
-          ? '2025년 올림픽공원 월별 주차 이용량 계절성 차트 (15131671)'
-          : '2025 Olympic Park monthly parking seasonality chart (15131671)'
-      }
+      aria-label={tr(
+        lang,
+        '2025년 올림픽공원 월별 주차 이용량 계절성 차트 (15131671)',
+        '2025 Olympic Park monthly parking seasonality chart (15131671)',
+        '2025年オリンピック公園 月別駐車利用量の季節変動チャート（15131671）'
+      )}
     >
-      <svg viewBox={`0 0 ${width} ${height}`} className="w-full" role="img" aria-label="2025 Monthly Parking Volume">
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        className="w-full"
+        role="img"
+        aria-label={tr(lang, '2025년 월별 주차 이용량', '2025 Monthly Parking Volume', '2025年 月別駐車台数')}
+      >
         {[0, 50000, 100000].map((v) => {
           const y = pad.top + innerH - (v / maxVal) * innerH;
           return (
             <g key={v}>
               <line x1={pad.left} y1={y} x2={width - pad.right} y2={y} stroke="#E2E8F0" strokeDasharray="3 3" />
               <text x={pad.left - 6} y={y + 4} textAnchor="end" fontSize="10" fill="#475569">
-                {v === 0 ? '0' : `${v / 10000}만`}
+                {v === 0 ? '0' : lang === 'ko' ? `${v / 10000}만` : lang === 'ja' ? `${v / 10000}万` : `${v / 1000}k`}
               </text>
             </g>
           );
@@ -420,7 +443,7 @@ export function MonthlySeasonalityChart({
                 </text>
               )}
               <text x={x + slot * 0.32} y={height - 8} textAnchor="middle" fontSize="10" fill="#334155">
-                {d.month}
+                {localizeMonthLabel(lang, d.month)}
               </text>
             </g>
           );

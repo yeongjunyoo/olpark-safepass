@@ -14,7 +14,7 @@ import {
 import type { AppBundle, FontScale, Lang, TabId } from './types/data';
 import { BASELINE_BUNDLE } from './lib/baselineData';
 import { loadAppBundle } from './lib/dataLoader';
-import { UI_LABELS } from './lib/i18n';
+import { tr, UI_LABELS } from './lib/i18n';
 import { LivePulseTab } from './components/tabs/LivePulseTab';
 import { ForecastTab } from './components/tabs/ForecastTab';
 import { SafeMapTab } from './components/tabs/SafeMapTab';
@@ -30,6 +30,12 @@ const TAB_ICONS: Record<TabId, typeof Activity> = {
   venue3d: Box,
   opendata: Database,
 };
+
+const LANG_OPTIONS: { code: Lang; label: string; aria: string }[] = [
+  { code: 'ko', label: '한국어', aria: '한국어로 전환' },
+  { code: 'en', label: 'EN', aria: 'Switch language to English' },
+  { code: 'ja', label: '日本語', aria: '日本語に切り替え' },
+];
 
 export function App() {
   const [bundle, setBundle] = useState<AppBundle>(BASELINE_BUNDLE);
@@ -48,7 +54,6 @@ export function App() {
     document.documentElement.dataset.fontScale = fontScale;
   }, [lang, highContrast, fontScale]);
 
-  // Initial load of B1 data/models + optional live Worker overlay
   const refreshData = async () => {
     setLoading(true);
     try {
@@ -91,16 +96,10 @@ export function App() {
 
   const sourceLabel =
     bundle.live.sourceMode === 'live-worker'
-      ? lang === 'ko'
-        ? '실시간 Worker 연동'
-        : 'Live Worker API'
+      ? tr(lang, '실시간 Worker (5분 캐시)', 'Live Worker (5m Cache)', 'リアルタイムWorker（5分キャッシュ）')
       : bundle.live.sourceMode === 'static-snapshot'
-        ? lang === 'ko'
-          ? '실측 JSON 스냅샷 연동'
-          : 'Verified JSON Snapshot'
-        : lang === 'ko'
-          ? '실측 검증 데이터셋'
-          : 'Verified Empirical Dataset';
+        ? tr(lang, '정적 스냅샷 (일 4회 갱신)', 'Static Snapshot (4x/day)', '静的スナップショット（1日4回更新）')
+        : tr(lang, '실측 검증 데이터셋', 'Verified Empirical Dataset', '実測検証データセット');
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
@@ -145,15 +144,35 @@ export function App() {
               {labels.fontSize} {fontScale}%
             </button>
 
-            <button
-              type="button"
-              onClick={() => setLang((prev) => (prev === 'ko' ? 'en' : 'ko'))}
-              aria-label={lang === 'ko' ? 'Switch language to English' : '한국어로 전환'}
-              className="inline-flex items-center gap-1 rounded border border-teal-300/60 bg-[#0F766E] px-2.5 py-0.5 text-[11px] font-bold text-white transition hover:bg-[#115E59]"
+            {/* 3-Way Segmented Language Switcher (KO / EN / JA) */}
+            <div
+              role="group"
+              aria-label={labels.langGroupLabel}
+              className="inline-flex items-center overflow-hidden rounded border border-teal-300/60 bg-white/10"
             >
-              <Globe className="h-3.5 w-3.5" aria-hidden="true" />
-              {labels.langToggle}
-            </button>
+              <span className="hidden items-center px-1.5 text-teal-200 sm:inline-flex" aria-hidden="true">
+                <Globe className="h-3.5 w-3.5" />
+              </span>
+              {LANG_OPTIONS.map((opt) => {
+                const active = lang === opt.code;
+                return (
+                  <button
+                    key={opt.code}
+                    type="button"
+                    aria-pressed={active}
+                    aria-label={opt.aria}
+                    onClick={() => setLang(opt.code)}
+                    className={`px-2 py-0.5 text-[11px] font-bold transition ${
+                      active
+                        ? 'bg-[#0F766E] text-white'
+                        : 'text-slate-200 hover:bg-white/20 hover:text-white'
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -183,27 +202,36 @@ export function App() {
             <div className="flex items-center gap-2">
               <span
                 aria-live="polite"
-                className="inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-xs font-bold text-[#0F766E]"
+                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold ${
+                  bundle.live.sourceMode === 'live-worker'
+                    ? 'border-emerald-300 bg-emerald-50 text-emerald-900'
+                    : 'border-teal-200 bg-teal-50 text-[#0F766E]'
+                }`}
               >
-                <span className="h-2 w-2 rounded-full bg-emerald-600" aria-hidden="true" />
+                <span
+                  className={`h-2 w-2 rounded-full ${
+                    bundle.live.sourceMode === 'live-worker' ? 'bg-emerald-600' : 'bg-teal-600'
+                  }`}
+                  aria-hidden="true"
+                />
                 {sourceLabel}
               </span>
               <button
                 type="button"
                 onClick={() => void refreshData()}
                 disabled={loading}
-                aria-label={lang === 'ko' ? '실시간 데이터 새로고침' : 'Refresh live data'}
+                aria-label={tr(lang, '실시간 데이터 새로고침', 'Refresh live data', 'リアルタイムデータを更新')}
                 className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 disabled:opacity-60"
               >
                 <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} aria-hidden="true" />
-                <span className="hidden sm:inline">{lang === 'ko' ? '갱신' : 'Refresh'}</span>
+                <span className="hidden sm:inline">{tr(lang, '갱신', 'Refresh', '更新')}</span>
               </button>
             </div>
           </div>
 
           {/* Primary Navigation Tablist */}
           <nav
-            aria-label={lang === 'ko' ? '주요 서비스 메뉴' : 'Primary service navigation'}
+            aria-label={tr(lang, '주요 서비스 메뉴', 'Primary service navigation', '主要サービスメニュー')}
             className="no-scrollbar mt-4 flex gap-1.5 overflow-x-auto pb-1"
           >
             <div role="tablist" aria-label={labels.appTitle} className="flex min-w-max gap-1.5">
@@ -268,7 +296,9 @@ export function App() {
           </div>
           <div className="flex shrink-0 items-center gap-2 font-mono text-[11px] font-bold text-[#0F2C59]">
             <span className="rounded bg-slate-100 px-2 py-1">MIT License</span>
-            <span className="rounded bg-teal-50 px-2 py-1 text-[#0F766E]">2026–2028 SLA ₩0</span>
+            <span className="rounded bg-teal-50 px-2 py-1 text-[#0F766E]">
+              {tr(lang, '2026.12–2028.12 비용 0원 목표', '2026.12–2028.12 $0 Target', '2026.12〜2028.12 0円目標')}
+            </span>
           </div>
         </div>
       </footer>

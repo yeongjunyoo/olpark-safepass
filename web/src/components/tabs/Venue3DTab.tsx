@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import {
   Box,
   Eye,
@@ -14,6 +15,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import type { AppBundle, Lang } from '../../types/data';
+import { pickText, tr } from '../../lib/i18n';
 import {
   computeSightline,
   VENUE_3D_SPECS,
@@ -39,6 +41,17 @@ function detectWebGL(): boolean {
   }
 }
 
+function disposeObjectTree(root: THREE.Object3D) {
+  root.traverse((obj) => {
+    const mesh = obj as THREE.Mesh;
+    if (mesh.geometry) mesh.geometry.dispose();
+    if (mesh.material) {
+      const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+      mats.forEach((m) => m.dispose());
+    }
+  });
+}
+
 export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
   const [params, setParams] = useState<SightlineParams>({
     venueId: 'kspo-dome',
@@ -55,6 +68,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
   const [wireframe, setWireframe] = useState<boolean>(false);
   const [viewMode, setViewMode] = useState<'3d' | '2d'>('3d');
   const [glbStatus, setGlbStatus] = useState<string>('');
+  const [glbLoadedFile, setGlbLoadedFile] = useState<string>('');
   const [webglSupported] = useState<boolean>(() => detectWebGL());
 
   const mountRef = useRef<HTMLDivElement | null>(null);
@@ -87,14 +101,14 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
     if (!webglSupported || viewMode !== '3d' || !mountRef.current) return;
     const container = mountRef.current;
     const width = container.clientWidth || 720;
-    const height = 410;
+    const height = 420;
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color('#0B192C');
-    scene.fog = new THREE.Fog('#0B192C', 45, 110);
+    scene.fog = new THREE.Fog('#0B192C', 55, 135);
 
-    const camera = new THREE.PerspectiveCamera(48, width / height, 0.1, 200);
-    camera.position.set(-8, 12, 22);
+    const camera = new THREE.PerspectiveCamera(48, width / height, 0.1, 240);
+    camera.position.set(-9, 11.5, 21);
 
     let renderer: THREE.WebGLRenderer;
     try {
@@ -106,34 +120,35 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
 
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
     container.innerHTML = '';
     container.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
-    controls.maxPolarAngle = Math.PI / 2 - 0.03;
+    controls.maxPolarAngle = Math.PI / 2 - 0.02;
     controls.target.set(8, 2.2, 0);
 
-    // Lighting
-    const hemi = new THREE.HemisphereLight('#E2E8F0', '#1E293B', 1.1);
+    // Balanced Lighting for Indoor & Outdoor GLB Models
+    const hemi = new THREE.HemisphereLight('#F1F5F9', '#1E293B', 1.35);
     scene.add(hemi);
-    const dir = new THREE.DirectionalLight('#FFFFFF', 1.4);
-    dir.position.set(14, 24, 16);
+    const dir = new THREE.DirectionalLight('#FFFFFF', 1.5);
+    dir.position.set(16, 28, 18);
     scene.add(dir);
-    const rim = new THREE.DirectionalLight('#2DD4BF', 0.55);
-    rim.position.set(-16, 10, -14);
+    const rim = new THREE.DirectionalLight('#2DD4BF', 0.65);
+    rim.position.set(-18, 12, -16);
     scene.add(rim);
 
-    // Subtle floor grid
-    const grid = new THREE.GridHelper(64, 32, '#334155', '#1E293B');
-    grid.position.y = -0.01;
+    const grid = new THREE.GridHelper(72, 36, '#334155', '#1E293B');
+    grid.position.y = -0.02;
     scene.add(grid);
 
     const dynamicGroup = new THREE.Group();
     const glbGroup = new THREE.Group();
-    scene.add(dynamicGroup);
     scene.add(glbGroup);
+    scene.add(dynamicGroup);
 
     sceneObjectsRef.current = { scene, camera, controls, dynamicGroup, glbGroup };
 
@@ -157,70 +172,112 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', onResize);
+      disposeObjectTree(glbGroup);
+      disposeObjectTree(dynamicGroup);
       controls.dispose();
       renderer.dispose();
       sceneObjectsRef.current = null;
     };
   }, [webglSupported, viewMode]);
 
-  // Load real KSPO&CO 15127487 GLB when available for selected venue
+  // Load real KSPO&CO 15127487 Draco GLB (100% local ./draco/ WASM decoder — zero external CDN!)
   useEffect(() => {
     const ctx = sceneObjectsRef.current;
     if (!ctx) return;
 
-    // Clear old GLB
     while (ctx.glbGroup.children.length > 0) {
-      ctx.glbGroup.remove(ctx.glbGroup.children[0]);
+      const ch = ctx.glbGroup.children[0];
+      disposeObjectTree(ch);
+      ctx.glbGroup.remove(ch);
     }
 
     const glbUrl = modelMeta?.glbUrl;
     if (!glbUrl) {
       setGlbStatus('');
+      setGlbLoadedFile('');
       return;
     }
 
     let cancelled = false;
-    setGlbStatus(lang === 'ko' ? '실물 15127487 GLB 3D 모델 로딩 중...' : 'Loading official 15127487 GLB model...');
+    const fileName = glbUrl.split('/').pop() ?? glbUrl;
+    setGlbLoadedFile('');
+    setGlbStatus(
+      tr(
+        lang,
+        `실물 15127487 Draco GLB 로딩 중 (${fileName})...`,
+        `Loading official 15127487 Draco GLB (${fileName})...`,
+        `公式15127487 Draco GLB 読み込み中 (${fileName})...`
+      )
+    );
+
     const loader = new GLTFLoader();
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('./draco/');
+    loader.setDRACOLoader(dracoLoader);
+
     loader.load(
       glbUrl,
       (gltf) => {
-        if (cancelled || !sceneObjectsRef.current) return;
+        dracoLoader.dispose();
+        if (cancelled || !sceneObjectsRef.current) {
+          disposeObjectTree(gltf.scene);
+          return;
+        }
         const root = gltf.scene;
-        // Auto-normalize scale to fit nicely around the 40m arena coordinate frame
+        // Auto-normalize scale & center cleanly around the sightline coordinate frame (x=0 wheelchair -> x~22m stage)
         const box = new THREE.Box3().setFromObject(root);
         const size = new THREE.Vector3();
         const center = new THREE.Vector3();
         box.getSize(size);
         box.getCenter(center);
         const maxDim = Math.max(size.x, size.y, size.z) || 1;
-        const scale = 42 / maxDim;
+        // Scale venue shell cleanly to ~48m span so wheelchair sightline rays (0..26m) sit inside cleanly
+        const targetSpan = params.venueId === 'woori' ? 34 : 44;
+        const scale = targetSpan / maxDim;
         root.scale.setScalar(scale);
-        root.position.set(-center.x * scale + 12, -box.min.y * scale - 0.05, -center.z * scale);
+        root.position.set(
+          -center.x * scale + 11,
+          -box.min.y * scale - 0.08,
+          -center.z * scale
+        );
         root.traverse((obj) => {
-          if ((obj as THREE.Mesh).isMesh) {
-            const m = (obj as THREE.Mesh).material;
-            if (m && 'transparent' in m) {
-              (m as THREE.MeshStandardMaterial).opacity = 0.85;
-              (m as THREE.MeshStandardMaterial).transparent = true;
-            }
+          const mesh = obj as THREE.Mesh;
+          if (mesh.isMesh && mesh.material) {
+            const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+            mats.forEach((mat) => {
+              const std = mat as THREE.MeshStandardMaterial;
+              std.transparent = true;
+              std.opacity = 0.52;
+              std.depthWrite = false;
+              std.side = THREE.DoubleSide;
+              std.wireframe = wireframe;
+            });
           }
         });
         ctx.glbGroup.add(root);
-        const fileName = glbUrl.split('/').pop() ?? glbUrl;
+        setGlbLoadedFile(fileName);
+        const sizeStr = modelMeta?.fileSizeMb ? ` · ${modelMeta.fileSizeMb}MB Draco` : '';
         setGlbStatus(
-          lang === 'ko'
-            ? `실물 15127487 GLB 로드 완료 (${fileName})`
-            : `Loaded official 15127487 GLB (${fileName})`
+          tr(
+            lang,
+            `실물 15127487 GLB 로드 완료 (${fileName}${sizeStr})`,
+            `Loaded official 15127487 GLB (${fileName}${sizeStr})`,
+            `公式15127487実物GLB読込完了 (${fileName}${sizeStr})`
+          )
         );
       },
       undefined,
       () => {
+        dracoLoader.dispose();
         if (!cancelled) {
+          setGlbLoadedFile('');
           setGlbStatus(
-            lang === 'ko'
-              ? '파라메트릭 3D 공연장 모델로 표시 중 (GLB 자산 준비 대기)'
-              : 'Rendering parametric 3D architectural twin (GLB asset standby)'
+            tr(
+              lang,
+              '파라메트릭 3D 공연장 모델로 표시 중 (GLB 로드 폴백)',
+              'Rendering parametric 3D architectural twin (GLB fallback)',
+              'パラメトリック3Dモデル表示中（GLBフォールバック）'
+            )
           );
         }
       }
@@ -228,16 +285,34 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
 
     return () => {
       cancelled = true;
+      dracoLoader.dispose();
     };
-  }, [modelMeta?.glbUrl, lang, viewMode]);
+  }, [modelMeta?.glbUrl, modelMeta?.fileSizeMb, params.venueId, lang, viewMode]);
 
-  // Rebuild parametric stage + wheelchair deck + standing/seated front row + 3D sightline rays
+  // Sync wireframe toggle onto already-loaded GLB meshes without re-downloading
+  useEffect(() => {
+    const ctx = sceneObjectsRef.current;
+    if (!ctx) return;
+    ctx.glbGroup.traverse((obj) => {
+      const mesh = obj as THREE.Mesh;
+      if (mesh.isMesh && mesh.material) {
+        const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        mats.forEach((m) => {
+          if ('wireframe' in m) (m as THREE.MeshStandardMaterial).wireframe = wireframe;
+        });
+      }
+    });
+  }, [wireframe]);
+
+  // Rebuild parametric stage + wheelchair deck + standing/seated front row + 24-ray optical overlay
   useEffect(() => {
     const ctx = sceneObjectsRef.current;
     if (!ctx) return;
     const g = ctx.dynamicGroup;
     while (g.children.length > 0) {
-      g.remove(g.children[0]);
+      const ch = g.children[0];
+      disposeObjectTree(ch);
+      g.remove(ch);
     }
 
     const stageX = sightline.stageDistanceM;
@@ -256,7 +331,6 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
     mainStage.position.set(stageX + 4.5, stageH / 2, 0);
     g.add(mainStage);
 
-    // Stage LED Backdrop
     const ledMat = new THREE.MeshStandardMaterial({
       color: '#0F766E',
       emissive: '#0D9488',
@@ -267,7 +341,6 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
     backdrop.position.set(stageX + 8.5, stageH + 2.6, 0);
     g.add(backdrop);
 
-    // Thrust stage extension
     if (params.thrustStageM > 0) {
       const thrust = new THREE.Mesh(
         new THREE.BoxGeometry(params.thrustStageM, stageH * 0.96, 4.2),
@@ -277,8 +350,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
       g.add(thrust);
     }
 
-    // Performer silhouette on front edge of stage
-    const perfMat = new THREE.MeshStandardMaterial({ color: '#FBBF24', emissive: '#D97706', emissiveIntensity: 0.25 });
+    const perfMat = new THREE.MeshStandardMaterial({ color: '#FBBF24', emissive: '#D97706', emissiveIntensity: 0.35 });
     const perfBody = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.26, 1.4, 12), perfMat);
     perfBody.position.set(stageX, stageH + 0.7, 0);
     g.add(perfBody);
@@ -286,17 +358,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
     perfHead.position.set(stageX, stageH + 1.58, 0);
     g.add(perfHead);
 
-    // 2. Arena Bowl Rings (subtle architectural context when not showing full GLB)
-    if (!modelMeta?.glbUrl) {
-      const tierMat = new THREE.MeshStandardMaterial({ color: '#334155', roughness: 0.8, wireframe });
-      [-10, 10].forEach((zSide) => {
-        const sideTier = new THREE.Mesh(new THREE.BoxGeometry(28, 3.2, 3.8), tierMat);
-        sideTier.position.set(stageX * 0.48, 1.6, zSide);
-        g.add(sideTier);
-      });
-    }
-
-    // 3. Wheelchair Platform Deck (elevation = platformLiftCm)
+    // 2. Wheelchair Platform Deck (elevation = platformLiftCm)
     const deckH = Math.max(0.08, deckY);
     const deckMesh = new THREE.Mesh(
       new THREE.BoxGeometry(2.6, deckH, 6.5),
@@ -305,8 +367,8 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
     deckMesh.position.set(-0.5, deckH / 2, 0);
     g.add(deckMesh);
 
-    // Wheelchair Spectator Avatar (at x = 0)
-    const wcMat = new THREE.MeshStandardMaterial({ color: '#38BDF8', emissive: '#0284C7', emissiveIntensity: 0.25 });
+    // Wheelchair Spectator Avatar (x = 0)
+    const wcMat = new THREE.MeshStandardMaterial({ color: '#38BDF8', emissive: '#0284C7', emissiveIntensity: 0.35 });
     const wheelLeft = new THREE.Mesh(new THREE.TorusGeometry(0.32, 0.05, 8, 16), wcMat);
     wheelLeft.position.set(0, deckY + 0.34, 0.35);
     g.add(wheelLeft);
@@ -320,7 +382,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
     wcHead.position.set(0, eyeY, 0);
     g.add(wcHead);
 
-    // 4. Safety Railing in front of wheelchair deck (x = 0.65)
+    // 3. Safety Railing (x = 0.65)
     if (params.railingHeightCm > 0) {
       const railH = params.railingHeightCm / 100;
       const railMesh = new THREE.Mesh(
@@ -328,7 +390,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
         new THREE.MeshStandardMaterial({
           color: sightline.blockedByRailingCount > 0 ? '#EF4444' : '#94A3B8',
           transparent: true,
-          opacity: 0.65,
+          opacity: 0.72,
           wireframe,
         })
       );
@@ -336,7 +398,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
       g.add(railMesh);
     }
 
-    // 5. Front-Row General Spectators (Seated 1.25m vs Standing 1.65m)
+    // 4. Front-Row General Spectators
     const frontMat = new THREE.MeshStandardMaterial({
       color: params.frontRowPosture === 'standing' ? '#F97316' : '#64748B',
       roughness: 0.5,
@@ -352,22 +414,28 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
       g.add(head);
     });
 
-    // 6. Optical Sightline Rays (Teal = clear, Red = blocked)
+    // 5. Optical Sightline Beams (luminous 3D cylinders so rays stand out crisply inside every real GLB)
+    const upAxis = new THREE.Vector3(0, 1, 0);
+    const clearRayMat = new THREE.MeshBasicMaterial({ color: '#14F1D9' });
+    const blockedRayMat = new THREE.MeshBasicMaterial({ color: '#FF4D4F' });
     sightline.rays.forEach((ray, idx) => {
-      if (idx % 2 !== 0) return; // Keep 12 crisp rays in 3D for clean readability
+      if (idx % 2 !== 0) return;
       const blocked = ray.blockedBy !== 'none';
-      const pts = [
-        new THREE.Vector3(0.15, eyeY, 0),
-        new THREE.Vector3(ray.hitX, ray.hitY, 0),
-      ];
-      const geom = new THREE.BufferGeometry().setFromPoints(pts);
-      const line = new THREE.Line(
-        geom,
-        new THREE.LineBasicMaterial({ color: blocked ? '#EF4444' : '#2DD4BF' })
+      const p0 = new THREE.Vector3(0.15, eyeY, 0);
+      const p1 = new THREE.Vector3(ray.hitX, ray.hitY, 0);
+      const dirVec = new THREE.Vector3().subVectors(p1, p0);
+      const len = dirVec.length();
+      if (len < 0.05) return;
+      const beam = new THREE.Mesh(
+        new THREE.CylinderGeometry(blocked ? 0.055 : 0.048, blocked ? 0.055 : 0.048, len, 6),
+        blocked ? blockedRayMat : clearRayMat
       );
-      g.add(line);
+      beam.position.copy(p0).addScaledVector(dirVec, 0.5);
+      beam.quaternion.setFromUnitVectors(upAxis, dirVec.normalize());
+      beam.renderOrder = 10;
+      g.add(beam);
     });
-  }, [params, sightline, wireframe, modelMeta?.glbUrl, viewMode]);
+  }, [params, sightline, wireframe, viewMode]);
 
   // Camera Presets
   useEffect(() => {
@@ -386,8 +454,8 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
       camera.position.set(stageX + 3, params.stageHeightM + 4, 10);
       controls.target.set(0, sightline.eyeY, 0);
     } else {
-      camera.position.set(-9, 10.5, 19);
-      controls.target.set(stageX * 0.45, 2.0, 0);
+      camera.position.set(-13, 14, 25);
+      controls.target.set(stageX * 0.45, 2.4, 0);
     }
     controls.update();
   }, [cameraPreset, sightline.eyeY, sightline.stageDistanceM, params.stageHeightM]);
@@ -396,19 +464,24 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
     pass: {
       ko: '적합 (시야 확보 양호)',
       en: 'PASS (Clear Sightline)',
+      ja: '適合（視界確保良好）',
       cls: 'border-emerald-300 bg-emerald-50 text-emerald-900',
     },
     caution: {
       ko: '주의 (부분 시야 제한)',
       en: 'CAUTION (Partial Occlusion)',
+      ja: '注意（部分的な視界遮蔽）',
       cls: 'border-amber-300 bg-amber-50 text-amber-950',
     },
     critical: {
-      ko: '부적합 (단상 보강 · 무대 상향 필수)',
-      en: 'CRITICAL (Riser Required)',
+      ko: '부적합 (단상 보강 · 무대 상향 참고)',
+      en: 'CRITICAL (Riser Recommended)',
+      ja: '不適合（観覧台かさ上げ推奨）',
       cls: 'border-red-300 bg-red-50 text-red-900',
     },
   }[sightline.status];
+
+  const recLiftClamped = Math.min(90, sightline.recommendedPlatformLiftCm);
 
   return (
     <div className="space-y-6">
@@ -418,33 +491,48 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
           <div>
             <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-[11px] font-bold text-[#0F2C59] border border-blue-200">
               <Sparkles className="h-3.5 w-3.5 text-[#0F766E]" aria-hidden="true" />
-              {lang === 'ko'
-                ? '공모 예시 3번(실감형 3D 무대설계) × 휠체어석 VOC 1,262회 직접 해결'
-                : 'Contest Ex. #3 (3D Stage Design) × Wheelchair Sightline VOC (1,262 views)'}
+              {tr(
+                lang,
+                '공식 15127487 전 5개 공연장 실물 Draco GLB 탑재 × 휠체어석 VOC 1,262회 직접 해결',
+                'All 5 Official 15127487 Venues (Draco GLB, 10.1MB Total) × Wheelchair VOC (1,262 views)',
+                '公式15127487 全5会場 実物Draco GLB搭載（計10.1MB）× 車椅子席VOC 1,262回対応'
+              )}
             </div>
             <h2 id="venue3d-heading" className="mt-1.5 flex items-center gap-2 text-base font-bold text-[#0F2C59] sm:text-lg">
               <Box className="h-5 w-5 text-[#0F766E]" aria-hidden="true" />
-              {lang === 'ko'
-                ? '실감형 3D 공연장 탐색 & 휠체어석 기하학적 광선추적 시야 검증기'
-                : 'Interactive 3D Venue Twin & Geometric Wheelchair Sightline Raycaster'}
+              {tr(
+                lang,
+                '실감형 3D 공연장 탐색 & 휠체어석 기하학적 광선추적 시야 검증기',
+                'Interactive 3D Venue Twin & Geometric Wheelchair Sightline Raycaster',
+                '実物3D会場ビューア & 車椅子席 幾何学レイキャスト視界検証機'
+              )}
             </h2>
             <p className="mt-1 text-xs text-slate-600">
-              {lang === 'ko' ? venueSpec.vocContextKo : venueSpec.vocContextEn}
+              {tr(lang, venueSpec.vocContextKo, venueSpec.vocContextEn, venueSpec.vocContextJa)}
             </p>
           </div>
 
           <div className={`rounded-xl border px-3.5 py-2 text-right ${statusMeta.cls}`}>
             <div className="text-[11px] font-bold">
-              {lang === 'ko' ? statusMeta.ko : statusMeta.en}
+              {tr(lang, statusMeta.ko, statusMeta.en, statusMeta.ja)}
             </div>
-            <div className="text-xl font-extrabold">
-              {lang === 'ko' ? `가림률 ${sightline.occlusionPct}%` : `${sightline.occlusionPct}% Blocked`}
+            <div className="text-xl font-extrabold" aria-live="polite">
+              {tr(
+                lang,
+                `가림률 ${sightline.occlusionPct}%`,
+                `${sightline.occlusionPct}% Blocked`,
+                `遮蔽率 ${sightline.occlusionPct}%`
+              )}
             </div>
           </div>
         </div>
 
-        {/* Venue Selector Pills */}
-        <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label={lang === 'ko' ? '공연장 3D 선택' : 'Select 3D venue'}>
+        {/* Venue Selector Pills (All 5 Real Official GLB Venues!) */}
+        <div
+          className="mt-4 flex flex-wrap gap-2"
+          role="group"
+          aria-label={tr(lang, '공연장 3D 선택', 'Select 3D venue', '3D会場選択')}
+        >
           {(Object.keys(VENUE_3D_SPECS) as Venue3DId[]).map((vid) => {
             const sp = VENUE_3D_SPECS[vid];
             return (
@@ -459,7 +547,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
                     : 'border-slate-300 bg-slate-50 text-slate-700 hover:bg-slate-100'
                 }`}
               >
-                {lang === 'ko' ? sp.nameKo : sp.nameEn}
+                {tr(lang, sp.nameKo, sp.nameEn, sp.nameJa)}
               </button>
             );
           })}
@@ -467,17 +555,16 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
 
         {/* Main 3D Viewport + Controls */}
         <div className="mt-5 grid gap-5 lg:grid-cols-12">
-          {/* Left: 3D Viewport & Camera Toolbar */}
           <div className="space-y-3 lg:col-span-8">
             <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs">
               <div className="flex flex-wrap items-center gap-1.5">
                 <Camera className="h-4 w-4 text-[#0F2C59]" aria-hidden="true" />
                 {(
                   [
-                    { id: 'overview', ko: '전체 조감', en: 'Overview' },
-                    { id: 'wheelchair-pov', ko: '휠체어 1인칭', en: 'Wheelchair POV' },
-                    { id: 'side-section', ko: '측면 단면', en: 'Side Section' },
-                    { id: 'stage-front', ko: '무대 정면', en: 'Stage Front' },
+                    { id: 'overview', ko: '전체 조감', en: 'Overview', ja: '全体俯瞰' },
+                    { id: 'wheelchair-pov', ko: '휠체어 1인칭', en: 'Wheelchair POV', ja: '車椅子視点' },
+                    { id: 'side-section', ko: '측면 단면', en: 'Side Section', ja: '側面断面' },
+                    { id: 'stage-front', ko: '무대 정면', en: 'Stage Front', ja: 'ステージ正面' },
                   ] as const
                 ).map((cam) => (
                   <button
@@ -491,7 +578,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
                         : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    {lang === 'ko' ? cam.ko : cam.en}
+                    {tr(lang, cam.ko, cam.en, cam.ja)}
                   </button>
                 ))}
               </div>
@@ -506,7 +593,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
                   }`}
                 >
                   <Layers className="h-3.5 w-3.5" aria-hidden="true" />
-                  {lang === 'ko' ? '와이어프레임' : 'Wireframe'}
+                  {tr(lang, '와이어프레임', 'Wireframe', 'ワイヤーフレーム')}
                 </button>
                 <button
                   type="button"
@@ -515,64 +602,73 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
                   className="rounded-md border border-slate-300 bg-white px-2 py-1 text-[11px] font-bold text-[#0F2C59] hover:bg-slate-100"
                 >
                   {viewMode === '3d'
-                    ? lang === 'ko'
-                      ? '2D 평면/단면 전환'
-                      : 'Switch to 2D SVG'
-                    : lang === 'ko'
-                      ? '3D WebGL 복귀'
-                      : 'Back to 3D WebGL'}
+                    ? tr(lang, '2D 평면/단면 전환', 'Switch to 2D SVG', '2D断面図へ切替')
+                    : tr(lang, '3D WebGL 복귀', 'Back to 3D WebGL', '3D WebGLに戻る')}
                 </button>
               </div>
             </div>
 
-            {/* Three.js Canvas or 2D Fallback */}
             {viewMode === '3d' && webglSupported ? (
               <div
                 role="region"
-                aria-label={
-                  lang === 'ko'
-                    ? `${venueSpec.nameKo} 3D 공연장 및 휠체어 시야 광선추적 뷰어 (드래그로 회전, 스크롤로 줌)`
-                    : `${venueSpec.nameEn} 3D WebGL venue and wheelchair sightline raycasting viewer`
-                }
+                aria-label={tr(
+                  lang,
+                  `${venueSpec.nameKo} 3D 공연장 및 휠체어 시야 광선추적 뷰어 (드래그로 회전, 스크롤로 줌)`,
+                  `${venueSpec.nameEn} 3D WebGL venue and wheelchair sightline raycasting viewer`,
+                  `${venueSpec.nameJa} 3D WebGL会場・車椅子視界レイキャストビューア`
+                )}
+                data-loaded-glb={glbLoadedFile}
                 className="relative overflow-hidden rounded-xl border border-slate-300 bg-[#0B192C]"
               >
-                <div ref={mountRef} className="h-[410px] w-full" />
-                <div className="pointer-events-none absolute bottom-2.5 left-3 right-3 flex flex-wrap items-center justify-between gap-2 rounded-lg bg-slate-950/75 px-3 py-1.5 text-[11px] text-slate-100 backdrop-blur-xs">
-                  <span>
-                    {glbStatus || (lang === 'ko' ? modelMeta?.sourceNoteKo : modelMeta?.sourceNoteEn)}
+                <div ref={mountRef} className="h-[420px] w-full" />
+                <div className="pointer-events-none absolute bottom-2.5 left-3 right-3 flex flex-wrap items-center justify-between gap-2 rounded-lg bg-slate-950/80 px-3 py-1.5 text-[11px] text-slate-100 backdrop-blur-xs">
+                  <span aria-live="polite">
+                    {glbStatus ||
+                      (modelMeta ? pickText(lang, modelMeta.sourceNoteKo, modelMeta.sourceNoteEn, modelMeta.sourceNoteJa) : '')}
                   </span>
                   <span className="font-semibold text-teal-300">
-                    {lang === 'ko'
-                      ? '청록 광선 = 가시 시야 · 적색 광선 = 가림(차단)'
-                      : 'Teal ray = Clear · Red ray = Occluded'}
+                    {tr(
+                      lang,
+                      '청록 광선 = 가시 시야 · 적색 광선 = 가림(차단)',
+                      'Teal ray = Clear · Red ray = Occluded',
+                      'シアン光線 = 確保視界 · 赤色光線 = 遮蔽'
+                    )}
                   </span>
                 </div>
               </div>
             ) : (
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
                 <p className="mb-2 text-xs font-semibold text-slate-600">
-                  {lang === 'ko'
-                    ? '2D 건축 단면도 모드 (WebGL 미지원 기기 및 저사양 모바일 자동 폴백)'
-                    : '2D Architectural Cross-Section Mode (Auto fallback for non-WebGL devices)'}
+                  {tr(
+                    lang,
+                    '2D 건축 단면도 모드 (WebGL 미지원 기기 및 저사양 모바일 자동 폴백)',
+                    '2D Architectural Cross-Section Mode (Auto fallback for non-WebGL devices)',
+                    '2D建築断面図モード（WebGL非対応端末・省電力モバイル向け自動フォールバック）'
+                  )}
                 </p>
                 <SightlineCrossSectionSVG params={params} result={sightline} lang={lang} />
               </div>
             )}
 
-            {/* Synchronized 2D Architectural Sightline Cross-Section (always shown in 3D mode too!) */}
             {viewMode === '3d' && (
               <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
                 <div className="mb-2 flex items-center justify-between text-xs">
                   <h3 className="flex items-center gap-1.5 font-bold text-[#0F2C59]">
                     <Eye className="h-4 w-4 text-[#0F766E]" aria-hidden="true" />
-                    {lang === 'ko'
-                      ? '실시간 2D 광학 단면도 (24개 광선추적 정량 분석 · KWCAG 대체 시각화)'
-                      : 'Synchronized 2D Optical Cross-Section (24-Ray Geometric Verification)'}
+                    {tr(
+                      lang,
+                      '실시간 2D 광학 단면도 (24개 광선추적 정량 분석 · KWCAG 대체 시각화)',
+                      'Synchronized 2D Optical Cross-Section (24-Ray Geometric Verification)',
+                      '連動2D光学断面図（24本レイキャスト定量検証・KWCAG代替視覚化）'
+                    )}
                   </h3>
                   <span className="font-mono text-[11px] font-bold text-[#0F766E]">
-                    {lang === 'ko'
-                      ? `가시율 ${sightline.visiblePct}% · 유효 시야각 ${sightline.clearAngleDeg}°`
-                      : `Visible ${sightline.visiblePct}% · Angle ${sightline.clearAngleDeg}°`}
+                    {tr(
+                      lang,
+                      `가시율 ${sightline.visiblePct}% · 유효 시야각 ${sightline.clearAngleDeg}°`,
+                      `Visible ${sightline.visiblePct}% · Angle ${sightline.clearAngleDeg}°`,
+                      `可視率 ${sightline.visiblePct}% · 有効視野角 ${sightline.clearAngleDeg}°`
+                    )}
                   </span>
                 </div>
                 <SightlineCrossSectionSVG params={params} result={sightline} lang={lang} />
@@ -584,13 +680,12 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
           <div className="space-y-4 rounded-xl border border-slate-200 bg-slate-50/70 p-4 lg:col-span-4">
             <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-[#0F2C59]">
               <Sliders className="h-4 w-4 text-[#0F766E]" aria-hidden="true" />
-              {lang === 'ko' ? '무대·휠체어석 설계 변수' : 'Stage & Wheelchair Geometry Controls'}
+              {tr(lang, '무대·휠체어석 설계 변수', 'Stage & Wheelchair Geometry Controls', 'ステージ・車椅子席 設計パラメータ')}
             </div>
 
-            {/* Front Row Standing vs Seated Toggle */}
             <div>
               <div className="mb-1.5 text-xs font-bold text-slate-800">
-                {lang === 'ko' ? '앞열 일반석 관객 자세 (핵심 민원 변수)' : 'Front-Row Spectator Posture'}
+                {tr(lang, '앞열 일반석 관객 자세 (핵심 민원 변수)', 'Front-Row Spectator Posture', '前列一般席の観客姿勢（主要VOC要因）')}
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <button
@@ -603,7 +698,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
                       : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-100'
                   }`}
                 >
-                  {lang === 'ko' ? '착석 (125 cm)' : 'Seated (125 cm)'}
+                  {tr(lang, '착석 (125 cm)', 'Seated (125 cm)', '着席 (125 cm)')}
                 </button>
                 <button
                   type="button"
@@ -615,16 +710,15 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
                       : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-100'
                   }`}
                 >
-                  {lang === 'ko' ? '기립·스탠딩 (165 cm)' : 'Standing (165 cm)'}
+                  {tr(lang, '기립·스탠딩 (165 cm)', 'Standing (165 cm)', '起立・スタンディング (165 cm)')}
                 </button>
               </div>
             </div>
 
-            {/* Sliders */}
             <div className="space-y-3 text-xs">
               <div>
                 <div className="flex justify-between font-semibold text-slate-700">
-                  <label htmlFor="wc-eye">{lang === 'ko' ? '휠체어 관객 눈높이' : 'Wheelchair Eye Height'}</label>
+                  <label htmlFor="wc-eye">{tr(lang, '휠체어 관객 눈높이', 'Wheelchair Eye Height', '車椅子観客の目線高さ')}</label>
                   <span className="font-bold text-[#0F2C59]">{params.wheelchairEyeCm} cm</span>
                 </div>
                 <input
@@ -641,7 +735,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
 
               <div>
                 <div className="flex justify-between font-semibold text-slate-700">
-                  <label htmlFor="wc-lift">{lang === 'ko' ? '휠체어석 단상(라이저) 높이' : 'Wheelchair Riser Lift'}</label>
+                  <label htmlFor="wc-lift">{tr(lang, '휠체어석 단상(라이저) 높이', 'Wheelchair Riser Lift', '車椅子観覧台（ライザー）高さ')}</label>
                   <span className="font-bold text-[#0F766E]">+{params.platformLiftCm} cm</span>
                 </div>
                 <input
@@ -658,7 +752,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
 
               <div>
                 <div className="flex justify-between font-semibold text-slate-700">
-                  <label htmlFor="stage-h">{lang === 'ko' ? '무대 높이 (m)' : 'Stage Height (m)'}</label>
+                  <label htmlFor="stage-h">{tr(lang, '무대 높이 (m)', 'Stage Height (m)', 'ステージ高さ (m)')}</label>
                   <span className="font-bold text-[#0F2C59]">{params.stageHeightM.toFixed(1)} m</span>
                 </div>
                 <input
@@ -675,7 +769,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
 
               <div>
                 <div className="flex justify-between font-semibold text-slate-700">
-                  <label htmlFor="thrust-m">{lang === 'ko' ? '돌출무대 확장 길이' : 'Thrust Stage Extension'}</label>
+                  <label htmlFor="thrust-m">{tr(lang, '돌출무대 확장 길이', 'Thrust Stage Extension', '花道・突出ステージ延長')}</label>
                   <span className="font-bold text-[#0F2C59]">{params.thrustStageM} m</span>
                 </div>
                 <input
@@ -692,7 +786,7 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
 
               <div>
                 <div className="flex justify-between font-semibold text-slate-700">
-                  <label htmlFor="rail-cm">{lang === 'ko' ? '전면 안전 난간 높이 (핸드볼 VOC)' : 'Front Safety Railing Height'}</label>
+                  <label htmlFor="rail-cm">{tr(lang, '전면 안전 난간 높이 (핸드볼 VOC)', 'Front Safety Railing Height', '前面安全手すり高さ（ハンドボールVOC）')}</label>
                   <span className="font-bold text-amber-800">{params.railingHeightCm} cm</span>
                 </div>
                 <input
@@ -708,20 +802,20 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
               </div>
             </div>
 
-            {/* Quick Apply Recommended Riser Button */}
+            {/* Quick Apply Recommended Riser Button + Legal Ramp / Egress Caveat */}
             <div className="rounded-xl border border-teal-200 bg-white p-3.5 text-xs">
               <div className="flex items-center gap-1.5 font-bold text-[#0F2C59]">
                 <Accessibility className="h-4 w-4 text-[#0F766E]" aria-hidden="true" />
-                {lang === 'ko' ? '자동 광학 개선 처방 (대관 무대설계 가이드)' : 'Auto Optical Design Recommendation'}
+                {tr(lang, '자동 광학 개선 처방 (대관 무대설계 참고)', 'Auto Optical Design Guide (Reference)', '自動光学改善ガイド（設計参考）')}
               </div>
 
               <div className="mt-2.5 grid grid-cols-2 gap-2">
                 <div className="rounded-lg bg-slate-50 p-2">
-                  <div className="text-[10px] text-slate-500">{lang === 'ko' ? '권장 휠체어 단상' : 'Rec. Riser Lift'}</div>
+                  <div className="text-[10px] text-slate-500">{tr(lang, '참고 휠체어 단상', 'Ref. Riser Lift', '参考観覧台高さ')}</div>
                   <div className="text-base font-extrabold text-[#0F766E]">+{sightline.recommendedPlatformLiftCm} cm</div>
                 </div>
                 <div className="rounded-lg bg-slate-50 p-2">
-                  <div className="text-[10px] text-slate-500">{lang === 'ko' ? '권장 최소 무대고' : 'Rec. Stage Height'}</div>
+                  <div className="text-[10px] text-slate-500">{tr(lang, '권장 최소 무대고', 'Ref. Stage Height', '推奨最小ステージ高')}</div>
                   <div className="text-base font-extrabold text-[#0F2C59]">{sightline.recommendedStageHeightM.toFixed(1)} m</div>
                 </div>
               </div>
@@ -732,31 +826,51 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
                   onClick={() =>
                     setParams((p) => ({
                       ...p,
-                      platformLiftCm: Math.min(90, sightline.recommendedPlatformLiftCm),
+                      platformLiftCm: recLiftClamped,
                       railingHeightCm: Math.min(p.railingHeightCm, 80),
                     }))
                   }
                   className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#0F766E] px-3 py-2 text-xs font-bold text-white transition hover:bg-[#0D625B]"
                 >
                   <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
-                  {lang === 'ko'
-                    ? `권장 단상(+${Math.min(90, sightline.recommendedPlatformLiftCm)}cm)·저시야 난간 즉시 적용`
-                    : `Apply Recommended Riser (+${Math.min(90, sightline.recommendedPlatformLiftCm)}cm)`}
+                  {tr(
+                    lang,
+                    `참고 단상(+${recLiftClamped}cm)·저시야 난간 즉시 적용`,
+                    `Apply Reference Riser (+${recLiftClamped}cm)`,
+                    `参考観覧台（+${recLiftClamped}cm）・低遮蔽手すりを即時適用`
+                  )}
                 </button>
               ) : (
                 <div className="mt-2.5 flex items-center gap-1.5 rounded-lg bg-emerald-50 px-2.5 py-2 font-bold text-emerald-900">
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" />
-                  {lang === 'ko' ? '앞열 기립 상황에서도 무대 시야 95%+ 확보!' : '95%+ clear sightline verified!'}
+                  {tr(
+                    lang,
+                    '앞열 기립 상황에서도 무대 시야 95%+ 확보!',
+                    '95%+ clear sightline verified!',
+                    '前列起立時でもステージ視界95%以上を確保！'
+                  )}
                 </div>
               )}
+
+              <p className="mt-2 text-[11px] leading-relaxed text-slate-600">
+                {tr(
+                  lang,
+                  `※ +${recLiftClamped}cm 참고 단상(실제 설치 시 법정 경사로 1/12 및 피난 검토 병행).`,
+                  `* +${recLiftClamped}cm reference riser (actual installation requires statutory 1:12 ramp gradient & fire egress review).`,
+                  `※ +${recLiftClamped}cm参考観覧台（実設置時は法定スロープ勾配1/12および避難動線検討を併用してください）。`
+                )}
+              </p>
 
               {sightline.blockedByRailingCount > 0 && (
                 <div className="mt-2 flex items-start gap-1.5 rounded-lg bg-amber-50 p-2 text-[11px] text-amber-950">
                   <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-700" aria-hidden="true" />
                   <span>
-                    {lang === 'ko'
-                      ? `전면 불투명 난간(${params.railingHeightCm}cm)이 광선 ${sightline.blockedByRailingCount}개를 직접 차단 중 → 강화유리·80cm 하향 권장`
-                      : `Opaque railing (${params.railingHeightCm}cm) blocks ${sightline.blockedByRailingCount} rays → use tempered glass / 80cm height`}
+                    {tr(
+                      lang,
+                      `전면 불투명 난간(${params.railingHeightCm}cm)이 광선 ${sightline.blockedByRailingCount}개를 직접 차단 중 → 강화유리·80cm 하향 검토 권장`,
+                      `Opaque railing (${params.railingHeightCm}cm) blocks ${sightline.blockedByRailingCount} rays → consider tempered glass / 80cm rail`,
+                      `前面の不透明手すり（${params.railingHeightCm}cm）が光線${sightline.blockedByRailingCount}本を遮蔽中 → 強化ガラス・80cm化を推奨`
+                    )}
                   </span>
                 </div>
               )}
@@ -766,22 +880,51 @@ export function Venue3DTab({ bundle, lang }: Venue3DTabProps) {
 
         <AccessibleTableToggle
           lang={lang}
-          caption={
-            lang === 'ko'
-              ? '3D 공연장 휠체어석 광선추적 시야 검증 정량 결과 표'
-              : '3D Venue Wheelchair Sightline Raycasting Summary Table'
-          }
-          headers={
-            lang === 'ko'
-              ? ['항목', '현재 설정값', '판정 / 권고']
-              : ['Metric', 'Current Value', 'Verdict / Recommendation']
-          }
+          caption={tr(
+            lang,
+            '3D 공연장 휠체어석 광선추적 시야 검증 정량 결과 표',
+            '3D Venue Wheelchair Sightline Raycasting Summary Table',
+            '3D公演会場 車椅子席レイキャスト視界検証 定量結果表'
+          )}
+          headers={tr(
+            lang,
+            ['항목', '현재 설정값', '판정 / 권고'],
+            ['Metric', 'Current Value', 'Verdict / Recommendation'],
+            ['項目', '現在設定値', '判定・推奨']
+          )}
           rows={[
-            [lang === 'ko' ? '대상 공연장' : 'Venue', lang === 'ko' ? venueSpec.nameKo : venueSpec.nameEn, lang === 'ko' ? venueSpec.seatsKo : venueSpec.seatsEn],
-            [lang === 'ko' ? '휠체어 눈높이 (단상 포함)' : 'Wheelchair Eye Y', `${Math.round(sightline.eyeY * 100)} cm`, `${params.wheelchairEyeCm}cm + ${params.platformLiftCm}cm`],
-            [lang === 'ko' ? '앞열 관객 상단 높이' : 'Front Spectator Height', `${Math.round(sightline.frontBlockerY * 100)} cm`, params.frontRowPosture === 'standing' ? 'Standing (165cm)' : 'Seated (125cm)'],
-            [lang === 'ko' ? '무대 시야 가림률' : 'Stage Occlusion %', `${sightline.occlusionPct}%`, lang === 'ko' ? statusMeta.ko : statusMeta.en],
-            [lang === 'ko' ? '권장 휠체어 단상 높이' : 'Recommended Riser', `+${sightline.recommendedPlatformLiftCm} cm`, lang === 'ko' ? '가림률 5% 이하 달성 기준' : 'Target <= 5% occlusion'],
+            [
+              tr(lang, '대상 공연장', 'Venue', '対象会場'),
+              tr(lang, venueSpec.nameKo, venueSpec.nameEn, venueSpec.nameJa),
+              tr(lang, venueSpec.seatsKo, venueSpec.seatsEn, venueSpec.seatsJa),
+            ],
+            [
+              tr(lang, '휠체어 눈높이 (단상 포함)', 'Wheelchair Eye Y', '車椅子目線高さ（観覧台含む）'),
+              `${Math.round(sightline.eyeY * 100)} cm`,
+              `${params.wheelchairEyeCm}cm + ${params.platformLiftCm}cm`,
+            ],
+            [
+              tr(lang, '앞열 관객 상단 높이', 'Front Spectator Height', '前列観客の頭頂高さ'),
+              `${Math.round(sightline.frontBlockerY * 100)} cm`,
+              params.frontRowPosture === 'standing'
+                ? tr(lang, '기립 (165cm)', 'Standing (165cm)', '起立 (165cm)')
+                : tr(lang, '착석 (125cm)', 'Seated (125cm)', '着席 (125cm)'),
+            ],
+            [
+              tr(lang, '무대 시야 가림률', 'Stage Occlusion %', 'ステージ視界遮蔽率'),
+              `${sightline.occlusionPct}%`,
+              tr(lang, statusMeta.ko, statusMeta.en, statusMeta.ja),
+            ],
+            [
+              tr(lang, '참고 휠체어 단상 높이', 'Reference Riser Lift', '参考観覧台かさ上げ'),
+              `+${sightline.recommendedPlatformLiftCm} cm`,
+              tr(
+                lang,
+                '가림률 5% 이하 참고치 (법정 경사로 1/12·피난 병행)',
+                'Target <= 5% occlusion (with 1:12 ramp & egress review)',
+                '遮蔽率5%以下目安（法定スロープ1/12・避難確認併用）'
+              ),
+            ],
           ]}
         />
       </section>
@@ -816,16 +959,15 @@ function SightlineCrossSectionSVG({
       viewBox={`0 0 ${W} ${H}`}
       className="w-full rounded-lg bg-white border border-slate-200"
       role="img"
-      aria-label={
-        lang === 'ko'
-          ? `휠체어석 시야 2D 광학 단면도: 가림률 ${result.occlusionPct}%, 가시율 ${result.visiblePct}%`
-          : `2D Sightline Cross-Section: ${result.occlusionPct}% occluded, ${result.visiblePct}% visible`
-      }
+      aria-label={tr(
+        lang,
+        `휠체어석 시야 2D 광학 단면도: 가림률 ${result.occlusionPct}%, 가시율 ${result.visiblePct}%`,
+        `2D Sightline Cross-Section: ${result.occlusionPct}% occluded, ${result.visiblePct}% visible`,
+        `車椅子席視界2D光学断面図：遮蔽率${result.occlusionPct}%、可視率${result.visiblePct}%`
+      )}
     >
-      {/* Floor baseline */}
       <line x1={padL} y1={sy(0)} x2={W - padR} y2={sy(0)} stroke="#94A3B8" strokeWidth="2" />
 
-      {/* Height guide lines */}
       {[1, 2, 3, 4].map((m) => (
         <g key={m}>
           <line x1={padL} y1={sy(m)} x2={W - padR} y2={sy(m)} stroke="#E2E8F0" strokeDasharray="3 3" />
@@ -835,7 +977,6 @@ function SightlineCrossSectionSVG({
         </g>
       ))}
 
-      {/* Wheelchair Deck */}
       {deckY > 0 && (
         <rect
           x={sx(-1.0)}
@@ -848,13 +989,11 @@ function SightlineCrossSectionSVG({
         />
       )}
 
-      {/* Wheelchair Eye Marker */}
       <circle cx={sx(0)} cy={sy(result.eyeY)} r="6" fill="#0284C7" stroke="#FFFFFF" strokeWidth="2" />
       <text x={sx(0)} y={sy(result.eyeY) - 10} textAnchor="middle" fontSize="10" fontWeight="700" fill="#0F2C59">
-        {lang === 'ko' ? `휠체어 ${(result.eyeY * 100).toFixed(0)}cm` : `WC ${(result.eyeY * 100).toFixed(0)}cm`}
+        {tr(lang, `휠체어 ${(result.eyeY * 100).toFixed(0)}cm`, `WC ${(result.eyeY * 100).toFixed(0)}cm`, `車椅子 ${(result.eyeY * 100).toFixed(0)}cm`)}
       </text>
 
-      {/* Safety Railing */}
       {params.railingHeightCm > 0 && (
         <line
           x1={sx(0.65)}
@@ -866,7 +1005,6 @@ function SightlineCrossSectionSVG({
         />
       )}
 
-      {/* Front-Row Blocker */}
       <rect
         x={sx(params.frontRowGapM) - 5}
         y={sy(result.frontBlockerY)}
@@ -883,15 +1021,10 @@ function SightlineCrossSectionSVG({
         fill={params.frontRowPosture === 'standing' ? '#C2410C' : '#475569'}
       >
         {params.frontRowPosture === 'standing'
-          ? lang === 'ko'
-            ? '앞열 기립'
-            : 'Standing'
-          : lang === 'ko'
-            ? '앞열 착석'
-            : 'Seated'}
+          ? tr(lang, '앞열 기립', 'Standing', '前列起立')
+          : tr(lang, '앞열 착석', 'Seated', '前列着席')}
       </text>
 
-      {/* Stage Block & Performer Target Band */}
       <rect
         x={sx(result.stageDistanceM)}
         y={sy(params.stageHeightM)}
@@ -915,10 +1048,9 @@ function SightlineCrossSectionSVG({
         fontWeight="700"
         fill="#0F2C59"
       >
-        {lang === 'ko' ? `무대 ${params.stageHeightM.toFixed(1)}m` : `Stage ${params.stageHeightM.toFixed(1)}m`}
+        {tr(lang, `무대 ${params.stageHeightM.toFixed(1)}m`, `Stage ${params.stageHeightM.toFixed(1)}m`, `舞台 ${params.stageHeightM.toFixed(1)}m`)}
       </text>
 
-      {/* Optical Rays */}
       {result.rays.map((ray) => {
         const blocked = ray.blockedBy !== 'none';
         return (
@@ -936,11 +1068,13 @@ function SightlineCrossSectionSVG({
         );
       })}
 
-      {/* Distance axis label */}
       <text x={W / 2} y={H - 8} textAnchor="middle" fontSize="10.5" fill="#475569">
-        {lang === 'ko'
-          ? `휠체어석(0m) → 앞열(${params.frontRowGapM}m) → 무대 전면(${result.stageDistanceM}m)`
-          : `Wheelchair (0m) → Front Row (${params.frontRowGapM}m) → Stage Front (${result.stageDistanceM}m)`}
+        {tr(
+          lang,
+          `휠체어석(0m) → 앞열(${params.frontRowGapM}m) → 무대 전면(${result.stageDistanceM}m)`,
+          `Wheelchair (0m) → Front Row (${params.frontRowGapM}m) → Stage Front (${result.stageDistanceM}m)`,
+          `車椅子席(0m) → 前列(${params.frontRowGapM}m) → ステージ前面(${result.stageDistanceM}m)`
+        )}
       </text>
     </svg>
   );

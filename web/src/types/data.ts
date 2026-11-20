@@ -1,10 +1,11 @@
-export type Lang = 'ko' | 'en';
+export type Lang = 'ko' | 'en' | 'ja';
 export type TabId = 'pulse' | 'forecast' | 'map' | 'venue3d' | 'opendata';
 export type FontScale = '100' | '115' | '130';
 
 export interface ParkingLotStatus {
   name: string;
   nameEn: string;
+  nameJa?: string;
   code: string;
   capacity: number;
   seoulCurPrkYn: 'Y' | 'N';
@@ -51,12 +52,14 @@ export interface SubwayStationSnapshot {
   id: string;
   nameKo: string;
   nameEn: string;
+  nameJa?: string;
   line: string;
   lineColor: string;
   lat: number;
   lng: number;
   exitInfoKo: string;
   exitInfoEn: string;
+  exitInfoJa?: string;
   hasElevator: boolean;
   monthlyTotal202610: number;
   hour20Boardings: number;
@@ -71,6 +74,7 @@ export interface ConcertItem {
   venueId: 'kspo-dome' | 'handball' | 'olympic-hall' | 'woori' | '88-lawn' | 'museum' | 'other';
   venueKo: string;
   venueEn: string;
+  venueJa?: string;
   startDate: string;
   endDate: string;
   status: 'live' | 'upcoming' | 'archive';
@@ -113,8 +117,10 @@ export interface ModelBenchmarkRow {
   modelId: string;
   nameKo: string;
   nameEn: string;
+  nameJa?: string;
   typeKo: string;
   typeEn: string;
+  typeJa?: string;
   hourlyMae: number;
   hourlyRmse: number;
   r2: number;
@@ -128,8 +134,10 @@ export interface CaseStudyDay {
   date: string;
   dowKo: string;
   dowEn: string;
+  dowJa?: string;
   labelKo: string;
   labelEn: string;
+  labelJa?: string;
   totalEntries: number;
   stayGt10m: number;
   nightExit2022: number;
@@ -137,8 +145,10 @@ export interface CaseStudyDay {
   tempMaxC: number;
   concertsKo: string;
   concertsEn: string;
+  concertsJa?: string;
   highlightTagKo: string;
   highlightTagEn: string;
+  highlightTagJa?: string;
 }
 
 export interface ModelBundle {
@@ -172,8 +182,10 @@ export interface ParkingZoneInfo {
   id: string;
   nameKo: string;
   nameEn: string;
+  nameJa?: string;
   gateKo: string;
   gateEn: string;
+  gateJa?: string;
   lat: number;
   lng: number;
   fullCount15164156: number;
@@ -182,12 +194,14 @@ export interface ParkingZoneInfo {
   disabledSpaces: number;
   nearVenueKo: string;
   nearVenueEn: string;
+  nearVenueJa?: string;
 }
 
 export interface OverflowParkingLot {
   id: string;
   nameKo: string;
   nameEn: string;
+  nameJa?: string;
   lat: number;
   lng: number;
   capacity: number;
@@ -198,6 +212,7 @@ export interface OverflowParkingLot {
   walkMinToPark: number;
   rateInfoKo: string;
   rateInfoEn: string;
+  rateInfoJa?: string;
   distanceM: number;
 }
 
@@ -206,13 +221,16 @@ export interface FacilityPOI {
   category: 'venue' | 'museum' | 'aed' | 'info' | 'shade' | 'running-caution' | 'disabled-parking' | 'stroller-detour';
   nameKo: string;
   nameEn: string;
+  nameJa?: string;
   lat: number;
   lng: number;
   descKo: string;
   descEn: string;
+  descJa?: string;
   capacity?: number;
   barrierFreeNoteKo?: string;
   barrierFreeNoteEn?: string;
+  barrierFreeNoteJa?: string;
 }
 
 export interface DataAuditDefect {
@@ -220,11 +238,14 @@ export interface DataAuditDefect {
   datasetId: string;
   datasetNameKo: string;
   datasetNameEn: string;
+  datasetNameJa?: string;
   severity: 'critical' | 'high' | 'medium';
   titleKo: string;
   titleEn: string;
+  titleJa?: string;
   evidenceKo: string;
   evidenceEn: string;
+  evidenceJa?: string;
   beforeSample: string;
   afterFixSample: string;
 }
@@ -234,9 +255,11 @@ export interface OpenDataProposalSchema {
   filename: string;
   titleKo: string;
   titleEn: string;
+  titleJa?: string;
   targetDataset: string;
   rationaleKo: string;
   rationaleEn: string;
+  rationaleJa?: string;
   columns: string[];
   sampleRows: Record<string, string | number | boolean>[];
 }
@@ -245,15 +268,19 @@ export interface DatasetProvenance {
   id: string;
   agencyKo: string;
   agencyEn: string;
+  agencyJa?: string;
   nameKo: string;
   nameEn: string;
+  nameJa?: string;
   format: string;
   refreshCycleKo: string;
   refreshCycleEn: string;
+  refreshCycleJa?: string;
   records: string;
   status: 'live' | 'static-verified' | 'upstream-maintenance';
   usageKo: string;
   usageEn: string;
+  usageJa?: string;
   url: string;
 }
 
@@ -270,8 +297,10 @@ export interface AppBundle {
     venueId: '88-lawn' | 'lake-stage' | 'kspo-dome' | 'handball' | 'woori';
     glbUrl: string | null;
     fileSizeMb?: number;
+    rawSizeMb?: number;
     sourceNoteKo: string;
     sourceNoteEn: string;
+    sourceNoteJa: string;
   }[];
   b1LoadedFiles: string[];
 }

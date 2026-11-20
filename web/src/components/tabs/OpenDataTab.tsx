@@ -12,6 +12,7 @@ import {
   Cpu,
 } from 'lucide-react';
 import type { AppBundle, Lang, OpenDataProposalSchema } from '../../types/data';
+import { pickText, tr } from '../../lib/i18n';
 
 interface OpenDataTabProps {
   bundle: AppBundle;
@@ -40,7 +41,6 @@ function downloadProposalCsv(p: OpenDataProposalSchema) {
       })
       .join(',')
   );
-  // UTF-8 BOM for seamless Korean Excel opening
   triggerDownload(p.filename, '\uFEFF' + [header, ...lines].join('\r\n'), 'text/csv;charset=utf-8');
 }
 
@@ -50,6 +50,7 @@ function downloadProposalJson(p: OpenDataProposalSchema) {
     target_dataset: p.targetDataset,
     title_ko: p.titleKo,
     title_en: p.titleEn,
+    title_ja: p.titleJa,
     columns: p.columns,
     sample_records: p.sampleRows,
     license: 'MIT / KOGL Type 1 Compatible',
@@ -66,22 +67,25 @@ export function OpenDataTab({ bundle, lang }: OpenDataTabProps) {
   return (
     <div className="space-y-6">
       {/* 1. INTEGRATED PUBLIC DATA PROVENANCE MATRIX */}
-      <section
-        aria-labelledby="provenance-heading"
-        className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-      >
+      <section aria-labelledby="provenance-heading" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
             <h2 id="provenance-heading" className="flex items-center gap-2 text-base font-bold text-[#0F2C59] sm:text-lg">
               <Database className="h-5 w-5 text-[#0F766E]" aria-hidden="true" />
-              {lang === 'ko'
-                ? '공공데이터 융합 출처 · 실시간 상태 투명성 대시보드 (KSPO&CO + 3개 타 기관)'
-                : 'Integrated Public Data Provenance & Live Health Matrix'}
+              {tr(
+                lang,
+                '공공데이터 융합 출처 · 실시간 상태 투명성 대시보드 (KSPO&CO + 3개 타 기관)',
+                'Integrated Public Data Provenance & Live Health Matrix',
+                '公共データ融合ソース・リアルタイム稼働透明性ダッシュボード'
+              )}
             </h2>
             <p className="mt-1 text-xs text-slate-600">
-              {lang === 'ko'
-                ? 'KSPO&CO 핵심 개방 데이터 7종과 서울열린데이터광장·기상청 API를 결합하며, culture.go.kr 점검(11/19~22) 시에도 정적 스냅샷 Fallback으로 무중단 동작합니다.'
-                : 'Combines 7 core KSPO&CO datasets with Seoul CityData, Seoul Subway, and KMA Weather with automated failover during culture.go.kr maintenance.'}
+              {tr(
+                lang,
+                'KSPO&CO 핵심 개방 데이터 7종과 서울열린데이터광장·기상청 API를 결합하며, culture.go.kr 점검(11/19~22) 시에도 정적 스냅샷 Fallback으로 중단 없이 동작합니다.',
+                'Combines 7 core KSPO&CO datasets with Seoul CityData, Seoul Subway, and KMA Weather with automated failover during culture.go.kr maintenance.',
+                'KSPO&CO主要公共データ7種とソウル市都市データ・地下鉄・気象庁APIを融合し、外部メンテナンス時も静的スナップショットへ自動切替します。'
+              )}
             </p>
           </div>
           <span className="inline-flex items-center gap-1 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-xs font-bold text-[#0F766E]">
@@ -95,20 +99,20 @@ export function OpenDataTab({ bundle, lang }: OpenDataTabProps) {
             <thead className="bg-slate-100 text-slate-700">
               <tr>
                 <th scope="col" className="px-3 py-2.5 font-bold">ID</th>
-                <th scope="col" className="px-3 py-2.5 font-bold">{lang === 'ko' ? '제공기관 · 데이터명' : 'Agency & Dataset'}</th>
-                <th scope="col" className="px-3 py-2.5 font-bold">{lang === 'ko' ? '규모 · 주기' : 'Volume & Refresh'}</th>
-                <th scope="col" className="px-3 py-2.5 font-bold">{lang === 'ko' ? '서비스 활용 역할' : 'Role in SafePass'}</th>
-                <th scope="col" className="px-3 py-2.5 font-bold text-center">{lang === 'ko' ? '상태' : 'Status'}</th>
+                <th scope="col" className="px-3 py-2.5 font-bold">{tr(lang, '제공기관 · 데이터명', 'Agency & Dataset', '提供機関・データ名')}</th>
+                <th scope="col" className="px-3 py-2.5 font-bold">{tr(lang, '규모 · 주기', 'Volume & Refresh', '規模・更新周期')}</th>
+                <th scope="col" className="px-3 py-2.5 font-bold">{tr(lang, '서비스 활용 역할', 'Role in SafePass', 'サービスでの活用役割')}</th>
+                <th scope="col" className="px-3 py-2.5 font-bold text-center">{tr(lang, '상태', 'Status', '状態')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 bg-white">
               {bundle.provenance.map((p) => {
                 const badge =
                   p.status === 'live'
-                    ? { ko: 'LIVE 정상', en: 'LIVE OK', cls: 'bg-emerald-100 text-emerald-900' }
+                    ? { ko: 'LIVE 정상', en: 'LIVE OK', ja: 'LIVE 正常', cls: 'bg-emerald-100 text-emerald-900' }
                     : p.status === 'static-verified'
-                      ? { ko: '실물 검증', en: 'VERIFIED', cls: 'bg-blue-100 text-blue-900' }
-                      : { ko: '점검 Fallback', en: 'MAINT FALLBACK', cls: 'bg-amber-100 text-amber-950' };
+                      ? { ko: '실물 검증', en: 'VERIFIED', ja: '実測検証済', cls: 'bg-blue-100 text-blue-900' }
+                      : { ko: '점검 Fallback', en: 'MAINT FALLBACK', ja: '保守フォールバック', cls: 'bg-amber-100 text-amber-950' };
 
                 return (
                   <tr key={p.id} className="hover:bg-slate-50">
@@ -120,25 +124,25 @@ export function OpenDataTab({ bundle, lang }: OpenDataTabProps) {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 font-bold text-slate-900 hover:text-[#0F2C59] hover:underline"
                       >
-                        {lang === 'ko' ? p.nameKo : p.nameEn}
+                        {pickText(lang, p.nameKo, p.nameEn, p.nameJa)}
                         <ExternalLink className="h-3 w-3 shrink-0" aria-hidden="true" />
                       </a>
                       <div className="text-[11px] text-slate-500">
-                        {lang === 'ko' ? p.agencyKo : p.agencyEn} · {p.format}
+                        {pickText(lang, p.agencyKo, p.agencyEn, p.agencyJa)} · {p.format}
                       </div>
                     </td>
                     <td className="px-3 py-2.5 text-slate-700 whitespace-nowrap">
                       <div className="font-semibold">{p.records}</div>
                       <div className="text-[11px] text-slate-500">
-                        {lang === 'ko' ? p.refreshCycleKo : p.refreshCycleEn}
+                        {pickText(lang, p.refreshCycleKo, p.refreshCycleEn, p.refreshCycleJa)}
                       </div>
                     </td>
                     <td className="px-3 py-2.5 text-slate-700">
-                      {lang === 'ko' ? p.usageKo : p.usageEn}
+                      {pickText(lang, p.usageKo, p.usageEn, p.usageJa)}
                     </td>
                     <td className="px-3 py-2.5 text-center whitespace-nowrap">
                       <span className={`inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold ${badge.cls}`}>
-                        {lang === 'ko' ? badge.ko : badge.en}
+                        {tr(lang, badge.ko, badge.en, badge.ja)}
                       </span>
                     </td>
                   </tr>
@@ -150,20 +154,23 @@ export function OpenDataTab({ bundle, lang }: OpenDataTabProps) {
       </section>
 
       {/* 2. 6 EMPIRICAL DATA QUALITY AUDIT DEFECTS */}
-      <section
-        aria-labelledby="audit-heading"
-        className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-      >
+      <section aria-labelledby="audit-heading" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 id="audit-heading" className="flex items-center gap-2 text-base font-bold text-[#0F2C59] sm:text-lg">
           <ShieldAlert className="h-5 w-5 text-red-700" aria-hidden="true" />
-          {lang === 'ko'
-            ? '실물 전수감사(58종) 적발: KSPO&CO 공공데이터 6대 품질 결함 & 정제 증빙'
-            : 'Empirical Full-Catalog Audit (58 Datasets): 6 Detected Quality Defects & Fixes'}
+          {tr(
+            lang,
+            '실물 전수감사(58종) 적발: KSPO&CO 공공데이터 6대 품질 결함 & 정제 증빙',
+            'Empirical Full-Catalog Audit (58 Datasets): 6 Detected Quality Defects & Fixes',
+            '全件実物監査（58種）：KSPO&CO公共データ6大品質課題と改善エビデンス'
+          )}
         </h2>
         <p className="mt-1 text-xs text-slate-600">
-          {lang === 'ko'
-            ? '행안부 공공데이터 품질인증 최우수(2년 연속) 기관의 차년도 품질 고도화를 위해 실제 CSV/API 전수 검증에서 적발한 6대 결함을 원문 증거와 함께 보고합니다.'
-            : 'Actionable engineering audit of all 58 KSPO&CO datasets with row-level proof to strengthen next-year public data quality certification.'}
+          {tr(
+            lang,
+            '행안부 공공데이터 품질인증 최우수(2년 연속) 기관의 차년도 품질 고도화를 위해 실제 CSV/API 전수 검증에서 적발한 6대 결함을 원문 증거와 함께 보고합니다.',
+            'Actionable engineering audit of all 58 KSPO&CO datasets with row-level proof to strengthen next-year public data quality certification.',
+            '全58種のCSV/API実測監査から検出した6つの品質課題を、原文エビデンスと正規化スキーマ案とともに提示します。'
+          )}
         </p>
 
         <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -190,10 +197,10 @@ export function OpenDataTab({ bundle, lang }: OpenDataTabProps) {
                   </span>
                 </div>
                 <h3 className="mt-1.5 text-sm font-bold text-slate-900">
-                  {lang === 'ko' ? d.titleKo : d.titleEn}
+                  {pickText(lang, d.titleKo, d.titleEn, d.titleJa)}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-slate-700">
-                  {lang === 'ko' ? d.evidenceKo : d.evidenceEn}
+                  {pickText(lang, d.evidenceKo, d.evidenceEn, d.evidenceJa)}
                 </p>
               </div>
 
@@ -212,7 +219,7 @@ export function OpenDataTab({ bundle, lang }: OpenDataTabProps) {
         </div>
       </section>
 
-      {/* 3. 5 PROPOSED OPEN DATA SCHEMAS (ONE-CLICK CSV/JSON DOWNLOAD) */}
+      {/* 3. 5 PROPOSED OPEN DATA SCHEMAS */}
       <section
         aria-labelledby="proposals-heading"
         className="rounded-2xl border border-teal-200 bg-gradient-to-b from-teal-50/50 to-white p-5 shadow-sm"
@@ -221,32 +228,35 @@ export function OpenDataTab({ bundle, lang }: OpenDataTabProps) {
           <div>
             <h2 id="proposals-heading" className="flex items-center gap-2 text-base font-bold text-[#0F2C59] sm:text-lg">
               <Download className="h-5 w-5 text-[#0F766E]" aria-hidden="true" />
-              {lang === 'ko'
-                ? '향후 추가 개방 제안 표준 스키마 5종 (원클릭 CSV · JSON 다운로드)'
-                : '5 Proposed New Open Data Standard Schemas (1-Click CSV / JSON Download)'}
+              {tr(
+                lang,
+                '향후 추가 개방 제안 표준 스키마 5종 (원클릭 CSV · JSON 다운로드)',
+                '5 Proposed New Open Data Standard Schemas (1-Click CSV / JSON Download)',
+                '追加開放提案 標準スキーマ5種（ワンクリックCSV・JSONダウンロード）'
+              )}
             </h2>
             <p className="mt-1 text-xs text-slate-600">
-              {lang === 'ko'
-                ? '상세기획서 5장 추가 개방 의견과 1:1 연동되는 실무형 표준 스키마 5종입니다. 클릭 즉시 UTF-8 CSV 또는 JSON 샘플을 내려받을 수 있습니다.'
-                : 'Production-ready standard schemas corresponding 1:1 to Section 5 of the competition proposal. Click to download UTF-8 CSV or JSON.'}
+              {tr(
+                lang,
+                '상세기획서 5장 추가 개방 의견과 1:1 연동되는 실무형 표준 스키마 5종입니다. 클릭 즉시 UTF-8 CSV 또는 JSON 샘플을 내려받을 수 있습니다.',
+                'Production-ready standard schemas corresponding 1:1 to Section 5 of the competition proposal. Click to download UTF-8 CSV or JSON.',
+                '詳細企画書の追加開放提案と1:1で連動する実務標準スキーマ5種です。クリックでUTF-8 CSVまたはJSONサンプルを取得できます。'
+              )}
             </p>
           </div>
         </div>
 
         <div className="mt-4 space-y-3">
           {bundle.proposals.map((p) => (
-            <article
-              key={p.id}
-              className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs"
-            >
+            <article key={p.id} className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="max-w-3xl">
                   <div className="text-[11px] font-bold text-[#0F766E]">{p.targetDataset}</div>
                   <h3 className="mt-0.5 text-sm font-bold text-[#0F2C59]">
-                    {lang === 'ko' ? p.titleKo : p.titleEn}
+                    {pickText(lang, p.titleKo, p.titleEn, p.titleJa)}
                   </h3>
                   <p className="mt-1 text-xs text-slate-600">
-                    {lang === 'ko' ? p.rationaleKo : p.rationaleEn}
+                    {pickText(lang, p.rationaleKo, p.rationaleEn, p.rationaleJa)}
                   </p>
                   <div className="mt-2 flex flex-wrap gap-1">
                     {p.columns.map((col) => (
@@ -284,133 +294,153 @@ export function OpenDataTab({ bundle, lang }: OpenDataTabProps) {
         </div>
       </section>
 
-      {/* 4. 2028 ZERO-COST ARCHITECTURE & UNINTERRUPTED SLA */}
-      <section
-        aria-labelledby="sla-heading"
-        className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-      >
+      {/* 4. 2026.12~2028.12 (25 MONTHS) ZERO-COST TARGET ARCHITECTURE */}
+      <section aria-labelledby="sla-heading" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
             <h2 id="sla-heading" className="flex items-center gap-2 text-base font-bold text-[#0F2C59] sm:text-lg">
               <Server className="h-5 w-5 text-[#0F766E]" aria-hidden="true" />
-              {lang === 'ko'
-                ? '2028년 12월까지 운영비 0원 무중단 자동화 아키텍처 & SLA (24개월)'
-                : 'Zero-Cost Uninterrupted Architecture & 24-Month SLA Through Dec 2028'}
+              {tr(
+                lang,
+                '2026.12~2028.12 (총 25개월) 인프라 비용 0원 목표 자동화 아키텍처',
+                'Dec 2026–Dec 2028 (25 Months) $0 Infrastructure Cost Target Architecture',
+                '2026年12月〜2028年12月（計25か月）インフラ費0円目標 自動運用アーキテクチャ'
+              )}
             </h2>
             <p className="mt-1 text-xs text-slate-600">
-              {lang === 'ko'
-                ? '참가 서약서 6호(2028년 서비스 운영 협조 및 원천소스 제공)를 완벽 이행하기 위해 유료 서버·DB를 0% 배제한 영구 무료 클라우드 아키텍처를 설계했습니다.'
-                : '100% serverless, zero-paid-DB architecture honoring Contest Pledge #6 (continuous operation through 2028 + MIT source handover).'}
+              {tr(
+                lang,
+                '참가 서약서 6호(2028년 서비스 운영 협조 및 원천소스 제공) 이행을 위해 무료 티어(Cloudflare Pages/Workers + GitHub Actions 일 4회 갱신) 기반 인프라 비용 0원 목표 · 목표 가동률 99%+ 구조로 설계했습니다.',
+                'Built on free-tier serverless infrastructure (Cloudflare Pages/Workers + 4x daily GitHub Actions sync) targeting $0 infrastructure cost and 99%+ uptime through Dec 2028 (25 months).',
+                '2028年末までの継続運用とMITソース提供を前提に、Cloudflare Pages/Workers＋GitHub Actions（1日4回更新）でインフラ費0円目標・目標稼働率99%+の構成を実運用しています。'
+              )}
             </p>
           </div>
           <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-extrabold text-emerald-900">
-            {lang === 'ko' ? '월 운영비 ₩0 확정' : '$0 / Month Verified'}
+            {tr(lang, '인프라 비용 0원 목표 · 목표 가동률 99%+', '$0 Infra Target · 99%+ Uptime Target', 'インフラ費0円目標・目標稼働率99%+')}
           </span>
         </div>
 
         {/* SVG Architecture Diagram */}
         <div
           role="region"
-          aria-label={lang === 'ko' ? '2028년 운영비 0원 아키텍처 도식' : '2028 Zero-Cost Architecture Diagram'}
+          aria-label={tr(
+            lang,
+            '2026.12~2028.12 인프라 비용 0원 목표 아키텍처 도식',
+            'Dec 2026–Dec 2028 Zero-Cost Target Architecture Diagram',
+            '2026.12〜2028.12 インフラ費0円目標アーキテクチャ構成図'
+          )}
           className="mt-4 overflow-x-auto rounded-xl border border-slate-200 bg-slate-50 p-4"
         >
-          <svg viewBox="0 0 820 195" className="min-w-[680px] w-full" role="img" aria-label="2028 Zero-Cost SLA Architecture">
-            {/* Box 1: Public APIs */}
+          <svg
+            viewBox="0 0 820 195"
+            className="min-w-[680px] w-full"
+            role="img"
+            aria-label={tr(
+              lang,
+              '25개월 인프라 비용 0원 목표 아키텍처 구성도',
+              '25-Month $0 Infrastructure Cost Target Architecture',
+              '25か月インフラ費0円目標アーキテクチャ構成図'
+            )}
+          >
             <rect x="10" y="25" width="185" height="140" rx="12" fill="#FFFFFF" stroke="#0F2C59" strokeWidth="2" />
             <text x="102" y="50" textAnchor="middle" fontSize="12" fontWeight="800" fill="#0F2C59">
-              {lang === 'ko' ? '공공데이터 원천 (무료)' : 'Public Data APIs'}
+              {tr(lang, '공공데이터 원천 (무료)', 'Public Data APIs', '公共データAPI（無料）')}
             </text>
-            <text x="102" y="75" textAnchor="middle" fontSize="10.5" fill="#334155">• KSPO&CO parkingorsApi</text>
+            <text x="102" y="75" textAnchor="middle" fontSize="10.5" fill="#334155">• KSPO&amp;CO parkingorsApi</text>
             <text x="102" y="96" textAnchor="middle" fontSize="10.5" fill="#334155">• Seoul Live CityData</text>
             <text x="102" y="117" textAnchor="middle" fontSize="10.5" fill="#334155">• KMA Songpa (62,126)</text>
-            <text x="102" y="138" textAnchor="middle" fontSize="10.5" fill="#334155">• 15127487 GLB / CSV</text>
+            <text x="102" y="138" textAnchor="middle" fontSize="10.5" fill="#334155">• 15127487 5-Venue Draco GLB</text>
 
-            {/* Arrow 1 */}
-            <path d="M195 75 L245 75" stroke="#0F766E" strokeWidth="2.5" markerEnd="url(#arr)" />
+            <path d="M195 75 L245 75" stroke="#0F766E" strokeWidth="2.5" />
             <path d="M195 130 L245 130" stroke="#0F2C59" strokeWidth="2" strokeDasharray="4 3" />
 
-            {/* Box 2: Cloudflare Worker */}
             <rect x="248" y="18" width="210" height="78" rx="12" fill="#CCFBF1" stroke="#0F766E" strokeWidth="2" />
             <text x="353" y="42" textAnchor="middle" fontSize="12" fontWeight="800" fill="#0F2C59">
               Cloudflare Workers (₩0)
             </text>
             <text x="353" y="61" textAnchor="middle" fontSize="10" fill="#115E59">
-              {lang === 'ko' ? '일 10만 요청 무료 · 5분 엣지 캐시' : '100k req/day free · 5-min Edge Cache'}
+              {tr(lang, '일 10만 요청 무료 · 5분 엣지 캐시', '100k req/day free · 5-min Edge Cache', '1日10万req無料・5分エッジキャッシュ')}
             </text>
             <text x="353" y="79" textAnchor="middle" fontSize="10" fill="#115E59">
-              {lang === 'ko' ? 'Secret 키 은닉 · 장애 시 정적 폴백' : 'Env Secrets · Auto Static Fallback'}
+              {tr(lang, 'Secret 키 은닉 · 장애 시 정적 폴백', 'Env Secrets · Auto Static Fallback', '鍵秘匿・障害時静的フォールバック')}
             </text>
 
-            {/* Box 3: GitHub Actions */}
             <rect x="248" y="108" width="210" height="72" rx="12" fill="#EFF6FF" stroke="#1D4ED8" strokeWidth="2" />
             <text x="353" y="131" textAnchor="middle" fontSize="12" fontWeight="800" fill="#1E3A8A">
               GitHub Actions Cron (₩0)
             </text>
             <text x="353" y="150" textAnchor="middle" fontSize="10" fill="#1E40AF">
-              {lang === 'ko' ? '매일 06/12/18시 KST 자동 갱신' : 'Daily 06/12/18 KST Auto Refresh'}
+              {tr(lang, '일 4회 (06/12/18/00시 KST) 자동 갱신', '4x Daily (06/12/18/00 KST) Auto Sync', '1日4回（06/12/18/00 KST）自動更新')}
             </text>
             <text x="353" y="167" textAnchor="middle" fontSize="10" fill="#1E40AF">
-              {lang === 'ko' ? '스냅샷 커밋 + 3회 실패 시 Issue 경보' : 'Snapshot Commit + Issue Health Alert'}
+              {tr(lang, '스냅샷 커밋 + Pages 자동 미러 배포', 'Snapshot Commit + Auto Mirror Deploy', 'スナップショット保存＋自動ミラー配備')}
             </text>
 
-            {/* Arrow 2 */}
             <path d="M458 57 L515 80" stroke="#0F766E" strokeWidth="2.5" />
             <path d="M458 144 L515 115" stroke="#1D4ED8" strokeWidth="2.5" />
 
-            {/* Box 4: GitHub Pages / Cloudflare Pages + Browser Client */}
             <rect x="518" y="25" width="290" height="145" rx="12" fill="#0F2C59" />
             <text x="663" y="52" textAnchor="middle" fontSize="13" fontWeight="800" fill="#FFFFFF">
-              GitHub Pages · CF Pages PWA (₩0)
+              CF Pages · GitHub Pages (₩0)
             </text>
             <text x="663" y="75" textAnchor="middle" fontSize="10.5" fill="#99F6E4">
-              {lang === 'ko' ? '글로벌 CDN · HTTPS 기본 · 0원 영구 배포' : 'Global CDN · Free HTTPS · Zero-Cost Deploy'}
+              {tr(lang, 'olpark-safepass.pages.dev · 무제한 CDN', 'olpark-safepass.pages.dev · Unlimited CDN', 'olpark-safepass.pages.dev · 無制限CDN')}
             </text>
             <text x="663" y="99" textAnchor="middle" fontSize="10.5" fill="#E2E8F0">
-              {lang === 'ko' ? '• ML 추론 & 3D WebGL 100% 브라우저 실행' : '• 100% Client-Side ML & Three.js WebGL'}
+              {tr(lang, '• ML 추론 & 5개관 Draco 3D 브라우저 실행', '• 100% Client-Side ML & 5-Venue Draco 3D', '• ブラウザ完結ML推論＆5会場Draco 3D')}
             </text>
             <text x="663" y="121" textAnchor="middle" fontSize="10.5" fill="#E2E8F0">
-              {lang === 'ko' ? '• KWCAG 2.2 AA + MIT 원천소스 기관 이관' : '• KWCAG 2.2 AA + MIT Source Handover'}
+              {tr(lang, '• KWCAG 2.2 AA + KO/EN/JA + MIT 이관', '• KWCAG 2.2 AA + KO/EN/JA + MIT Source', '• KWCAG 2.2 AA + 日韓英3言語 + MIT')}
             </text>
             <text x="663" y="146" textAnchor="middle" fontSize="11" fontWeight="700" fill="#FDE047">
-              {lang === 'ko' ? '2026.12 ~ 2028.12 가동률 99.9%+' : '2026.12 – 2028.12 Uptime 99.9%+'}
+              {tr(lang, '총 25개월 (2026.12~2028.12) 목표 가동률 99%+', '25 Months (2026.12–2028.12) · 99%+ Target', '計25か月（2026.12〜2028.12）目標稼働率99%+')}
             </text>
           </svg>
         </div>
 
-        {/* Cost & SLA Table */}
+        {/* Cost & Target Cards */}
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
               icon: Server,
-              titleKo: '정적 호스팅 (GitHub / CF Pages)',
-              titleEn: 'GitHub / CF Pages CDN',
-              cost: '₩0 / 월',
-              detailKo: '무료 HTTPS · 자동 빌드·배포 · 기관 저장소 이관 즉시 가능',
-              detailEn: 'Free HTTPS · Auto CI/CD · Instant org repo handover',
+              titleKo: '정적 호스팅 (CF Pages + GH Pages)',
+              titleEn: 'CF Pages + GH Pages Mirror',
+              titleJa: '静的ホスティング（CF/GH Pages）',
+              cost: tr(lang, '인프라 ₩0 목표', '$0 Infra Target', 'インフラ0円目標'),
+              detailKo: 'Cloudflare Pages 무제한 대역폭 + GitHub Pages 미러 이중화 · Draco 3D 10.1MB 경량화',
+              detailEn: 'Cloudflare Pages unlimited bandwidth + GitHub Pages mirror · 10.1MB Draco 3D assets',
+              detailJa: 'Cloudflare Pages無制限帯域＋GitHub Pagesミラー冗長化・Draco 3D計10.1MB軽量化',
             },
             {
               icon: Cpu,
-              titleKo: '실시간 프록시 (CF Workers)',
-              titleEn: 'Cloudflare Workers API',
-              cost: '₩0 / 월',
-              detailKo: '일 100,000요청 무료 · 5분 캐시 적용 시 실사용 < 1%',
-              detailEn: '100k req/day free · <1% quota with 5m cache',
+              titleKo: '실시간 프록시 (CF Workers 실가동)',
+              titleEn: 'Cloudflare Workers (Live)',
+              titleJa: 'リアルタイムプロキシ（稼働中）',
+              cost: tr(lang, '5분 엣지 캐시', '5m Edge Cache', '5分エッジキャッシュ'),
+              detailKo: '일 100,000요청 무료 티어 · KSPO 주차·서울 도시데이터·송파 공영주차 실시간 통합',
+              detailEn: '100k req/day free tier · Live KSPO parking, Seoul CityData & Songpa overflow lots',
+              detailJa: '1日10万リクエスト無料枠・KSPO駐車・ソウル都市データ・松坡公営をリアルタイム統合',
             },
             {
               icon: CheckCircle2,
               titleKo: '자동 갱신 (GitHub Actions)',
-              titleEn: 'GitHub Actions Automation',
-              cost: '₩0 / 월',
-              detailKo: 'Public Repo 무제한 실행 · 일 3회 스냅샷 & 헬스체크',
-              detailEn: 'Unlimited public repo minutes · 3x daily refresh',
+              titleEn: 'GitHub Actions Cron',
+              titleJa: '自動更新（GitHub Actions）',
+              cost: tr(lang, '일 4회 자동', '4x Daily Auto', '1日4回自動'),
+              detailKo: '매일 06/12/18/00시 KST(일 4회) 스냅샷 갱신 · 총 25개월(2026.12~2028.12) 무인 운영',
+              detailEn: 'Refreshes at 06/12/18/00 KST (4x daily) across 25 months (Dec 2026–Dec 2028)',
+              detailJa: '毎日06/12/18/00時KST（1日4回）自動更新・計25か月（2026.12〜2028.12）無人運用',
             },
             {
               icon: AlertTriangle,
-              titleKo: '장애 자가복구 & 기관 이관',
-              titleEn: 'Auto Failover & MIT Handover',
-              cost: 'SLA 99.9%',
-              detailKo: 'culture.go.kr 502 시 정적 스냅샷 즉시 전환 + MIT 이관',
-              detailEn: 'Instant static failover on 502 + full MIT repo',
+              titleKo: '장애 폴백 & 기관 이관',
+              titleEn: 'Failover & MIT Handover',
+              titleJa: '障害フォールバック・MIT移管',
+              cost: tr(lang, '목표 가동률 99%+', '99%+ Target', '目標稼働率99%+'),
+              detailKo: '외부 API 502 장애 시 정적 스냅샷 즉시 전환 + MIT 원천소스 기관 이관 대응',
+              detailEn: 'Instant static snapshot failover on upstream 502 + MIT open-source repository',
+              detailJa: '外部API 502障害時に静的スナップショットへ自動切替＋MITオープンソース提供',
             },
           ].map((item) => {
             const Icon = item.icon;
@@ -418,15 +448,15 @@ export function OpenDataTab({ bundle, lang }: OpenDataTabProps) {
               <div key={item.titleKo} className="rounded-xl border border-slate-200 bg-slate-50/70 p-3.5">
                 <div className="flex items-center justify-between">
                   <Icon className="h-4 w-4 text-[#0F766E]" aria-hidden="true" />
-                  <span className="rounded bg-emerald-100 px-2 py-0.5 font-mono text-[11px] font-extrabold text-emerald-900">
+                  <span className="rounded bg-emerald-100 px-2 py-0.5 font-mono text-[10px] font-extrabold text-emerald-900">
                     {item.cost}
                   </span>
                 </div>
                 <div className="mt-2 text-xs font-bold text-[#0F2C59]">
-                  {lang === 'ko' ? item.titleKo : item.titleEn}
+                  {tr(lang, item.titleKo, item.titleEn, item.titleJa)}
                 </div>
                 <p className="mt-1 text-[11px] leading-relaxed text-slate-600">
-                  {lang === 'ko' ? item.detailKo : item.detailEn}
+                  {tr(lang, item.detailKo, item.detailEn, item.detailJa)}
                 </p>
               </div>
             );

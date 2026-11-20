@@ -17,18 +17,63 @@ async function fetchJsonSafe<T = unknown>(url: string): Promise<T | null> {
   }
 }
 
-const KNOWN_OVERFLOW_COORDS: Record<string, { lat: number; lng: number; walkMin: number; distM: number; en: string }> = {
-  '1277145': { lat: 37.514277, lng: 127.103414, walkMin: 12, distM: 1150, en: 'Jamsil Station Public Lot (Line 8 · 1 stop)' },
-  '173646': { lat: 37.5204, lng: 127.1095, walkMin: 9, distM: 760, en: 'Sincheon Retention Basin Public Lot' },
-  '1475224': { lat: 37.5218, lng: 127.1142, walkMin: 8, distM: 680, en: 'Jamsilnaru (Seongnae) Public Lot' },
-  '173752': { lat: 37.4709, lng: 127.1266, walkMin: 15, distM: 1500, en: 'Bokjeong Station Transfer Public Lot (Line 8)' },
+const KNOWN_OVERFLOW_COORDS: Record<
+  string,
+  { lat: number; lng: number; walkMin: number; distM: number; en: string; ja: string }
+> = {
+  '1277145': {
+    lat: 37.514277,
+    lng: 127.103414,
+    walkMin: 12,
+    distM: 1150,
+    en: 'Jamsil Station Public Lot (Line 8 · 1 stop)',
+    ja: '蚕室駅 公営駐車場（8号線・1駅）',
+  },
+  '173646': {
+    lat: 37.5204,
+    lng: 127.1095,
+    walkMin: 9,
+    distM: 760,
+    en: 'Sincheon Retention Basin Public Lot',
+    ja: '新川遊水池 公営駐車場（市営）',
+  },
+  '1475224': {
+    lat: 37.5218,
+    lng: 127.1142,
+    walkMin: 8,
+    distM: 680,
+    en: 'Jamsilnaru (Seongnae) Public Lot',
+    ja: '城内駅（蚕室ナル）公営駐車場',
+  },
+  '173752': {
+    lat: 37.4709,
+    lng: 127.1266,
+    walkMin: 15,
+    distM: 1500,
+    en: 'Bokjeong Station Transfer Public Lot (Line 8)',
+    ja: '福井駅 乗換公営駐車場（8号線）',
+  },
 };
 
-/**
- * Loads B1 pipeline outputs from /data/*.json and /models/*.glb if present,
- * plus optional live Cloudflare Worker endpoint (VITE_WORKER_URL),
- * cleanly merging into the verified KSPO&CO baseline bundle.
- */
+function venueIdToJa(venueId: ConcertItem['venueId'], fallback: string): string {
+  switch (venueId) {
+    case 'kspo-dome':
+      return 'KSPO DOME（体操競技場）';
+    case 'handball':
+      return 'チケットリンク・ライブアリーナ（ハンドボール）';
+    case 'olympic-hall':
+      return 'オリンピックホール';
+    case 'woori':
+      return 'ウリ金融アートホール';
+    case '88-lawn':
+      return '88芝生広場';
+    case 'museum':
+      return 'オリンピック公園内博物館';
+    default:
+      return fallback;
+  }
+}
+
 export async function loadAppBundle(): Promise<AppBundle> {
   const bundle: AppBundle = structuredClone(BASELINE_BUNDLE);
   const loaded: string[] = [];
@@ -52,7 +97,7 @@ export async function loadAppBundle(): Promise<AppBundle> {
     fetchJsonSafe<unknown>('./data/quality_audit.json'),
     fetchJsonSafe<unknown>('./data/parking_zones.json'),
     fetchJsonSafe<unknown>('./data/monthly_parking.json'),
-    fetchJsonSafe<{ local_glb_models?: Array<{ file?: string; url?: string; mb?: number }> }>(
+    fetchJsonSafe<{ local_glb_models?: Array<{ file?: string; url?: string; mb?: number; raw_mb?: number }> }>(
       './models/models_manifest.json'
     ),
   ]);
@@ -77,7 +122,7 @@ export async function loadAppBundle(): Promise<AppBundle> {
     mergeModelBundle(bundle, b1Model);
   }
 
-  // 4. Merge B1 concerts.json (live Nov-Dec 2026 official schedule + 15149169 English concerts)
+  // 4. Merge B1 concerts.json
   if (b1Concerts) {
     loaded.push('concerts.json');
     const arr = Array.isArray(b1Concerts)
@@ -91,14 +136,17 @@ export async function loadAppBundle(): Promise<AppBundle> {
         const title = String(r.title_ko ?? r.title ?? r.title_en ?? `Concert #${i + 1}`);
         const titleEn = String(r.title_en ?? r.title ?? title);
         const venue = String(r.venue_ko ?? r.venue ?? '올림픽공원');
+        const venueEn = String(r.venue_en ?? venue);
+        const venueId = inferVenueId(`${venue} ${title}`);
         const maxSim = Number(r.max_simultaneous_venues);
         return {
           id: String(r.id ?? `b1-${i}`),
           titleKo: title,
           titleEn,
-          venueId: inferVenueId(`${venue} ${title}`),
+          venueId,
           venueKo: venue,
-          venueEn: String(r.venue_en ?? venue),
+          venueEn,
+          venueJa: venueIdToJa(venueId, venueEn),
           startDate: String(r.start_date ?? r.date ?? '2026-11-21'),
           endDate: String(r.end_date ?? r.start_date ?? r.date ?? '2026-11-21'),
           status: (r.status === 'live' || r.status === 'upcoming' ? r.status : 'archive') as ConcertItem['status'],
@@ -109,7 +157,6 @@ export async function loadAppBundle(): Promise<AppBundle> {
         };
       });
       const liveEvents = bundle.live.concerts.filter((c) => c.status === 'live');
-      // Prioritize upcoming Nov-Dec 2026 shows + live museum events
       const upcoming = normalized.filter((c) => c.status === 'upcoming' || c.status === 'live').slice(0, 10);
       const rest = normalized.filter((c) => c.status === 'archive').slice(0, 4);
       bundle.live.concerts = [...upcoming, ...liveEvents, ...rest].slice(0, 12);
@@ -141,28 +188,36 @@ export async function loadAppBundle(): Promise<AppBundle> {
   if (b1Monthly) loaded.push('monthly_parking.json');
   if (b1Audit) loaded.push('quality_audit.json');
 
-  // 6. Update detected 3D GLB assets from models_manifest.json (zero 404 HEAD requests!)
+  // 6. Update ALL 5 detected Draco GLB assets from models_manifest.json (zero 404 requests!)
   const localModels = modelsManifest?.local_glb_models ?? [];
-  const has88Glb = localModels.some((x) => (x.file || '').includes('88Jandi'));
-  const hasLakeGlb = localModels.some((x) => (x.file || '').includes('LakeSide'));
-  const hasHandballGlb = localModels.some((x) => (x.file || '').toLowerCase().includes('handball'));
-  const hasWooriGlb = localModels.some((x) => (x.file || '').toLowerCase().includes('woori'));
+  const findModel = (needle: string) =>
+    localModels.find((x) => (x.file || '').toLowerCase().includes(needle));
 
-  for (const m of bundle.availableModels) {
-    if (m.venueId === '88-lawn') {
-      m.glbUrl = has88Glb ? './models/88JandiMadang.glb' : null;
-    } else if (m.venueId === 'lake-stage') {
-      m.glbUrl = hasLakeGlb ? './models/OlympicPark_LakeSideStage.glb' : null;
-    } else if (m.venueId === 'handball') {
-      m.glbUrl = hasHandballGlb ? './models/skhandball.glb' : null;
-    } else if (m.venueId === 'woori') {
-      m.glbUrl = hasWooriGlb ? './models/woori_arthall.glb' : null;
+  const m88 = findModel('88jandi');
+  const mLake = findModel('lakeside');
+  const mKspo = findModel('kspodome');
+  const mHandball = findModel('handball');
+  const mWoori = findModel('woori');
+
+  const applyModel = (
+    venueId: AppBundle['availableModels'][number]['venueId'],
+    hit: { file?: string; mb?: number; raw_mb?: number } | undefined
+  ) => {
+    const slot = bundle.availableModels.find((x) => x.venueId === venueId);
+    if (!slot) return;
+    if (hit?.file) {
+      slot.glbUrl = `./models/${hit.file}`;
+      if (typeof hit.mb === 'number') slot.fileSizeMb = hit.mb;
+      if (typeof hit.raw_mb === 'number') slot.rawSizeMb = hit.raw_mb;
+      loaded.push(hit.file);
     }
-  }
-  if (has88Glb) loaded.push('88JandiMadang.glb');
-  if (hasLakeGlb) loaded.push('OlympicPark_LakeSideStage.glb');
-  if (hasHandballGlb) loaded.push('skhandball.glb');
-  if (hasWooriGlb) loaded.push('woori_arthall.glb');
+  };
+
+  applyModel('88-lawn', m88);
+  applyModel('lake-stage', mLake);
+  applyModel('kspo-dome', mKspo);
+  applyModel('handball', mHandball);
+  applyModel('woori', mWoori);
 
   bundle.b1LoadedFiles = loaded;
   return bundle;
@@ -180,8 +235,10 @@ function inferVenueId(text: string): ConcertItem['venueId'] {
 }
 
 function mergeLivePayload(bundle: AppBundle, raw: Record<string, unknown>) {
-  if (typeof raw.updated_at === 'string') bundle.live.updatedAt = raw.updated_at.replace('T', ' ').slice(0, 16) + ' KST';
-  if (typeof raw.updatedAt === 'string') bundle.live.updatedAt = raw.updatedAt.replace('T', ' ').slice(0, 16) + ' KST';
+  const rawTs = typeof raw.updated_at === 'string' ? raw.updated_at : typeof raw.updatedAt === 'string' ? raw.updatedAt : null;
+  if (rawTs) {
+    bundle.live.updatedAt = rawTs.includes('KST') ? rawTs : rawTs.replace('T', ' ').slice(0, 16) + ' KST';
+  }
 
   const parking = (raw.kspo_parking ?? raw.kspoParking ?? raw.parking) as Record<string, unknown> | undefined;
   const pSum = Number(parking?.parking_sum ?? parking?.parkingSum ?? raw.parking_sum);
@@ -189,12 +246,12 @@ function mergeLivePayload(bundle: AppBundle, raw: Record<string, unknown>) {
     bundle.live.kspoParking.parkingSum = Math.round(pSum);
     bundle.live.kspoParking.occupancyPct =
       Math.round((pSum / bundle.live.kspoParking.totalCapacity) * 1000) / 10;
-    if (typeof (parking?.measured_at ?? parking?.measuredAt) === 'string') {
-      bundle.live.kspoParking.measuredAt = String(parking?.measured_at ?? parking?.measuredAt) + ' KST';
+    const mAt = parking?.measured_at ?? parking?.measuredAt;
+    if (typeof mAt === 'string') {
+      bundle.live.kspoParking.measuredAt = mAt.includes('KST') ? mAt : mAt + ' KST';
     }
   }
 
-  // Population
   const pop = (raw.seoul_population ?? raw.seoulPopulation ?? raw.population) as Record<string, unknown> | undefined;
   if (pop) {
     if (typeof pop.congest_lvl === 'string' || typeof pop.congestLevel === 'string') {
@@ -209,7 +266,7 @@ function mergeLivePayload(bundle: AppBundle, raw: Record<string, unknown>) {
     if (Number.isFinite(pMin) && pMin > 0) bundle.live.seoulPopulation.min = pMin;
     if (Number.isFinite(pMax) && pMax > 0) bundle.live.seoulPopulation.max = pMax;
     if (Number.isFinite(nonRes) && nonRes > 0) bundle.live.seoulPopulation.nonResidentPct = nonRes;
-    if (typeof pop.observed_at === 'string') bundle.live.seoulPopulation.observedAt = pop.observed_at;
+    if (typeof pop.observed_at === 'string' && pop.observed_at) bundle.live.seoulPopulation.observedAt = pop.observed_at;
 
     const fcst = (pop.forecast_12h ?? pop.forecast12h ?? pop.fcst_ppltn) as Record<string, unknown>[] | undefined;
     if (Array.isArray(fcst) && fcst.length >= 4) {
@@ -230,7 +287,6 @@ function mergeLivePayload(bundle: AppBundle, raw: Record<string, unknown>) {
     }
   }
 
-  // Weather
   const wx = (raw.weather ?? raw.kma_weather) as Record<string, unknown> | undefined;
   if (wx) {
     const temp = Number(wx.temp_c ?? wx.tempC ?? wx.TEMP);
@@ -250,12 +306,11 @@ function mergeLivePayload(bundle: AppBundle, raw: Record<string, unknown>) {
     }
     const pm25 = Number(wx.pm25 ?? wx.PM25);
     if (Number.isFinite(pm25)) bundle.live.weather.pm25 = pm25;
-    if (typeof wx.pm25_grade === 'string') bundle.live.weather.pm25Grade = wx.pm25_grade;
+    if (typeof wx.pm25_grade === 'string' && wx.pm25_grade) bundle.live.weather.pm25Grade = wx.pm25_grade;
     const pm10 = Number(wx.pm10 ?? wx.PM10);
     if (Number.isFinite(pm10)) bundle.live.weather.pm10 = pm10;
   }
 
-  // Live Songpa Municipal Overflow Parking Lots
   const ovLive = raw.songpa_overflow_live as Record<string, unknown>[] | undefined;
   if (Array.isArray(ovLive) && ovLive.length > 0) {
     const mapped: OverflowParkingLot[] = ovLive.slice(0, 4).map((o, idx) => {
@@ -266,6 +321,7 @@ function mergeLivePayload(bundle: AppBundle, raw: Record<string, unknown>) {
         walkMin: 10,
         distM: 800,
         en: String(o.name ?? 'Songpa Public Lot'),
+        ja: String(o.name ?? '松坡公営駐車場'),
       };
       const cap = Number(o.capacity ?? 150);
       const occ = Number(o.occupied ?? 0);
@@ -276,6 +332,7 @@ function mergeLivePayload(bundle: AppBundle, raw: Record<string, unknown>) {
         id: `live-ov-${code}`,
         nameKo: String(o.name ?? '송파 공영주차장'),
         nameEn: geo.en,
+        nameJa: geo.ja,
         lat: geo.lat,
         lng: geo.lng,
         capacity: cap,
@@ -286,6 +343,7 @@ function mergeLivePayload(bundle: AppBundle, raw: Record<string, unknown>) {
         walkMinToPark: geo.walkMin,
         rateInfoKo: `실시간 잔여 ${avail}면 (${pct}%) · 5분 ${rate5}원`,
         rateInfoEn: `Live ${avail} free (${pct}%) · ₩${rate5}/5min`,
+        rateInfoJa: `空車 ${avail}台（占有率${pct}%）· 5分 ${rate5}ウォン`,
         distanceM: geo.distM,
       };
     });
@@ -336,12 +394,16 @@ function mergeModelBundle(bundle: AppBundle, raw: Record<string, unknown>) {
       const rmse = Number(r.hourly_rmse ?? r.hourlyRmse ?? r.rmse);
       const r2 = Number(r.r2 ?? r.r2_score);
       if (Number.isFinite(mae) && Number.isFinite(rmse)) {
+        const modelId = String(r.model_id ?? r.id ?? r.name ?? `m-${parsed.length}`);
+        const baseMatch = bundle.model.benchmarks.find((b) => b.modelId === modelId);
         parsed.push({
-          modelId: String(r.model_id ?? r.id ?? r.name ?? `m-${parsed.length}`),
+          modelId,
           nameKo: String(r.name_ko ?? r.nameKo ?? r.name ?? '모델'),
           nameEn: String(r.name_en ?? r.nameEn ?? r.name ?? 'Model'),
+          nameJa: String(r.name_ja ?? baseMatch?.nameJa ?? r.name_en ?? r.name ?? 'モデル'),
           typeKo: String(r.type_ko ?? r.typeKo ?? r.description ?? 'GroupKFold 실측'),
           typeEn: String(r.type_en ?? r.typeEn ?? r.description ?? 'GroupKFold Verified'),
+          typeJa: String(r.type_ja ?? baseMatch?.typeJa ?? r.type_en ?? 'GroupKFold検証'),
           hourlyMae: Math.round(mae * 100) / 100,
           hourlyRmse: Math.round(rmse * 100) / 100,
           r2: Number.isFinite(r2) ? Math.round(r2 * 1000) / 1000 : 0.85,
