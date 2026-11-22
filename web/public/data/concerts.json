@@ -1,21 +1,6 @@
 {
-  "updated_at": "2026-11-22T19:58:11+09:00",
+  "updated_at": "2026-11-23T05:58:48+09:00",
   "items": [
-    {
-      "id": "kspo-5158",
-      "title_ko": "2026-27 로이킴 LIVE TOUR ［R:O:Y］ in SEOUL",
-      "title_en": "2026-27 로이킴 LIVE TOUR ［R:O:Y］ in SEOUL",
-      "venue_ko": "KSPO DOME",
-      "venue_en": "KSPO DOME",
-      "start_date": "2026-11-21",
-      "end_date": "2026-11-22",
-      "show_times": "2026.11.21.(SAT) 6PM  2026.11.22.(SUN) 5PM",
-      "status": "live",
-      "expected_capacity": 15000,
-      "ticket_url": "https://nol.yanolja.com/ticket/products/26013078",
-      "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
-      "max_simultaneous_venues": 1
-    },
     {
       "id": "kspo-5168",
       "title_ko": "2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
