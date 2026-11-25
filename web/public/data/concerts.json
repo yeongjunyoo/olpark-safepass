@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T08:49:47+09:00",
+  "updated_at": "2026-11-25T21:27:50+09:00",
   "items": [
     {
       "id": "kspo-5168",
@@ -107,19 +107,19 @@
       "max_simultaneous_venues": 3
     },
     {
-      "id": "kspo-5178",
-      "title_ko": "2026 DAY6 Special Concert ‘The Present’",
-      "title_en": "2026 DAY6 Special Concert ‘The Present’",
-      "venue_ko": "KSPO DOME",
-      "venue_en": "KSPO DOME",
+      "id": "kspo-5186",
+      "title_ko": "2026 XIA Musical Concert with Orchestra Vol.9",
+      "title_en": "2026 XIA Musical Concert with Orchestra Vol.9",
+      "venue_ko": "티켓링크 라이브 아레나(핸드볼경기장)",
+      "venue_en": "Ticketlink Live Arena (Handball)",
       "start_date": "2026-12-18",
       "end_date": "2026-12-20",
-      "show_times": "2026.12.18. FRI 7PM / 12.19 SAT 6PM / 12.20 SUN 5PM(KST)",
+      "show_times": "2026년 12월 18일(금) 7:30PM(KST) 2026년 12월 19일(토) 6PM(KST) 2026년 12월 20일(일) 5PM(KST)",
       "status": "upcoming",
-      "expected_capacity": 15000,
-      "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5178",
+      "expected_capacity": 5003,
+      "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5186",
       "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
-      "max_simultaneous_venues": 3
+      "max_simultaneous_venues": 4
     },
     {
       "id": "kspo-5174",
@@ -134,7 +134,22 @@
       "expected_capacity": 3000,
       "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5174",
       "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
-      "max_simultaneous_venues": 3
+      "max_simultaneous_venues": 4
+    },
+    {
+      "id": "kspo-5178",
+      "title_ko": "2026 DAY6 Special Concert ‘The Present’",
+      "title_en": "2026 DAY6 Special Concert ‘The Present’",
+      "venue_ko": "KSPO DOME",
+      "venue_en": "KSPO DOME",
+      "start_date": "2026-12-18",
+      "end_date": "2026-12-20",
+      "show_times": "2026.12.18. FRI 7PM / 12.19 SAT 6PM / 12.20 SUN 5PM(KST)",
+      "status": "upcoming",
+      "expected_capacity": 15000,
+      "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5178",
+      "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
+      "max_simultaneous_venues": 4
     },
     {
       "id": "kspo-5173",
@@ -300,6 +315,21 @@
       "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5175",
       "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
       "max_simultaneous_venues": 3
+    },
+    {
+      "id": "kspo-5187",
+      "title_ko": "2027 CNBLUE LIVE '에바뛰콘 - KEEP DREAMIN', KEEP RUNNIN''",
+      "title_en": "2027 CNBLUE LIVE '에바뛰콘 - KEEP DREAMIN', KEEP RUNNIN''",
+      "venue_ko": "KSPO DOME",
+      "venue_en": "KSPO DOME",
+      "start_date": "2027-02-20",
+      "end_date": "2027-02-21",
+      "show_times": "2027년 02월 20일(토) ~ 2027년 02월 21일(일)  토 18시 / 일 17시",
+      "status": "upcoming",
+      "expected_capacity": 15000,
+      "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5187",
+      "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
+      "max_simultaneous_venues": 2
     },
     {
       "id": "B046-8007",
