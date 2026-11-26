@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26T21:08:35+09:00",
+  "updated_at": "2026-11-27T08:38:48+09:00",
   "items": [
     {
       "id": "kspo-5168",
@@ -10,7 +10,7 @@
       "start_date": "2026-11-27",
       "end_date": "2026-11-29",
       "show_times": "2026년 11월 27일(금) 8PM / 2026년 11월 28일(토) 6PM / 2026년 11월 29일(일) 5PM",
-      "status": "upcoming",
+      "status": "live",
       "expected_capacity": 3000,
       "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5168",
       "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
@@ -25,7 +25,7 @@
       "start_date": "2026-11-27",
       "end_date": "2026-11-29",
       "show_times": "2026년 11월 27일(금) 오후 7시 2026년 11월 28일(토) 오후 6시 2026년 11월 29일(일) 오후 5시",
-      "status": "upcoming",
+      "status": "live",
       "expected_capacity": 15000,
       "ticket_url": "https://ticket.yes24.com/Special/60153",
       "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
@@ -107,21 +107,6 @@
       "max_simultaneous_venues": 3
     },
     {
-      "id": "kspo-5186",
-      "title_ko": "2026 XIA Musical Concert with Orchestra Vol.9",
-      "title_en": "2026 XIA Musical Concert with Orchestra Vol.9",
-      "venue_ko": "티켓링크 라이브 아레나(핸드볼경기장)",
-      "venue_en": "Ticketlink Live Arena (Handball)",
-      "start_date": "2026-12-18",
-      "end_date": "2026-12-20",
-      "show_times": "2026년 12월 18일(금) 7:30PM(KST) 2026년 12월 19일(토) 6PM(KST) 2026년 12월 20일(일) 5PM(KST)",
-      "status": "upcoming",
-      "expected_capacity": 5003,
-      "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5186",
-      "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
-      "max_simultaneous_venues": 4
-    },
-    {
       "id": "kspo-5174",
       "title_ko": "자우림 단독 콘서트 ［ MIDNIGHT EXPRESS 2026-2027 ］ - 서울",
       "title_en": "자우림 단독 콘서트 ［ MIDNIGHT EXPRESS 2026-2027 ］ - 서울",
@@ -148,6 +133,21 @@
       "status": "upcoming",
       "expected_capacity": 15000,
       "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5178",
+      "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
+      "max_simultaneous_venues": 4
+    },
+    {
+      "id": "kspo-5186",
+      "title_ko": "2026 XIA Musical Concert with Orchestra Vol.9",
+      "title_en": "2026 XIA Musical Concert with Orchestra Vol.9",
+      "venue_ko": "티켓링크 라이브 아레나(핸드볼경기장)",
+      "venue_en": "Ticketlink Live Arena (Handball)",
+      "start_date": "2026-12-18",
+      "end_date": "2026-12-20",
+      "show_times": "2026년 12월 18일(금) 7:30PM(KST) 2026년 12월 19일(토) 6PM(KST) 2026년 12월 20일(일) 5PM(KST)",
+      "status": "upcoming",
+      "expected_capacity": 5003,
+      "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5186",
       "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
       "max_simultaneous_venues": 4
     },
@@ -188,8 +188,8 @@
       "venue_ko": "티켓링크 라이브 아레나(핸드볼경기장)",
       "venue_en": "Ticketlink Live Arena (Handball)",
       "start_date": "2026-12-25",
-      "end_date": "2026-12-26",
-      "show_times": "금 18시 30분 / 토 18시",
+      "end_date": "2026-12-27",
+      "show_times": "금 18시 30분 / 토 18시 / 일 17시",
       "status": "upcoming",
       "expected_capacity": 5003,
       "ticket_url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5182",
