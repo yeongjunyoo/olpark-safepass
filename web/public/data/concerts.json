@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T20:57:11+09:00",
+  "updated_at": "2026-11-28T08:19:37+09:00",
   "items": [
     {
       "id": "kspo-5168",
@@ -40,7 +40,7 @@
       "start_date": "2026-11-28",
       "end_date": "2027-01-03",
       "show_times": "수목금 19시 30분 / 토 15시, 19시 / 일 14시 (일자별 공연 시간 변동 있으며, 상세페이지 참고 부탁드립니다. )",
-      "status": "upcoming",
+      "status": "live",
       "expected_capacity": 1184,
       "ticket_url": "https://tickets.interpark.com/goods/26007874",
       "source": "KSPO&CO 공식 공연일정 API (a20301010100)",
